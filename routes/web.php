@@ -15,7 +15,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function (\Illuminate\Http\Request $request) {
     $days = \App\Models\PrepDay::all();
-$timetable = [];
+    $timetable = [];
     return view('test', compact('days', 'request', 'timetable'));
 });
 Route::post('/', function (\App\Http\Requests\TimetableRequest $request) {
@@ -23,8 +23,15 @@ Route::post('/', function (\App\Http\Requests\TimetableRequest $request) {
     $timetable = [];
     foreach ($days as $day) {
         $timetable[ $day->day ] = [];
-        $timetable[ $day->day ] = $day->sciences->where("set", $request->science_set)->pluck('subject')->toArray();
-
+        foreach ($day->sciences->where("set", $request->science_set)->pluck('subject')->toArray() as $science) {
+            array_push($timetable[ $day->day ], $science);
+        }
+        foreach ($day->humanities->where("set", $request->humanities_set)->pluck('subject')->toArray() as $humanity) {
+            array_push($timetable[ $day->day ], $humanity);
+        }
+        foreach ($day->classics->where("set", $request->classciv_set)->pluck('subject')->toArray() as $classic) {
+            array_push($timetable[ $day->day ], $classic);
+        }
         switch ($day->day) {
             case "Monday":
                 array_push($timetable[ $day->day ], $request->optiona);

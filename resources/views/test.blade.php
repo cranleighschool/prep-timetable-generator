@@ -21,6 +21,17 @@
                        placeholder="Science Set"
                        name="science_set" id="science_set"/>
 
+                <label class="form-label" for="humanities">Humanities Set (Geog, Hist, RS)</label>
+                <input type="text" class="form-control" value="{{ old('humanities_set') ?? $request->humanities_set }}"
+                       placeholder="Humanities Set"
+                       name="humanities_set" id="humanities_set"/>
+
+                <label class="form-label" for="classciv_set">Class Civ Set</label>
+                <input type="text" class="form-control" value="{{ old('classcivset_set') ?? $request->classciv_set }}"
+                       placeholder="Class Civ Set"
+                       name="classciv_set" id="classciv_set"/>
+
+
                 <label class="form-label" for="maths_set">Maths Set</label>
                 <input class="form-control" type="text" value="{{ old('maths_set') ?? $request->maths_set }}"
                        placeholder="Maths Set"
@@ -49,8 +60,8 @@
                 <label class="form-label" for="latin">
                     <span class="">Do you do Latin?</span>
                     <select class="form-select mt-1 block w-full" placeholder="Thingy" name="latin">
-                        <option value="YES">Yes</option>
-                        <option value="NO">No</option>
+                        <option @if($request->latin===true) selected="selected" @endif value="YES">Yes</option>
+                        <option @if($request->latin===false) selected="selected" @endif value="NO">No</option>
                     </select>
                 </label>
             </div>

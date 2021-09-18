@@ -17,7 +17,13 @@ class PrepDay extends Model
     public $timestamps = false;
 
     public function sciences() {
-        return $this->hasMany(ScienceSet::class, "day_id");
+        return $this->hasMany(ScienceSet::class, "day_id")->whereIn('subject', ['Biology', 'Chemistry', 'Physics']);
+    }
+    public function humanities() {
+        return $this->hasMany(ScienceSet::class, 'day_id')->whereIn('subject', ['Geography', 'RS', 'History']);
+    }
+    public function classics() {
+        return $this->hasMany(ScienceSet::class, 'day_id')->whereIn('subject', ['Class Civ']);
     }
 
 

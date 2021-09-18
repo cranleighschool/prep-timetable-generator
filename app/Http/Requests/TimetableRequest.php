@@ -18,6 +18,9 @@ class TimetableRequest extends FormRequest
 
     protected function prepareForValidation()
     {
+        $this->merge([
+            'maths_set' => strtoupper($this->get('maths_set'))
+        ]);
         if ($this->get('latin')==='YES') {
             $this->merge(["latin" => true]);
         } else {
