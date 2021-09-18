@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Isams\SubjectsController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -12,13 +13,38 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
+Route::get('/', function () {
 
-Route::get('/', function (\Illuminate\Http\Request $request) {
-    $days = \App\Models\PrepDay::all();
-    $timetable = [];
-    return view('test', compact('days', 'request', 'timetable'));
+    return view('start');
 });
-Route::post('/', function (\App\Http\Requests\TimetableRequest $request) {
+Route::post('/', function (\Illuminate\Http\Request $request) {
+    $pupil = \App\Models\School::getPupil($request->username);
+    $timetable = new \spkm\isams\Controllers\PupilTimetableController(App\Models\School::find(1));
+    $sets = collect($timetable->show($pupil->schoolId)['sets'])->pluck('code', 'subjectId')->unique();
+    $pupilName = $pupil->fullName. " '".$pupil->preferredName."' (".$pupil->boardingHouse.")";
+    $numSubjects = $sets->count();
+    $yearGroup = $pupil->yearGroup;
+
+    return view('welcome', compact('pupilName', 'numSubjects', 'yearGroup', 'sets'));
+});
+function getSets($sets) {
+    $subjectController = new SubjectsController(new \App\Models\School());
+    $sets = collect($sets)->map(function ($item, $key) use ($subjectController) {
+        $subject = $subjectController->show($key);
+        $subject['set'] = $item;
+        return $subject;
+    })->pluck("name", "set");
+    return $sets;
+}
+Route::get('generate/9', function (\Illuminate\Http\Request $request) {
+    $days = \App\Models\PrepDay::all();
+    $sets = getSets($request->sets);
+
+
+    $timetable = [];
+    return view('test', compact('days', 'request', 'timetable', 'sets'));
+});
+Route::post('/iv', function (\App\Http\Requests\TimetableRequest $request) {
     $days = \App\Models\PrepDay::all();
     $timetable = [];
     foreach ($days as $day) {

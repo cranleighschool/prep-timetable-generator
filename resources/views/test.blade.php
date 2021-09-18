@@ -1,19 +1,17 @@
-<!doctype html>
-<head>
-    <meta charset="UTF-8"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css"
-          integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
-    <title>
-        Timetable
-    </title>
-</head>
-<body>
-<div class="container">
-
+@extends('layouts.app')
+@section('content')
     <form class="form-inline" method="POST">
         {{ csrf_field() }}
         {{ method_field('POST') }}
+        <div class="row">
+            <div class="col"><h2>Your Subjects</h2>
+            <ul>
+                @foreach ($sets as $code => $subject)
+                    <li>{{ $subject }} (<code>{{ $code }}</code>)</li>
+                    @endforeach
+            </ul>
+            </div>
+        </div>
         <div class="row">
             <div class="col">
                 <label class="form-label" for="science_set">Science Set</label>
@@ -61,7 +59,7 @@
                     <span class="">Do you do Latin?</span>
                     <select class="form-select mt-1 block w-full" placeholder="Thingy" name="latin">
                         <option @if($request->latin===true) selected="selected" @endif value="YES">Yes</option>
-                        <option @if($request->latin===false) selected="selected" @endif value="NO">No</option>
+                        <option @if($request->latin===false || !isset($request->latin)) selected="selected" @endif value="NO">No</option>
                     </select>
                 </label>
             </div>
@@ -99,10 +97,4 @@
         </tr>
         </tbody>
     </table>
-
-</div>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ"
-        crossorigin="anonymous"></script>
-</body>
-</html>
+@endsection
