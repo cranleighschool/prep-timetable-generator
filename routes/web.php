@@ -17,16 +17,15 @@ Route::get('/', function () {
 
     return view('start');
 });
-Route::post('/', function (\Illuminate\Http\Request $request) {
-    $pupil = \App\Models\School::getPupil($request->username);
-    $timetable = new \spkm\isams\Controllers\PupilTimetableController(App\Models\School::find(1));
-    $sets = collect($timetable->show($pupil->schoolId)['sets'])->pluck('code', 'subjectId')->unique();
-    $pupilName = $pupil->fullName. " '".$pupil->preferredName."' (".$pupil->boardingHouse.")";
+Route::post('/', function (\App\Http\Requests\PupilRequest $request) {
+    $sets = $request->sets;
+    $pupilName = $request->pupil->fullName. " '".$request->pupil->preferredName."' (".$request->pupil->boardingHouse.")";
     $numSubjects = $sets->count();
-    $yearGroup = $pupil->yearGroup;
+    $yearGroup = $request->pupil->yearGroup;
 
     return view('welcome', compact('pupilName', 'numSubjects', 'yearGroup', 'sets'));
 });
+
 function getSets($sets) {
     $subjectController = new SubjectsController(new \App\Models\School());
     $sets = collect($sets)->map(function ($item, $key) use ($subjectController) {
@@ -36,17 +35,18 @@ function getSets($sets) {
     })->pluck("name", "set");
     return $sets;
 }
-Route::get('generate/9', function (\Illuminate\Http\Request $request) {
+Route::get('setup/9', function (\Illuminate\Http\Request $request) {
     $days = \App\Models\PrepDay::all();
     $sets = getSets($request->sets);
-
+    $yearGroup = (int) $request->yearGroup;
 
     $timetable = [];
-    return view('test', compact('days', 'request', 'timetable', 'sets'));
+    return view('setup', compact('days', 'request', 'timetable', 'sets', 'yearGroup'));
 });
-Route::post('/iv', function (\App\Http\Requests\TimetableRequest $request) {
+Route::post('generate/9', function (\App\Http\Requests\TimetableRequest $request) {
     $days = \App\Models\PrepDay::all();
     $timetable = [];
+    $yearGroup = $request->yearGroup;
     foreach ($days as $day) {
         $timetable[ $day->day ] = [];
         foreach ($day->sciences->where("set", $request->science_set)->pluck('subject')->toArray() as $science) {
@@ -88,5 +88,5 @@ Route::post('/iv', function (\App\Http\Requests\TimetableRequest $request) {
 
     }
 
-    return view('test', compact('days', 'request', 'timetable'));
+    return view('timetable', compact('days', 'request', 'timetable', 'yearGroup'));
 });
