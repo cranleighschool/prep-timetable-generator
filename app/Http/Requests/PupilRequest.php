@@ -25,7 +25,6 @@ class PupilRequest extends FormRequest
             $pupil = School::getPupil($this->get('username'));
         } catch (\TypeError $exception) {
             throw ValidationException::withMessages(['username' => 'Could not find a pupil with that username!']);
-
         }
         $this->merge(['pupil' => $pupil]);
 

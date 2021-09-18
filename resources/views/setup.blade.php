@@ -58,7 +58,7 @@
                     <input class="form-control" type="text" value="{{ old('optiond') ?? $request->optiond }}"
                            placeholder="Option D"
                            name="optiond"/>
-                @endif;
+                @endif
             </div>
             <div class="col">
                 <label class="form-label" for="cmlf">CMFL</label>

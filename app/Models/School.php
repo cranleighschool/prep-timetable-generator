@@ -14,9 +14,8 @@ class School extends Model implements Institution
 
     public static function getPupil(string $username): Pupil
     {
-        $username = strtoupper($username);
         $isams = new CurrentPupilController(new self());
-        return $isams->index()->where('schoolEmailAddress', '=', $username.'@cranleigh.org')->first();
+        return $isams->index()->whereIn('schoolEmailAddress', [strtoupper($username)."@cranleigh.org",strtolower($username)."@cranleigh.org"])->first();
     }
 
     public function getConfigName(): string
