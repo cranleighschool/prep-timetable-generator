@@ -27,12 +27,13 @@
                            placeholder="Humanities Set"
                            name="humanities_set" id="humanities_set"/>
 
-                    <label class="form-label" for="classciv_set">Class Civ Set</label>
-                    <input type="number" class="form-control"
-                           value="{{ old('classcivset_set') ?? $request->classciv_set }}"
-                           placeholder="Class Civ Set"
-                           name="classciv_set" id="classciv_set"/>
-
+                    @if (!in_array('Latin', $sets->toArray()))
+                        <label class="form-label" for="classciv_set">Class Civ Set</label>
+                        <input type="number" class="form-control"
+                               value="{{ old('classcivset_set') ?? $request->classciv_set }}"
+                               placeholder="Class Civ Set"
+                               name="classciv_set" id="classciv_set"/>
+                    @endif
                     <label class="form-label" for="maths_set">Maths Set</label>
                     <input class="form-control" type="text" value="{{ old('maths_set') ?? $request->maths_set }}"
                            placeholder="Maths Set"
