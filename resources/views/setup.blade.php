@@ -1,5 +1,12 @@
 @extends('layouts.app')
 @section('content')
+    <div class="row">
+        <div class="col">
+            <div class="well well-lg">
+                <p class="lead">Welcome {{ $request->pupil->preferredName }}, you have {{ count($request->sets) }} subjects. Below in the green labels you'll see which set you are in for each subject. Use this information to fill in the form below, then you can generate your prep timetable!</p>
+            </div>
+        </div>
+    </div>
     <form action="{{ url('generate/'.$yearGroup) }}" class="form-inline" method="POST">
         {{ csrf_field() }}
         {{ method_field('POST') }}

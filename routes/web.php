@@ -18,6 +18,7 @@ Route::get('/', function () {
     return view('start');
 });
 Route::post('/', function (\App\Http\Requests\PupilRequest $request) {
+    dd('Should not be here!');
     $sets = $request->sets;
     $pupilName = $request->pupil->fullName. " '".$request->pupil->preferredName."' (".$request->pupil->boardingHouse.")";
     $numSubjects = $sets->count();
@@ -27,10 +28,8 @@ Route::post('/', function (\App\Http\Requests\PupilRequest $request) {
 });
 
 
-Route::get('setup/{yearGroup}', function (\App\Http\Requests\SetupRequest $request, int $yearGroup) {
-    if ($yearGroup !== $request->yearGroup) {
-        abort(400, "Looks like you're trying to cheat the system!");
-    }
+Route::post('setup', function (\App\Http\Requests\SetupRequest $request) {
+    $yearGroup = $request->yearGroup;
     $days = \App\Models\PrepDay::all();
     $sets = $request->sets;
 

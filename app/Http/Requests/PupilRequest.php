@@ -7,6 +7,9 @@ use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\ValidationException;
 use spkm\isams\Controllers\PupilTimetableController;
 
+/**
+ * @deprecated Not needed now
+ */
 class PupilRequest extends FormRequest
 {
     /**
@@ -20,6 +23,11 @@ class PupilRequest extends FormRequest
     }
 
     public function prepareForValidation()
+    {
+        $this->getPupilAndSets();
+    }
+
+    private function getPupilAndSets()
     {
         try {
             $pupil = School::getPupil($this->get('username'));
