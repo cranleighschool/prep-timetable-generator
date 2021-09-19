@@ -14,30 +14,42 @@ class ScienceSet extends Model
     {
         $label = '';
         $e = explode("-", $code);
-        if (Str::endsWith($e[0], "A")) {
+        if (Str::endsWith($e[ 0 ], "A")) {
             $label = "Option A";
         }
-        if (Str::endsWith($e[0], "B")) {
+        if (Str::endsWith($e[ 0 ], "B")) {
             $label = "Option B";
         }
-        if (Str::endsWith($e[0], "C")) {
+        if (Str::endsWith($e[ 0 ], "C")) {
             $label = "Option C";
         }
-        if (Str::endsWith($e[0], "D")) {
+        if (Str::endsWith($e[ 0 ], "D")) {
             $label = "Option D";
         }
-        if (preg_match('^\A[0-9]{1,2}-(PH|CH|BI)[0-9]{1}\Z^', $code, $matches)) {
-            $label = "Science Set: ".substr($matches[0], -1);
+        if (preg_match('^\A(9)-(PH|CH|BI)[0-9]{1}\Z^', $code, $matches)) {
+            $label = "Science Set: ".substr($matches[ 0 ], -1);
+        }
+        if (preg_match('^\A(10|11)-(PH)[0-9]{1}\Z^', $code, $matches)) {
+            $label = "Physics Set: ".substr($matches[ 0 ], -1);
+        }
+        if (preg_match('^\A(10|11)-(CH)[0-9]{1}\Z^', $code, $matches)) {
+            $label = "Chemistry Set: ".substr($matches[ 0 ], -1);
+        }
+        if (preg_match('^\A(10|11)-(BI)[0-9]{1}\Z^', $code, $matches)) {
+            $label = "Biology Set: ".substr($matches[ 0 ], -1);
+        }
+        if (preg_match('^\A(9|10|11)-(FR|SP)[0-9]{1}\Z^', $code, $matches)) {
+            $label = "Language";
         }
 
 
-        if (preg_match('^\A[0-9]{1,2}-(CC)[0-9]{1}\Z^', $code, $matches)) {
-            $label = "Class Civ Set: ".substr($matches[0], -1);
+        if (preg_match('^\A(9)-(CC)[0-9]{1}\Z^', $code, $matches)) {
+            $label = "Class Civ Set: ".substr($matches[ 0 ], -1);
         }
-        if (preg_match('^\A[0-9]{1,2}-(GG|HI|RS)[0-9]{1}\Z^', $code, $matches)) {
-            $label = "Humanities Set: ".substr($matches[0], -1);
+        if (preg_match('^\A(9)-(GG|HI|RS)[0-9]{1}\Z^', $code, $matches)) {
+            $label = "Humanities Set: ".substr($matches[ 0 ], -1);
         }
-        if (preg_match('^\A[0-9]{1,2}-(MA)+(.*)^', $code, $matches)) {
+        if (preg_match('^\A(9)-(MA)+(.*)^', $code, $matches)) {
             $label = "Maths Set: ".trim(end($matches));
         }
 

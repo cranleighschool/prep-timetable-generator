@@ -20,24 +20,28 @@ class PrepDay extends Model
         $timetable = [];
 
         if ($yearGroup == 9) {
-            return self::year9Timetable($timetable, $request);
+            $timetable = self::year9Timetable($timetable, $request);
         }
         if ($yearGroup == 10) {
-            return self::year10Timetable($timetable, $request);
+            $timetable = self::year10Timetable($timetable, $request);
         }
         if ($yearGroup == 11) {
-            return self::year11Timetable($timetable, $request);
+            $timetable = self::year11Timetable($timetable, $request);
         }
 
-
-        return $timetable;
+        return collect($timetable)->map(function ($day) {
+            return collect($day)->reject(function ($subject) {
+                return is_null(($subject));
+            })->toArray();
+        })->toArray();
     }
 
     public static function year9Timetable(array $timetable, Request $request): array
     {
         foreach (self::all() as $day) {
             $timetable[ $day->day ] = [];
-            foreach ($day->sciences->where("set", $request->science_set)->where('nc_year', $request->yearGroup)->pluck('subject')->toArray() as $science) {
+            foreach ($day->sciences->where("set", $request->science_set)->where('nc_year',
+                $request->yearGroup)->pluck('subject')->toArray() as $science) {
                 array_push($timetable[ $day->day ], $science);
             }
             foreach ($day->humanities->where("set",
@@ -83,7 +87,16 @@ class PrepDay extends Model
     {
         foreach (self::all() as $day) {
             $timetable[ $day->day ] = [];
-            foreach ($day->sciences->where("set", $request->science_set)->where('nc_year', $request->yearGroup)->pluck('subject')->toArray() as $science) {
+            foreach ($day->biology->where('set', $request->biology_set)->where('nc_year',
+                $request->yearGroup)->pluck('subject')->toArray() as $science) {
+                array_push($timetable[ $day->day ], $science);
+            }
+            foreach ($day->physics->where('set', $request->physics_set)->where('nc_year',
+                $request->yearGroup)->pluck('subject')->toArray() as $science) {
+                array_push($timetable[ $day->day ], $science);
+            }
+            foreach ($day->chemistry->where('set', $request->chemistry_set)->where('nc_year',
+                $request->yearGroup)->pluck('subject')->toArray() as $science) {
                 array_push($timetable[ $day->day ], $science);
             }
 
@@ -112,11 +125,70 @@ class PrepDay extends Model
                     break;
             }
         }
+
         return $timetable;
     }
 
     public static function year11Timetable(array $timetable, Request $request): array
     {
+        foreach (self::all() as $day) {
+            $timetable[ $day->day ] = [];
+            foreach ($day->biology->where('set', $request->biology_set)->where('nc_year',
+                $request->yearGroup)->pluck('subject')->toArray() as $science) {
+                array_push($timetable[ $day->day ], $science);
+            }
+            foreach ($day->physics->where('set', $request->physics_set)->where('nc_year',
+                $request->yearGroup)->pluck('subject')->toArray() as $science) {
+                array_push($timetable[ $day->day ], $science);
+            }
+            foreach ($day->chemistry->where('set', $request->chemistry_set)->where('nc_year',
+                $request->yearGroup)->pluck('subject')->toArray() as $science) {
+                array_push($timetable[ $day->day ], $science);
+            }
+
+            switch ($day->day) {
+                case "Monday":
+                    array_push($timetable[ $day->day ], $request->cmfl);
+                    array_push($timetable[ $day->day ], 'Maths');
+                    break;
+                case "Tuesday":
+                    array_push($timetable[$day->day], 'English');
+                    array_push($timetable[ $day->day ], $request->optiona);
+                    array_push($timetable[ $day->day ], $request->optionc);
+                    break;
+                case "Wednesday":
+                    array_push($timetable[ $day->day ], $request->optionb);
+                    array_push($timetable[ $day->day ], $request->cmfl);
+                    array_push($timetable[ $day->day ], $request->optiond);
+                    break;
+                case "Thursday":
+                    array_push($timetable[ $day->day ], "English");
+                    array_push($timetable[ $day->day ], $request->optiond);
+                    break;
+                case "Friday":
+                    array_push($timetable[ $day->day ], $request->optiona);
+                    array_push($timetable[ $day->day ], $request->optiond);
+                    array_push($timetable[ $day->day ], 'Maths');
+                    break;
+            }
+        }
+
+        return $timetable;
+    }
+
+    public function biology()
+    {
+        return $this->hasMany(ScienceSet::class, 'day_id')->whereIn('subject', ['Biology']);
+    }
+
+    public function chemistry()
+    {
+        return $this->hasMany(ScienceSet::class, 'day_id')->whereIn('subject', ['Chemistry']);
+    }
+
+    public function physics()
+    {
+        return $this->hasMany(ScienceSet::class, 'day_id')->whereIn('subject', ['Physics']);
     }
 
     public function sciences()

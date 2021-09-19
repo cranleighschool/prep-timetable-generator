@@ -28,4 +28,5 @@
 
     <hr />
         <a href="javascript:history.back()" class="btn btn-lg btn-primary">Go Back</a>
+        <a href="{{ url('/') }}" class="btn btn-lg btn-secondary">Start Over</a>
 @endsection

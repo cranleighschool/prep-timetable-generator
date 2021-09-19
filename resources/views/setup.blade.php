@@ -16,10 +16,21 @@
         <h2>Fill in the details below</h2>
         <div class="row">
             <div class="col">
-                <label class="form-label" for="science_set">Science Set</label>
-                <input type="number" class="form-control" value="{{ old('science_set') ?? $request->science_set }}"
-                       placeholder="Science Set"
-                       name="science_set" id="science_set"/>
+                @if ($yearGroup===9)
+                    <label class="form-label" for="science_set">Science Set</label>
+                    <input type="number" class="form-control" value="{{ old('science_set') ?? $request->science_set }}"
+                           placeholder="Science Set"
+                           name="science_set" id="science_set"/>
+                @else
+                    @foreach (['Biology', 'Chemistry', 'Physics'] as $scienceSubject)
+                        <label class="form-label" for="{{ strtolower($scienceSubject) }}_set">{{ $scienceSubject }}
+                            Set</label>
+                        <input type="number" class="form-control"
+                               value="{{ old(strtolower($scienceSubject).'_set') ?? $request->{$scienceSubject.'_set'} }}"
+                               placeholder="{{ $scienceSubject }} Set"
+                               name="{{ strtolower($scienceSubject) }}_set" id="{{ strtolower($scienceSubject) }}_set"/>
+                    @endforeach
+                @endif
                 @if ($yearGroup===9)
                     <label class="form-label" for="humanities">Humanities Set (Geog, Hist, RS)</label>
                     <input type="number" class="form-control"
@@ -62,7 +73,7 @@
                 @endif
             </div>
             <div class="col">
-                <label class="form-label" for="cmlf">CMFL</label>
+                <label class="form-label" for="cmlf">Modern Foreign Language</label>
                 <input class="form-control" type="text" value="{{ old('cmfl') ?? $request->cmfl }}" placeholder="CMFL"
                        name="cmfl"/>
 
