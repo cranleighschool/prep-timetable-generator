@@ -57,92 +57,96 @@
                                     <h2>Fill in the details below</h2>
                                 </div>
                             </div>
-                            <div class="col">
-                                @if ($yearGroup===9)
-                                    <label class="form-label" for="science_set">Science Set</label>
-                                    <input type="number" class="form-control"
-                                           value="{{ old('science_set') ?? $request->science_set }}"
-                                           placeholder="Science Set"
-                                           name="science_set" id="science_set"/>
-                                @else
-                                    @foreach (['Biology', 'Chemistry', 'Physics'] as $scienceSubject)
-                                        <label class="form-label"
-                                               for="{{ strtolower($scienceSubject) }}_set">{{ $scienceSubject }}
-                                            Set</label>
+                            <div class="row">
+                                <div class="col">
+                                    @if ($yearGroup===9)
+                                        <label class="form-label" for="science_set">Science Set</label>
                                         <input type="number" class="form-control"
-                                               value="{{ old(strtolower($scienceSubject).'_set') ?? $request->{$scienceSubject.'_set'} }}"
-                                               placeholder="{{ $scienceSubject }} Set"
-                                               name="{{ strtolower($scienceSubject) }}_set"
-                                               id="{{ strtolower($scienceSubject) }}_set"/>
-                                    @endforeach
-                                @endif
-                                @if ($yearGroup===9)
-                                    <label class="form-label" for="humanities">Humanities Set (Geog, Hist, RS)</label>
-                                    <input type="number" class="form-control"
-                                           value="{{ old('humanities_set') ?? $request->humanities_set }}"
-                                           placeholder="Humanities Set"
-                                           name="humanities_set" id="humanities_set"/>
-
-                                    @if (!in_array('Latin', $sets->toArray()))
-                                        <label class="form-label" for="classciv_set">Class Civ Set</label>
-                                        <input type="number" class="form-control"
-                                               value="{{ old('classcivset_set') ?? $request->classciv_set }}"
-                                               placeholder="Class Civ Set"
-                                               name="classciv_set" id="classciv_set"/>
+                                               value="{{ old('science_set') ?? $request->science_set }}"
+                                               placeholder="Science Set"
+                                               name="science_set" id="science_set"/>
+                                    @else
+                                        @foreach (['Biology', 'Chemistry', 'Physics'] as $scienceSubject)
+                                            <label class="form-label"
+                                                   for="{{ strtolower($scienceSubject) }}_set">{{ $scienceSubject }}
+                                                Set</label>
+                                            <input type="number" class="form-control"
+                                                   value="{{ old(strtolower($scienceSubject).'_set') ?? $request->{$scienceSubject.'_set'} }}"
+                                                   placeholder="{{ $scienceSubject }} Set"
+                                                   name="{{ strtolower($scienceSubject) }}_set"
+                                                   id="{{ strtolower($scienceSubject) }}_set"/>
+                                        @endforeach
                                     @endif
-                                    <label class="form-label" for="maths_set">Maths Set</label>
+                                    @if ($yearGroup===9)
+                                        <label class="form-label" for="humanities">Humanities Set (Geog, Hist,
+                                            RS)</label>
+                                        <input type="number" class="form-control"
+                                               value="{{ old('humanities_set') ?? $request->humanities_set }}"
+                                               placeholder="Humanities Set"
+                                               name="humanities_set" id="humanities_set"/>
+
+                                        @if (!in_array('Latin', $sets->toArray()))
+                                            <label class="form-label" for="classciv_set">Class Civ Set</label>
+                                            <input type="number" class="form-control"
+                                                   value="{{ old('classcivset_set') ?? $request->classciv_set }}"
+                                                   placeholder="Class Civ Set"
+                                                   name="classciv_set" id="classciv_set"/>
+                                        @endif
+                                        <label class="form-label" for="maths_set">Maths Set</label>
+                                        <input class="form-control" type="text"
+                                               value="{{ old('maths_set') ?? $request->maths_set }}"
+                                               placeholder="Maths Set"
+                                               name="maths_set" id="maths_set"/>
+                                    @endif
+                                </div>
+                                <div class="col">
+                                    <label class="form-label" for="optiona">Option A</label>
                                     <input class="form-control" type="text"
-                                           value="{{ old('maths_set') ?? $request->maths_set }}"
-                                           placeholder="Maths Set"
-                                           name="maths_set" id="maths_set"/>
-                                @endif
-                            </div>
-                            <div class="col">
-                                <label class="form-label" for="optiona">Option A</label>
-                                <input class="form-control" type="text"
-                                       value="{{ old('optiona') ?? $request->optiona }}"
-                                       placeholder="Option A" name="optiona"/>
+                                           value="{{ old('optiona') ?? $request->optiona }}"
+                                           placeholder="Option A" name="optiona"/>
 
-                                <label class="form-label" for="optionb">Option B</label>
-                                <input class="form-control" type="text"
-                                       value="{{ old('optionb') ?? $request->optionb }}"
-                                       placeholder="Option B"
-                                       name="optionb"/>
-
-                                <label class="form-label" for="optionc">Option C</label>
-                                <input class="form-control" type="text"
-                                       value="{{ old('optionc') ?? $request->optionc }}"
-                                       placeholder="Option C"
-                                       name="optionc"/>
-                                @if ($yearGroup !== 9)
-                                    <label class="form-label" for="optionc">Option D</label>
+                                    <label class="form-label" for="optionb">Option B</label>
                                     <input class="form-control" type="text"
-                                           value="{{ old('optiond') ?? $request->optiond }}"
-                                           placeholder="Option D"
-                                           name="optiond"/>
-                                @endif
-                            </div>
-                            <div class="col">
-                                <label class="form-label" for="cmlf">Modern Foreign Language</label>
-                                <input class="form-control" type="text" value="{{ old('cmfl') ?? $request->cmfl }}"
-                                       placeholder="CMFL"
-                                       name="cmfl"/>
+                                           value="{{ old('optionb') ?? $request->optionb }}"
+                                           placeholder="Option B"
+                                           name="optionb"/>
 
-                                @if ($yearGroup == 9)
-                                    <label class="form-label" for="latin">
-                                        <span class="">Do you do Latin?</span>
-                                        <select class="form-select mt-1 block w-full" placeholder="Thingy" name="latin">
-                                            <option @if(in_array('Latin', $sets->toArray())) selected="selected"
-                                                    @endif value="YES">
-                                                Yes
-                                            </option>
-                                            <option @if(!in_array('Latin', $sets->toArray())) selected="selected"
-                                                    @endif value="NO">
-                                                No
-                                            </option>
-                                        </select>
-                                    </label>
-                                @endif
+                                    <label class="form-label" for="optionc">Option C</label>
+                                    <input class="form-control" type="text"
+                                           value="{{ old('optionc') ?? $request->optionc }}"
+                                           placeholder="Option C"
+                                           name="optionc"/>
+                                    @if ($yearGroup !== 9)
+                                        <label class="form-label" for="optionc">Option D</label>
+                                        <input class="form-control" type="text"
+                                               value="{{ old('optiond') ?? $request->optiond }}"
+                                               placeholder="Option D"
+                                               name="optiond"/>
+                                    @endif
+                                </div>
+                                <div class="col">
+                                    <label class="form-label" for="cmlf">Modern Foreign Language</label>
+                                    <input class="form-control" type="text" value="{{ old('cmfl') ?? $request->cmfl }}"
+                                           placeholder="CMFL"
+                                           name="cmfl"/>
+
+                                    @if ($yearGroup == 9)
+                                        <label class="form-label" for="latin">
+                                            <span class="">Do you do Latin?</span>
+                                            <select class="form-select mt-1 block w-full" placeholder="Thingy"
+                                                    name="latin">
+                                                <option @if(in_array('Latin', $sets->toArray())) selected="selected"
+                                                        @endif value="YES">
+                                                    Yes
+                                                </option>
+                                                <option @if(!in_array('Latin', $sets->toArray())) selected="selected"
+                                                        @endif value="NO">
+                                                    No
+                                                </option>
+                                            </select>
+                                        </label>
+                                    @endif
+                                </div>
                             </div>
                         </div>
                         <div class="row p-3">
