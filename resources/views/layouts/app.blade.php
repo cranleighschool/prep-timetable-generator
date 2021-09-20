@@ -14,6 +14,7 @@
             -webkit-columns: 2;
             -moz-columns: 2;
         }
+
         /*main {*/
         /*    margin-top:30px;*/
         /*}*/
@@ -27,13 +28,37 @@
 </head>
 <body>
 <div class="container">
+    <div class="row p-3">
+        <div class="col">
+            <h1>Cranleigh Prep Timetable Generator</h1>
+            <p class="lead">This application uses the logic from <a href="{{ asset('Michaelmas Prep Timetable 2021-22 (Term 1).pdf') }}" target="_blank">Mr Fearn's Prep Timetable sheet</a> to auto-populate your
+                Prep Timetable.</p>
+        </div>
+    </div>
     <main>
-    @foreach ($errors->all() as $error)
-        <div class="alert alert-danger">{{ $error }}</div>
-    @endforeach
-    @yield('content')
+        @foreach ($errors->all() as $error)
+            <div class="alert alert-danger">{{ $error }}</div>
+        @endforeach
+        @yield('content')
+        @if (!request()->routeIs('start'))
+            <hr/>
+            <div class="row p-3">
+                <div class="col">
+                    <a href="javascript:history.back()" class="btn btn-lg btn-primary">Go Back</a>
+                    <a href="{{ url('/') }}" class="btn btn-lg btn-secondary">Start Over</a>
+                </div>
+            </div>
+        @endif
     </main>
 </div>
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col float-end">
+            </div>
+        </div>
+    </div>
+</footer>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ"
         crossorigin="anonymous"></script>

@@ -16,7 +16,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
 
     return view('start');
-});
+})->name("start");
 
 Route::post('setup', function (\App\Http\Requests\SetupRequest $request) {
     $yearGroup = $request->yearGroup;
@@ -25,11 +25,11 @@ Route::post('setup', function (\App\Http\Requests\SetupRequest $request) {
 
     $timetable = [];
     return view('setup', compact('days', 'request', 'timetable', 'sets', 'yearGroup'));
-});
+})->name('setup');
 Route::post('generate/{yearGroup}', function (\App\Http\Requests\TimetableRequest $request, int $yearGroup) {
     $days = \App\Models\PrepDay::all();
     $yearGroup = $request->yearGroup;
     $timetable = \App\Models\PrepDay::getTimetable($yearGroup, $request);
 
     return view('timetable', compact('days', 'request', 'timetable', 'yearGroup'));
-});
+})->name('timetable');

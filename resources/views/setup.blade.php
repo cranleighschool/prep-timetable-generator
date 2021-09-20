@@ -2,12 +2,15 @@
 @section('content')
     <div class="row p-3">
         <div class="col">
-            <div class="progress">
-                <div class="progress-bar progress-bar-striped bg-secondary" role="progressbar" style="width: 33.3%;"
-                     aria-valuenow="33.3" aria-valuemin="0" aria-valuemax="100">Step 1: Username
+            <div class="progress" style="height:30px;">
+                <div class="progress-bar progress-bar-striped bg-success" role="progressbar" style="width: 33.3%;"
+                     aria-valuenow="33.3" aria-valuemin="0" aria-valuemax="100">Step 1: Your Username
                 </div>
-                <div class="progress-bar progress-bar-striped" role="progressbar" style="width: 33.3%;"
+                <div class="progress-bar progress-bar-striped bg-primary" role="progressbar" style="width: 33.3%;"
                      aria-valuenow="33.3" aria-valuemin="0" aria-valuemax="100">Step 2: Input Data
+                </div>
+                <div class="progress-bar progress-bar-striped bg-secondary" role="progressbar" style="width: 33.3%;"
+                     aria-valuenow="33.3" aria-valuemin="0" aria-valuemax="100">Step 3: Prep Timetable
                 </div>
             </div>
         </div>
@@ -25,7 +28,7 @@
         </div>
     </div>
     <div class="row p-3">
-        <aside class="col-4">
+        <aside class="col-md-4 mb-4">
             <div class="row">
                 <div class="col">
                     <div class="card">
@@ -43,7 +46,7 @@
                 </div>
             </div>
         </aside>
-        <div class="col">
+        <div class="col-md">
             <div class="card">
                 <div class="card-body">
                     <form action="{{ url('generate/'.$yearGroup) }}" class="form-inline" method="POST">
@@ -58,10 +61,10 @@
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col">
+                                <div class="col-md">
                                     @if ($yearGroup===9)
                                         <label class="form-label" for="science_set">Science Set</label>
-                                        <input type="number" class="form-control"
+                                        <input required="required" type="number" class="form-control"
                                                value="{{ old('science_set') ?? $request->science_set }}"
                                                placeholder="Science Set"
                                                name="science_set" id="science_set"/>
@@ -70,7 +73,7 @@
                                             <label class="form-label"
                                                    for="{{ strtolower($scienceSubject) }}_set">{{ $scienceSubject }}
                                                 Set</label>
-                                            <input type="number" class="form-control"
+                                            <input required="required" type="number" class="form-control"
                                                    value="{{ old(strtolower($scienceSubject).'_set') ?? $request->{$scienceSubject.'_set'} }}"
                                                    placeholder="{{ $scienceSubject }} Set"
                                                    name="{{ strtolower($scienceSubject) }}_set"
@@ -80,26 +83,26 @@
                                     @if ($yearGroup===9)
                                         <label class="form-label" for="humanities">Humanities Set (Geog, Hist,
                                             RS)</label>
-                                        <input type="number" class="form-control"
+                                        <input required="required" type="number" class="form-control"
                                                value="{{ old('humanities_set') ?? $request->humanities_set }}"
                                                placeholder="Humanities Set"
                                                name="humanities_set" id="humanities_set"/>
 
                                         @if (!in_array('Latin', $sets->toArray()))
                                             <label class="form-label" for="classciv_set">Class Civ Set</label>
-                                            <input type="number" class="form-control"
+                                            <input required="required" type="number" class="form-control"
                                                    value="{{ old('classcivset_set') ?? $request->classciv_set }}"
                                                    placeholder="Class Civ Set"
                                                    name="classciv_set" id="classciv_set"/>
                                         @endif
                                         <label class="form-label" for="maths_set">Maths Set</label>
-                                        <input class="form-control" type="text"
+                                        <input required="required" class="form-control" type="text"
                                                value="{{ old('maths_set') ?? $request->maths_set }}"
                                                placeholder="Maths Set"
                                                name="maths_set" id="maths_set"/>
                                     @endif
                                 </div>
-                                <div class="col">
+                                <div class="col-md">
                                     <label class="form-label" for="optiona">Option A</label>
                                     <input class="form-control" type="text"
                                            value="{{ old('optiona') ?? $request->optiona }}"
@@ -124,7 +127,7 @@
                                                name="optiond"/>
                                     @endif
                                 </div>
-                                <div class="col">
+                                <div class="col-md">
                                     <label class="form-label" for="cmlf">Modern Foreign Language</label>
                                     <input class="form-control" type="text" value="{{ old('cmfl') ?? $request->cmfl }}"
                                            placeholder="CMFL"
@@ -161,5 +164,4 @@
         </div>
     </div>
 
-    </div>
 @endsection
