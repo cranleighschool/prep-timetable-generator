@@ -15,12 +15,11 @@ class School extends Model implements Institution
 
     public static function getPupil(string $username): Pupil
     {
-        $allPupils = Cache::rememberForever("allPupils", function() {
+        $allPupils = Cache::rememberForever("allPupils", function () {
             $isams = new CurrentPupilController(new self());
             return $isams->index();
         });
-        return Cache::rememberForever("pupil_".$username, function() use ($allPupils, $username) {
-            //$isams = new CurrentPupilController(new self());
+        return Cache::rememberForever("pupil_".$username, function () use ($allPupils, $username) {
             return $allPupils->whereIn('schoolEmailAddress',
                 [strtoupper($username)."@cranleigh.org", strtolower($username)."@cranleigh.org"])->first();
         });

@@ -17,16 +17,6 @@ Route::get('/', function () {
 
     return view('start');
 });
-Route::post('/', function (\App\Http\Requests\PupilRequest $request) {
-    dd('Should not be here!');
-    $sets = $request->sets;
-    $pupilName = $request->pupil->fullName. " '".$request->pupil->preferredName."' (".$request->pupil->boardingHouse.")";
-    $numSubjects = $sets->count();
-    $yearGroup = $request->pupil->yearGroup;
-
-    return view('welcome', compact('pupilName', 'numSubjects', 'yearGroup', 'sets'));
-});
-
 
 Route::post('setup', function (\App\Http\Requests\SetupRequest $request) {
     $yearGroup = $request->yearGroup;
