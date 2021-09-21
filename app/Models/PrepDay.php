@@ -10,11 +10,23 @@ class PrepDay extends Model
 {
     use HasFactory;
 
+    /**
+     * @var bool
+     */
     public $timestamps = false;
+    /**
+     * @var string[]
+     */
     protected $fillable = [
         'day',
     ];
 
+    /**
+     * @param  int  $yearGroup
+     * @param  \Illuminate\Http\Request  $request
+     *
+     * @return array
+     */
     public static function getTimetable(int $yearGroup, Request $request): array
     {
         $timetable = [];
@@ -36,6 +48,12 @@ class PrepDay extends Model
         })->toArray();
     }
 
+    /**
+     * @param  array  $timetable
+     * @param  \Illuminate\Http\Request  $request
+     *
+     * @return array
+     */
     public static function year9Timetable(array $timetable, Request $request): array
     {
         foreach (self::all() as $day) {
@@ -62,7 +80,7 @@ class PrepDay extends Model
                     break;
                 case "Wednesday":
                     array_push($timetable[ $day->day ], $request->optionb);
-                    if (\Illuminate\Support\Str::contains($request->maths_set, "X")) {
+                    if (\Illuminate\Support\Str::contains($request->maths_set, "Y")) {
                         array_push($timetable[ $day->day ], "Maths");
                     }
                     break;
@@ -74,7 +92,7 @@ class PrepDay extends Model
                     break;
                 case "Friday":
                     array_push($timetable[ $day->day ], $request->optionc);
-                    if (\Illuminate\Support\Str::contains($request->maths_set, "Y")) {
+                    if (\Illuminate\Support\Str::contains($request->maths_set, "X")) {
                         array_push($timetable[ $day->day ], "Maths");
                     }
                     break;
@@ -83,6 +101,12 @@ class PrepDay extends Model
         return $timetable;
     }
 
+    /**
+     * @param  array  $timetable
+     * @param  \Illuminate\Http\Request  $request
+     *
+     * @return array
+     */
     public static function year10Timetable(array $timetable, Request $request): array
     {
         foreach (self::all() as $day) {
@@ -129,6 +153,12 @@ class PrepDay extends Model
         return $timetable;
     }
 
+    /**
+     * @param  array  $timetable
+     * @param  \Illuminate\Http\Request  $request
+     *
+     * @return array
+     */
     public static function year11Timetable(array $timetable, Request $request): array
     {
         foreach (self::all() as $day) {
@@ -152,7 +182,7 @@ class PrepDay extends Model
                     array_push($timetable[ $day->day ], 'Maths');
                     break;
                 case "Tuesday":
-                    array_push($timetable[$day->day], 'English');
+                    array_push($timetable[ $day->day ], 'English');
                     array_push($timetable[ $day->day ], $request->optiona);
                     array_push($timetable[ $day->day ], $request->optionc);
                     break;
@@ -167,7 +197,8 @@ class PrepDay extends Model
                     break;
                 case "Friday":
                     array_push($timetable[ $day->day ], $request->optiona);
-                    array_push($timetable[ $day->day ], $request->optiond);
+                    array_push($timetable[ $day->day ], $request->optionb);
+                    array_push($timetable[ $day->day ], $request->optionc);
                     array_push($timetable[ $day->day ], 'Maths');
                     break;
             }
@@ -176,34 +207,60 @@ class PrepDay extends Model
         return $timetable;
     }
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
     public function biology()
     {
-        return $this->hasMany(ScienceSet::class, 'day_id')->whereIn('subject', ['Biology']);
+        return $this->sets()->whereIn('subject', ['Biology']);
     }
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    private function sets()
+    {
+        return $this->hasMany(ScienceSet::class, 'day_id');
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
     public function chemistry()
     {
-        return $this->hasMany(ScienceSet::class, 'day_id')->whereIn('subject', ['Chemistry']);
+        return $this->sets()->whereIn('subject', ['Chemistry']);
     }
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
     public function physics()
     {
-        return $this->hasMany(ScienceSet::class, 'day_id')->whereIn('subject', ['Physics']);
+        return $this->sets()->whereIn('subject', ['Physics']);
     }
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
     public function sciences()
     {
-        return $this->hasMany(ScienceSet::class, "day_id")->whereIn('subject', ['Biology', 'Chemistry', 'Physics']);
+        return $this->sets()->whereIn('subject', ['Biology', 'Chemistry', 'Physics']);
     }
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
     public function humanities()
     {
-        return $this->hasMany(ScienceSet::class, 'day_id')->whereIn('subject', ['Geography', 'RS', 'History']);
+        return $this->sets()->whereIn('subject', ['Geography', 'RS', 'History']);
     }
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
     public function classics()
     {
-        return $this->hasMany(ScienceSet::class, 'day_id')->whereIn('subject', ['Class Civ']);
+        return $this->sets()->whereIn('subject', ['Class Civ']);
     }
 
 

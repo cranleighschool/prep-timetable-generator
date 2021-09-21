@@ -31,7 +31,7 @@
     <div class="row p-3">
         <div class="col">
             <h1>Cranleigh Prep Timetable Generator</h1>
-            <p class="lead">This application uses the logic from <a href="{{ asset('Michaelmas Prep Timetable 2021-22 (Term 1).pdf') }}" target="_blank">Mr Fearn's Prep Timetable sheet</a> to auto-populate your
+            <p class="lead">This application uses the logic from <a href="{{ asset('Michaelmas Prep Timetable 2021-22 (Term 1) Update.pdf') }}" target="_blank">Mr Fearn's Prep Timetable sheet</a> to auto-populate your
                 Prep Timetable.</p>
         </div>
     </div>

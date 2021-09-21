@@ -15,6 +15,13 @@ class ScienceSetsSeeder extends Seeder
      */
     public function run()
     {
+        $this->fourthForm();
+        $this->lowerFifth();
+        $this->upperFifth();
+    }
+
+    private function fourthForm()
+    {
         DB::table('science_sets')->insert([
             $this->getData(1, 'Biology', 'Thursday'),
             $this->getData(1, 'Chemistry', 'Tuesday'),
@@ -86,7 +93,30 @@ class ScienceSetsSeeder extends Seeder
             7 => "Wednesday",
             8 => "Monday",
         ]);
+    }
 
+    private function getData(int $set, string $subject, string $day, int $yearGroup = 9)
+    {
+        $day_id = PrepDay::where("day", $day)->first()->id;
+        return [
+            "set" => $set,
+            "subject" => $subject,
+            "day_id" => $day_id,
+            "nc_year" => $yearGroup,
+        ];
+    }
+
+    private function addSubject(string $subject, int $yearGroup, array $array)
+    {
+        foreach ($array as $set => $day) {
+            DB::table('science_sets')->insert([
+                $this->getData($set, $subject, $day, $yearGroup),
+            ]);
+        }
+    }
+
+    private function lowerFifth()
+    {
         $this->addSubject('Biology', 10, [
             1 => "Tuesday",
             2 => "Tuesday",
@@ -95,6 +125,8 @@ class ScienceSetsSeeder extends Seeder
             5 => "Thursday",
             6 => "Thursday",
             7 => "Thursday",
+            8 => "Wednesday",
+            9 => "Wednesday"
         ]);
         $this->addSubject('Biology', 10, [
             1 => "Thursday",
@@ -114,6 +146,8 @@ class ScienceSetsSeeder extends Seeder
             5 => "Tuesday",
             6 => "Tuesday",
             7 => "Tuesday",
+            8 => "Thursday",
+            9 => "Thursday"
         ]);
         $this->addSubject('Chemistry', 10, [
             1 => "Friday",
@@ -139,16 +173,18 @@ class ScienceSetsSeeder extends Seeder
             8 => 'Tuesday',
             9 => 'Tuesday',
         ]);
+    }
 
-
+    private function upperFifth()
+    {
         // Year 11 Science Sets
         $this->addSubject('Biology', 11, [
             1 => "Monday",
             2 => "Monday",
             3 => "Monday",
-            4 => "Thursday",
-            5 => "Thursday",
-            6 => "Thursday",
+            4 => "Monday",
+            5 => "Monday",
+            6 => "Monday",
             7 => "Monday",
             8 => "Monday",
         ]);
@@ -157,18 +193,9 @@ class ScienceSetsSeeder extends Seeder
             1 => "Wednesday",
             2 => "Wednesday",
             3 => "Wednesday",
-            4 => "Friday",
-            5 => "Friday",
-            6 => "Friday",
-            7 => "Friday",
-        ]);
-
-        $this->addSubject('Chemistry', 11, [
-            4 => "Monday",
-            5 => "Monday",
-            6 => "Monday",
-            7 => "Monday",
-            8 => "Monday",
+            4 => "Thursday",
+            5 => "Thursday",
+            6 => "Thursday",
         ]);
 
         $this->addSubject('Chemistry', 11, [
@@ -178,6 +205,9 @@ class ScienceSetsSeeder extends Seeder
             4 => "Wednesday",
             5 => "Wednesday",
             6 => "Wednesday",
+            7 => "Monday",
+            8 => "Monday",
+
         ]);
 
         $this->addSubject('Chemistry', 11, [
@@ -197,33 +227,16 @@ class ScienceSetsSeeder extends Seeder
             5 => 'Monday',
             6 => 'Monday',
         ]);
+
         $this->addSubject('Physics', 11, [
             1 => 'Thursday',
             2 => 'Thursday',
             3 => 'Thursday',
+            4 => 'Wednesday',
+            5 => 'Wednesday',
+            6 => 'Wednesday',
             7 => 'Thursday',
             8 => 'Thursday',
         ]);
-
-    }
-
-    private function getData(int $set, string $subject, string $day, int $yearGroup = 9)
-    {
-        $day_id = PrepDay::where("day", $day)->first()->id;
-        return [
-            "set" => $set,
-            "subject" => $subject,
-            "day_id" => $day_id,
-            "nc_year" => $yearGroup,
-        ];
-    }
-
-    private function addSubject(string $subject, int $yearGroup, array $array)
-    {
-        foreach ($array as $set => $day) {
-            DB::table('science_sets')->insert([
-                $this->getData($set, $subject, $day, $yearGroup),
-            ]);
-        }
     }
 }
