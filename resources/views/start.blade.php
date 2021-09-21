@@ -1,6 +1,6 @@
 @extends('layouts.app')
 @section('content')
-    <div class="row">
+    <div class="row p-3">
         <div class="col">
             <div class="progress" style="height:30px;">
                 <div class="progress-bar progress-bar-striped bg-primary" role="progressbar" style="width: 33.3%;"
