@@ -34,6 +34,7 @@ class SetupRequest extends FormRequest
 
     private function getPupilAndSets()
     {
+        //dd($this->get('username'));
         try {
             $pupil = School::getPupil($this->get('username'));
         } catch (\TypeError $exception) {

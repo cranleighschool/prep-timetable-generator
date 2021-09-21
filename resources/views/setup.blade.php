@@ -53,6 +53,7 @@
                         {{ csrf_field() }}
                         {{ method_field('POST') }}
                         <input type="hidden" name="yearGroup" value="{{ $yearGroup }}"/>
+                        <input type="hidden" name="username" value="{{ $request->username }}" />
 
                         <div class="row p-3">
                             <div class="row">
@@ -91,7 +92,7 @@
                                         @if (!in_array('Latin', $sets->toArray()))
                                             <label class="form-label" for="classciv_set">Class Civ Set</label>
                                             <input required="required" type="number" class="form-control"
-                                                   value="{{ old('classcivset_set') ?? $request->classciv_set }}"
+                                                   value="{{ old('classciv_set') ?? $request->classciv_set }}"
                                                    placeholder="Class Civ Set"
                                                    name="classciv_set" id="classciv_set"/>
                                         @endif

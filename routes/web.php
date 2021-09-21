@@ -18,7 +18,7 @@ Route::get('/', function () {
     return view('start');
 })->name("start");
 
-Route::post('setup', function (\App\Http\Requests\SetupRequest $request) {
+Route::get('setup', function (\App\Http\Requests\SetupRequest $request) {
     $yearGroup = $request->yearGroup;
     $days = \App\Models\PrepDay::all();
     $sets = $request->sets;
@@ -26,7 +26,8 @@ Route::post('setup', function (\App\Http\Requests\SetupRequest $request) {
     $timetable = [];
     return view('setup', compact('days', 'request', 'timetable', 'sets', 'yearGroup'));
 })->name('setup');
-Route::post('generate/{yearGroup}', function (\App\Http\Requests\TimetableRequest $request, int $yearGroup) {
+
+Route::post('generate/{yearGroup}', function (int $yearGroup, \App\Http\Requests\TimetableRequest $request) {
     $days = \App\Models\PrepDay::all();
     $yearGroup = $request->yearGroup;
     $timetable = \App\Models\PrepDay::getTimetable($yearGroup, $request);

@@ -36,7 +36,25 @@ class TimetableRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'username' => 'string|required',
+            'science_set' => 'min:1|max:8|integer',
+            'humanities_set' => 'min:1|max:8|integer',
+            'biology_set' => 'min:1|max:8|integer',
+            'chemistry_set' => 'min:1|max:8|integer',
+            'physics_set' => 'min:1|max:8|integer',
+            'classciv_set' => 'min:1|max:6|integer',
+
+            'maths_set' => 'regex:/^[a-zA-Z]{1}[0-9]{1}$/'
+        ];
+    }
+    public function messages()
+    {
+        return [
+            'classciv_set.min' => 'That looks like an incorrect Classics Set',
+            'classciv_set.max' => 'That looks like an incorrect Classics Set',
+            '*.min' => 'That looks like an incorrect '.ucwords(':attribute').' Number.',
+            '*.max' => 'That looks like an incorrect '.ucwords(':attribute').' Number.',
+            'maths_set' => 'Looks like an invalid Maths Set',
         ];
     }
 }

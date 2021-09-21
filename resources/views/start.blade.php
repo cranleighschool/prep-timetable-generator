@@ -19,8 +19,7 @@
         <div class="col">
             <label for="username" class="display-6">Your School Username</label>
 
-            <form action="{{ url('setup') }}" method="post" class="form form-inline">
-                {{ csrf_field() }}
+            <form action="{{ url('setup') }}" method="get" class="form form-inline">
                 <div class="row">
                     <div class="col">
                         <input type="text" name="username" class="form-control form-control-lg" placeholder="Enter your school username (eg: smitjo2021)"
