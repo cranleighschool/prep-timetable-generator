@@ -15,41 +15,62 @@
             </div>
         </div>
     </div>
-    <div class="container">
-        <div class="row p-3">
-            <div class="col">
-                <div class="card">
-                    <div class="card-body">
-                        <h2 class="card-title">Your Timetable</h2>
-                        <div class="table-responsive">
-                            <table class="table">
-                                <thead>
-                                @foreach ($timetable as $day => $values)
-                                    <th>{{ $day }}</th>
+    <div class="row p-3">
+        <div class="col">
+            <div class="card" id="timetable-card">
+                <div class="card-body">
+                    <h2 class="card-title">Your Prep Timetable (<code>{{ $request->username }}</code>)</h2>
+                    <div class="table-responsive">
+                        <table class="table">
+                            <thead>
+                            @foreach ($timetable as $day => $values)
+                                <th>{{ $day }}</th>
+                            @endforeach
+                            </thead>
+                            <tbody>
+                            <tr>
+                                @foreach ($timetable as $day => $subjects)
+                                    <td>
+                                        <table class="table">
+                                            <tbody>
+                                            @foreach ($subjects as $subject)
+                                                <tr>
+                                                    <td>{{ $subject }}</td>
+                                                </tr>
+                                            @endforeach
+                                            </tbody>
+                                        </table>
+                                    </td>
                                 @endforeach
-                                </thead>
-                                <tbody>
-                                <tr>
-                                    @foreach ($timetable as $day => $subjects)
-                                        <td>
-                                            <table class="table">
-                                                <tbody>
-                                                @foreach ($subjects as $subject)
-                                                    <tr>
-                                                        <td>{{ $subject }}</td>
-                                                    </tr>
-                                                @endforeach
-                                                </tbody>
-                                            </table>
-                                        </td>
-                                    @endforeach
-                                </tr>
-                                </tbody>
-                            </table>
-                        </div>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="card-footer">
+                        <p class="float-end">Prep Timetable for <code>{{ $request->username }}</code></p>
+                        <div class="clearfix">&nbsp;</div>
                     </div>
                 </div>
             </div>
         </div>
-
+    </div>
 @endsection
+@push('scripts')
+    <script>
+        function CopyToClipboard(containerid) {
+            if (document.selection) {
+                var range = document.body.createTextRange();
+                range.moveToElementText(document.getElementById(containerid));
+                range.select().createTextRange();
+                document.execCommand("copy");
+            } else if (window.getSelection) {
+                var range = document.createRange();
+                range.selectNode(document.getElementById(containerid));
+                window.getSelection().addRange(range);
+                document.execCommand("copy");
+                alert("Text has been copied, now paste in the text-area")
+            }
+        }
+    </script>
+
+@endpush
