@@ -46,9 +46,7 @@
                     <a href="javascript:history.back()" class="btn btn-lg btn-primary">Go Back</a>
                     <a href="{{ url('/') }}" class="btn btn-lg btn-secondary">Start Over</a>
                 </div>
-                <div class="col">
-                    <button type="button" class="btn btn-lg btn-info" id="copy-to-clipboard" onclick="CopyToClipboard('timetable-card')">Copy To Clipboard</button>
-                </div>
+
             </div>
         @endif
     </main>
@@ -65,6 +63,7 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ"
         crossorigin="anonymous"></script>
+<script src="{{ asset('js/app.js') }}" />
 @stack('scripts')
 </body>
 </html>

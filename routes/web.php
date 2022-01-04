@@ -31,6 +31,6 @@ Route::post('generate/{yearGroup}', function (int $yearGroup, \App\Http\Requests
     $days = \App\Models\PrepDay::all();
     $yearGroup = $request->yearGroup;
     $timetable = \App\Models\PrepDay::getTimetable($yearGroup, $request);
-
+    //dd($timetable);
     return view('timetable', compact('days', 'request', 'timetable', 'yearGroup'));
 })->name('timetable');
