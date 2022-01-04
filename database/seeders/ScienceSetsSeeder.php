@@ -27,9 +27,9 @@ class ScienceSetsSeeder extends Seeder
             $this->getData(1, 'Chemistry', 'Tuesday'),
             $this->getData(1, 'Physics', 'Friday'),
 
-            $this->getData(2, 'Biology', 'Tuesday'),
-            $this->getData(2, 'Chemistry', 'Thursday'),
-            $this->getData(2, 'Physics', 'Friday'),
+            $this->getData(2, 'Biology', 'Friday'),
+            $this->getData(2, 'Chemistry', 'Tuesday'),
+            $this->getData(2, 'Physics', 'Thursday'),
 
             $this->getData(3, 'Biology', 'Friday'),
             $this->getData(3, 'Chemistry', 'Tuesday'),
@@ -51,9 +51,9 @@ class ScienceSetsSeeder extends Seeder
             $this->getData(7, 'Chemistry', 'Tuesday'),
             $this->getData(7, 'Physics', 'Friday'),
 
-            $this->getData(8, 'Biology', 'Friday'),
+            $this->getData(8, 'Biology', 'Thursday'),
             $this->getData(8, 'Chemistry', 'Tuesday'),
-            $this->getData(8, 'Physics', 'Thursday'),
+            $this->getData(8, 'Physics', 'Friday'),
         ]);
         $this->addSubject("Class Civ", 9, [
             1 => "Thursday",
@@ -64,7 +64,7 @@ class ScienceSetsSeeder extends Seeder
             6 => "Tuesday",
         ]);
         $this->addSubject("Geography", 9, [
-            1 => "Wednesday",
+            1 => "Monday",
             2 => "Monday",
             3 => "Tuesday",
             4 => "Wednesday",
@@ -74,10 +74,10 @@ class ScienceSetsSeeder extends Seeder
             8 => "Thursday",
         ]);
         $this->addSubject("History", 9, [
-            1 => "Monday",
+            1 => "Wednesday",
             2 => "Tuesday",
             3 => "Monday",
-            4 => "Tuesday",
+            4 => "Monday",
             5 => "Tuesday",
             6 => "Thursday",
             7 => "Monday",
@@ -87,7 +87,7 @@ class ScienceSetsSeeder extends Seeder
             1 => "Tuesday",
             2 => "Wednesday",
             3 => "Wednesday",
-            4 => "Monday",
+            4 => "Tuesday",
             5 => "Thursday",
             6 => "Tuesday",
             7 => "Wednesday",
@@ -121,43 +121,36 @@ class ScienceSetsSeeder extends Seeder
             1 => "Tuesday",
             2 => "Tuesday",
             3 => "Tuesday",
-            4 => "Thursday",
-            5 => "Thursday",
-            6 => "Thursday",
-            7 => "Thursday",
+            4 => "Tuesday",
+            5 => "Tuesday",
+            6 => "Tuesday",
+            7 => "Tuesday",
             8 => "Wednesday",
             9 => "Wednesday"
         ]);
+
         $this->addSubject('Biology', 10, [
             1 => "Thursday",
             2 => "Thursday",
             3 => "Thursday",
-            4 => "Friday",
-            5 => "Friday",
-            6 => "Friday",
-            7 => "Friday",
+            4 => "Thursday",
+            5 => "Thursday",
+            6 => "Thursday",
+            7 => "Thursday",
         ]);
 
         $this->addSubject('Chemistry', 10, [
             1 => "Wednesday",
             2 => "Wednesday",
             3 => "Wednesday",
-            4 => "Tuesday",
-            5 => "Tuesday",
-            6 => "Tuesday",
-            7 => "Tuesday",
-            8 => "Thursday",
-            9 => "Thursday"
-        ]);
-        $this->addSubject('Chemistry', 10, [
-            1 => "Friday",
-            2 => "Friday",
-            3 => "Friday",
             4 => "Thursday",
             5 => "Thursday",
             6 => "Thursday",
             7 => "Thursday",
+            8 => "Thursday",
+            9 => "Thursday"
         ]);
+
 
 
         $this->addSubject('Physics', 10, [
@@ -172,6 +165,16 @@ class ScienceSetsSeeder extends Seeder
 
             8 => 'Tuesday',
             9 => 'Tuesday',
+        ]);
+
+        $this->addSubject('Physics', 10, [
+            1 => 'Friday',
+            2 => 'Friday',
+            3 => 'Friday',
+            4 => 'Friday',
+            5 => 'Friday',
+            6 => 'Friday',
+            7 => 'Friday',
         ]);
     }
 
