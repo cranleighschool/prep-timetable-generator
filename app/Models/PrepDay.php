@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 class PrepDay extends Model
 {
@@ -80,7 +81,7 @@ class PrepDay extends Model
                     break;
                 case "Wednesday":
                     array_push($timetable[ $day->day ], $request->optionb);
-                    if (\Illuminate\Support\Str::contains($request->maths_set, "Y")) {
+                    if (Str::contains($request->maths_set, "Y")) {
                         array_push($timetable[ $day->day ], "Maths");
                     }
                     break;
@@ -92,7 +93,7 @@ class PrepDay extends Model
                     break;
                 case "Friday":
                     array_push($timetable[ $day->day ], $request->optionc);
-                    if (\Illuminate\Support\Str::contains($request->maths_set, "X")) {
+                    if (Str::contains($request->maths_set, "X")) {
                         array_push($timetable[ $day->day ], "Maths");
                     }
                     break;
@@ -128,14 +129,14 @@ class PrepDay extends Model
                 case "Monday":
                     array_push($timetable[ $day->day ], $request->optionb);
                     array_push($timetable[ $day->day ], 'Maths');
-                    array_push($timetable[ $day->day ], "English");
+                    array_push($timetable[ $day->day ], $request->cmfl);
                     break;
                 case "Tuesday":
                     array_push($timetable[ $day->day ], $request->optiona);
                     array_push($timetable[ $day->day ], $request->optionc);
                     break;
                 case "Wednesday":
-                    array_push($timetable[ $day->day ], $request->optionb);
+                    array_push($timetable[ $day->day ], $request->optionc);
                     array_push($timetable[ $day->day ], 'Maths');
                     break;
                 case "Thursday":
@@ -262,6 +263,4 @@ class PrepDay extends Model
     {
         return $this->sets()->whereIn('subject', ['Class Civ']);
     }
-
-
 }
