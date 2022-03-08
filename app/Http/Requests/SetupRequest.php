@@ -76,7 +76,7 @@ class SetupRequest extends FormRequest
             'yearGroup' => [
                 function ($attribute, $value, $fail) {
                     if ($value > 11) {
-                        $fail('This is only for Lower School Pupils. You selected a year '.$value->yearGroup.' student!');
+                        $fail('This is only for Lower School Pupils. You selected a year '.$value.' student!');
                     }
                 },
             ],
