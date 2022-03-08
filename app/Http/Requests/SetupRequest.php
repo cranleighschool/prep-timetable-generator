@@ -28,7 +28,7 @@ class SetupRequest extends FormRequest
         $sets = $this->getSets($this->get('sets'));
         $this->merge([
             'sets' => $sets,
-            'yearGroup' => (int) $this->get('pupil')->yearGroup,
+            'yearGroup' => (int) $this->pupil->yearGroup,
         ]);
     }
 
@@ -37,10 +37,11 @@ class SetupRequest extends FormRequest
         //dd($this->get('username'));
         try {
             $pupil = School::getPupil($this->get('username'));
+            $this->pupil = $pupil;
         } catch (\TypeError $exception) {
             throw ValidationException::withMessages(['username' => 'Could not find a pupil with that username!']);
         }
-        $this->merge(['pupil' => $pupil]);
+        //$this->merge(['pupil' => $pupil]);
 
         $sets = Cache::remember("sets_".$pupil->schoolId, now()->addHours(2), function () use ($pupil) {
             $timetable = new PupilTimetableController(School::find(1));
