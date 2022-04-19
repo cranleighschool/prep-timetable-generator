@@ -23,6 +23,9 @@ class ScienceSetsSeeder extends Seeder
     private function fourthForm()
     {
         DB::table('science_sets')->insert([
+            //$this->getData(1, )
+
+
             $this->getData(1, 'Biology', 'Thursday'),
             $this->getData(1, 'Chemistry', 'Tuesday'),
             $this->getData(1, 'Physics', 'Friday'),
@@ -117,14 +120,7 @@ class ScienceSetsSeeder extends Seeder
 
     private function lowerFifth()
     {
-        $this->addSubject('Biology', 10, [
-            1 => "Tuesday",
-            2 => "Tuesday",
-            3 => "Tuesday",
-            4 => "Tuesday",
-            5 => "Tuesday",
-            6 => "Tuesday",
-            7 => "Tuesday",
+        $this->addSubject("Biology", 10, [
             8 => "Wednesday",
             9 => "Wednesday"
         ]);
@@ -139,10 +135,17 @@ class ScienceSetsSeeder extends Seeder
             7 => "Thursday",
         ]);
 
+        $this->addSubject("Chemistry", 10, [
+            4 => "Tuesday",
+            5 => "Tuesday",
+            6 => "Tuesday",
+            7 => "Tuesday",
+        ]);
         $this->addSubject('Chemistry', 10, [
             1 => "Wednesday",
             2 => "Wednesday",
             3 => "Wednesday",
+
             4 => "Thursday",
             5 => "Thursday",
             6 => "Thursday",
@@ -151,6 +154,21 @@ class ScienceSetsSeeder extends Seeder
             9 => "Thursday"
         ]);
 
+        $this->addSubject("Chemistry", 10, [
+            1 => "Friday",
+            2 => "Friday",
+            3 => "Friday",
+        ]);
+
+
+        $this->addSubject("Physics", 10, [
+            1 => 'Tuesday',
+            2 => 'Tuesday',
+            3 => 'Tuesday',
+
+            8 => "Tuesday",
+            9 => "Tuesday",
+        ]);
 
 
         $this->addSubject('Physics', 10, [
@@ -162,15 +180,9 @@ class ScienceSetsSeeder extends Seeder
             5 => 'Wednesday',
             6 => 'Wednesday',
             7 => 'Wednesday',
-
-            8 => 'Tuesday',
-            9 => 'Tuesday',
         ]);
 
         $this->addSubject('Physics', 10, [
-            1 => 'Friday',
-            2 => 'Friday',
-            3 => 'Friday',
             4 => 'Friday',
             5 => 'Friday',
             6 => 'Friday',

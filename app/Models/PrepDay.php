@@ -128,7 +128,7 @@ class PrepDay extends Model
             switch ($day->day) {
                 case "Monday":
                     array_push($timetable[ $day->day ], $request->optionb);
-                    array_push($timetable[ $day->day ], 'Maths');
+                    array_push($timetable[ $day->day ], 'English');
                     array_push($timetable[ $day->day ], $request->cmfl);
                     break;
                 case "Tuesday":
@@ -144,7 +144,7 @@ class PrepDay extends Model
                     array_push($timetable[ $day->day ], $request->optiond);
                     break;
                 case "Friday":
-                    array_push($timetable[ $day->day ], $request->optiona);
+                    array_push($timetable[ $day->day ], $request->optionb);
                     array_push($timetable[ $day->day ], $request->optiond);
                     array_push($timetable[ $day->day ], $request->cmfl);
                     break;
