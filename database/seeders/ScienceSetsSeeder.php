@@ -23,78 +23,76 @@ class ScienceSetsSeeder extends Seeder
     private function fourthForm()
     {
         DB::table('science_sets')->insert([
-            //$this->getData(1, )
 
+            $this->getData(1, 'Biology', PrepDay::THURSDAY),
+            $this->getData(1, 'Chemistry', PrepDay::TUESDAY),
+            $this->getData(1, 'Physics', PrepDay::FRIDAY),
 
-            $this->getData(1, 'Biology', 'Thursday'),
-            $this->getData(1, 'Chemistry', 'Tuesday'),
-            $this->getData(1, 'Physics', 'Friday'),
+            $this->getData(2, 'Biology', PrepDay::FRIDAY),
+            $this->getData(2, 'Chemistry', PrepDay::TUESDAY),
+            $this->getData(2, 'Physics', PrepDay::THURSDAY),
 
-            $this->getData(2, 'Biology', 'Friday'),
-            $this->getData(2, 'Chemistry', 'Tuesday'),
-            $this->getData(2, 'Physics', 'Thursday'),
+            $this->getData(3, 'Biology', PrepDay::FRIDAY),
+            $this->getData(3, 'Chemistry', PrepDay::TUESDAY),
+            $this->getData(3, 'Physics', PrepDay::THURSDAY),
 
-            $this->getData(3, 'Biology', 'Friday'),
-            $this->getData(3, 'Chemistry', 'Tuesday'),
-            $this->getData(3, 'Physics', 'Thursday'),
+            $this->getData(4, 'Biology', PrepDay::FRIDAY),
+            $this->getData(4, 'Chemistry', PrepDay::TUESDAY),
+            $this->getData(4, 'Physics', PrepDay::THURSDAY),
 
-            $this->getData(4, 'Biology', 'Friday'),
-            $this->getData(4, 'Chemistry', 'Tuesday'),
-            $this->getData(4, 'Physics', 'Thursday'),
+            $this->getData(5, 'Biology', PrepDay::THURSDAY),
+            $this->getData(5, 'Chemistry', PrepDay::FRIDAY),
+            $this->getData(5, 'Physics', PrepDay::TUESDAY),
 
-            $this->getData(5, 'Biology', 'Thursday'),
-            $this->getData(5, 'Chemistry', 'Friday'),
-            $this->getData(5, 'Physics', 'Tuesday'),
+            $this->getData(6, 'Biology', PrepDay::FRIDAY),
+            $this->getData(6, 'Chemistry', PrepDay::TUESDAY),
+            $this->getData(6, 'Physics', PrepDay::THURSDAY),
 
-            $this->getData(6, 'Biology', 'Friday'),
-            $this->getData(6, 'Chemistry', 'Tuesday'),
-            $this->getData(6, 'Physics', 'Thursday'),
+            $this->getData(7, 'Biology', PrepDay::THURSDAY),
+            $this->getData(7, 'Chemistry', PrepDay::TUESDAY),
+            $this->getData(7, 'Physics', PrepDay::FRIDAY),
 
-            $this->getData(7, 'Biology', 'Thursday'),
-            $this->getData(7, 'Chemistry', 'Tuesday'),
-            $this->getData(7, 'Physics', 'Friday'),
-
-            $this->getData(8, 'Biology', 'Thursday'),
-            $this->getData(8, 'Chemistry', 'Tuesday'),
-            $this->getData(8, 'Physics', 'Friday'),
+            $this->getData(8, 'Biology', PrepDay::THURSDAY),
+            $this->getData(8, 'Chemistry', PrepDay::TUESDAY),
+            $this->getData(8, 'Physics', PrepDay::FRIDAY),
         ]);
         $this->addSubject("Class Civ", 9, [
-            1 => "Thursday",
-            2 => "Thursday",
-            3 => "Wednesday",
-            4 => "Wednesday",
-            5 => "Wednesday",
-            6 => "Tuesday",
+            1 => PrepDay::THURSDAY,
+            2 => PrepDay::THURSDAY,
+            3 => PrepDay::WEDNESDAY,
+            4 => PrepDay::WEDNESDAY,
+            5 => PrepDay::WEDNESDAY,
+            6 => PrepDay::TUESDAY,
         ]);
         $this->addSubject("Geography", 9, [
-            1 => "Monday",
-            2 => "Monday",
-            3 => "Tuesday",
-            4 => "Wednesday",
-            5 => "Monday",
-            6 => "Monday",
-            7 => "Thursday",
-            8 => "Thursday",
+            1 => PrepDay::MONDAY,
+            2 => PrepDay::MONDAY,
+            3 => PrepDay::TUESDAY,
+            4 => PrepDay::WEDNESDAY,
+            5 => PrepDay::MONDAY,
+            6 => PrepDay::MONDAY,
+            7 => PrepDay::THURSDAY,
+            8 => PrepDay::THURSDAY,
         ]);
         $this->addSubject("History", 9, [
-            1 => "Wednesday",
-            2 => "Tuesday",
-            3 => "Monday",
-            4 => "Monday",
-            5 => "Tuesday",
-            6 => "Thursday",
-            7 => "Monday",
-            8 => "Wednesday",
+            1 => PrepDay::WEDNESDAY,
+            2 => PrepDay::TUESDAY,
+            3 => PrepDay::MONDAY,
+            4 => PrepDay::MONDAY,
+            5 => PrepDay::TUESDAY,
+            6 => PrepDay::THURSDAY,
+            7 => PrepDay::MONDAY,
+            8 => PrepDay::WEDNESDAY,
         ]);
         $this->addSubject("RS", 9, [
-            1 => "Tuesday",
-            2 => "Wednesday",
-            3 => "Wednesday",
-            4 => "Tuesday",
-            5 => "Thursday",
-            6 => "Tuesday",
-            7 => "Wednesday",
-            8 => "Monday",
+            1 => PrepDay::TUESDAY,
+            2 => PrepDay::WEDNESDAY,
+            3 => PrepDay::WEDNESDAY,
+            4 => PrepDay::TUESDAY,
+            5 => PrepDay::THURSDAY,
+            6 => PrepDay::TUESDAY,
+            7 => PrepDay::WEDNESDAY,
+            8 => PrepDay::MONDAY,
         ]);
     }
 
@@ -121,72 +119,72 @@ class ScienceSetsSeeder extends Seeder
     private function lowerFifth()
     {
         $this->addSubject("Biology", 10, [
-            8 => "Wednesday",
-            9 => "Wednesday"
+            8 => PrepDay::WEDNESDAY,
+            9 => PrepDay::WEDNESDAY
         ]);
 
         $this->addSubject('Biology', 10, [
-            1 => "Thursday",
-            2 => "Thursday",
-            3 => "Thursday",
-            4 => "Thursday",
-            5 => "Thursday",
-            6 => "Thursday",
-            7 => "Thursday",
+            1 => PrepDay::THURSDAY,
+            2 => PrepDay::THURSDAY,
+            3 => PrepDay::THURSDAY,
+            4 => PrepDay::THURSDAY,
+            5 => PrepDay::THURSDAY,
+            6 => PrepDay::THURSDAY,
+            7 => PrepDay::THURSDAY,
         ]);
 
         $this->addSubject("Chemistry", 10, [
-            4 => "Tuesday",
-            5 => "Tuesday",
-            6 => "Tuesday",
-            7 => "Tuesday",
+            4 => PrepDay::TUESDAY,
+            5 => PrepDay::TUESDAY,
+            6 => PrepDay::TUESDAY,
+            7 => PrepDay::TUESDAY,
         ]);
         $this->addSubject('Chemistry', 10, [
-            1 => "Wednesday",
-            2 => "Wednesday",
-            3 => "Wednesday",
+            1 => PrepDay::WEDNESDAY,
+            2 => PrepDay::WEDNESDAY,
+            3 => PrepDay::WEDNESDAY,
 
-            4 => "Thursday",
-            5 => "Thursday",
-            6 => "Thursday",
-            7 => "Thursday",
-            8 => "Thursday",
-            9 => "Thursday"
+            4 => PrepDay::THURSDAY,
+            5 => PrepDay::THURSDAY,
+            6 => PrepDay::THURSDAY,
+            7 => PrepDay::THURSDAY,
+            8 => PrepDay::THURSDAY,
+            9 => PrepDay::THURSDAY
         ]);
 
         $this->addSubject("Chemistry", 10, [
-            1 => "Friday",
-            2 => "Friday",
-            3 => "Friday",
+            1 => PrepDay::FRIDAY,
+            2 => PrepDay::FRIDAY,
+            3 => PrepDay::FRIDAY,
         ]);
 
 
         $this->addSubject("Physics", 10, [
-            1 => 'Tuesday',
-            2 => 'Tuesday',
-            3 => 'Tuesday',
+            1 => PrepDay::TUESDAY,
+            2 => PrepDay::TUESDAY,
+            3 => PrepDay::TUESDAY,
 
-            8 => "Tuesday",
-            9 => "Tuesday",
+            8 => PrepDay::TUESDAY,
+            9 => PrepDay::TUESDAY,
         ]);
 
 
         $this->addSubject('Physics', 10, [
-            1 => 'Thursday',
-            2 => 'Thursday',
-            3 => 'Thursday',
+            1 => PrepDay::THURSDAY,
+            2 => PrepDay::THURSDAY,
+            3 => PrepDay::THURSDAY,
 
-            4 => 'Wednesday',
-            5 => 'Wednesday',
-            6 => 'Wednesday',
-            7 => 'Wednesday',
+            4 => PrepDay::WEDNESDAY,
+            5 => PrepDay::WEDNESDAY,
+            6 => PrepDay::WEDNESDAY,
+            7 => PrepDay::WEDNESDAY,
         ]);
 
         $this->addSubject('Physics', 10, [
-            4 => 'Friday',
-            5 => 'Friday',
-            6 => 'Friday',
-            7 => 'Friday',
+            4 => PrepDay::FRIDAY,
+            5 => PrepDay::FRIDAY,
+            6 => PrepDay::FRIDAY,
+            7 => PrepDay::FRIDAY,
         ]);
     }
 
@@ -194,64 +192,64 @@ class ScienceSetsSeeder extends Seeder
     {
         // Year 11 Science Sets
         $this->addSubject('Biology', 11, [
-            1 => "Monday",
-            2 => "Monday",
-            3 => "Monday",
-            4 => "Monday",
-            5 => "Monday",
-            6 => "Monday",
-            7 => "Monday",
-            8 => "Monday",
+            1 => PrepDay::MONDAY,
+            2 => PrepDay::MONDAY,
+            3 => PrepDay::MONDAY,
+            4 => PrepDay::MONDAY,
+            5 => PrepDay::MONDAY,
+            6 => PrepDay::MONDAY,
+            7 => PrepDay::MONDAY,
+            8 => PrepDay::MONDAY,
         ]);
 
         $this->addSubject('Biology', 11, [
-            1 => "Wednesday",
-            2 => "Wednesday",
-            3 => "Wednesday",
-            4 => "Thursday",
-            5 => "Thursday",
-            6 => "Thursday",
+            1 => PrepDay::WEDNESDAY,
+            2 => PrepDay::WEDNESDAY,
+            3 => PrepDay::WEDNESDAY,
+            4 => PrepDay::THURSDAY,
+            5 => PrepDay::THURSDAY,
+            6 => PrepDay::THURSDAY,
         ]);
 
         $this->addSubject('Chemistry', 11, [
-            1 => "Wednesday",
-            2 => "Wednesday",
-            3 => "Wednesday",
-            4 => "Wednesday",
-            5 => "Wednesday",
-            6 => "Wednesday",
-            7 => "Monday",
-            8 => "Monday",
+            1 => PrepDay::WEDNESDAY,
+            2 => PrepDay::WEDNESDAY,
+            3 => PrepDay::WEDNESDAY,
+            4 => PrepDay::WEDNESDAY,
+            5 => PrepDay::WEDNESDAY,
+            6 => PrepDay::WEDNESDAY,
+            7 => PrepDay::MONDAY,
+            8 => PrepDay::MONDAY,
 
         ]);
 
         $this->addSubject('Chemistry', 11, [
-            1 => "Thursday",
-            2 => "Thursday",
-            3 => "Thursday",
-            4 => "Thursday",
-            5 => "Thursday",
-            6 => "Thursday",
+            1 => PrepDay::THURSDAY,
+            2 => PrepDay::THURSDAY,
+            3 => PrepDay::THURSDAY,
+            4 => PrepDay::THURSDAY,
+            5 => PrepDay::THURSDAY,
+            6 => PrepDay::THURSDAY,
         ]);
 
         $this->addSubject('Physics', 11, [
-            1 => 'Monday',
-            2 => 'Monday',
-            3 => 'Monday',
-            4 => 'Monday',
-            5 => 'Monday',
-            6 => 'Monday',
+            1 => PrepDay::MONDAY,
+            2 => PrepDay::MONDAY,
+            3 => PrepDay::MONDAY,
+            4 => PrepDay::MONDAY,
+            5 => PrepDay::MONDAY,
+            6 => PrepDay::MONDAY,
         ]);
 
         $this->addSubject('Physics', 11, [
-            1 => 'Thursday',
-            2 => 'Thursday',
-            3 => 'Thursday',
-            4 => 'Wednesday',
-            5 => 'Wednesday',
-            6 => 'Wednesday',
-            7 => 'Thursday',
-            8 => 'Thursday',
+            1 => PrepDay::THURSDAY,
+            2 => PrepDay::THURSDAY,
+            3 => PrepDay::THURSDAY,
+            4 => PrepDay::WEDNESDAY,
+            5 => PrepDay::WEDNESDAY,
+            6 => PrepDay::WEDNESDAY,
+            7 => PrepDay::THURSDAY,
+            8 => PrepDay::THURSDAY,
         ]);
     }
 }

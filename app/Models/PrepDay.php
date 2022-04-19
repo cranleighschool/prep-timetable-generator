@@ -11,6 +11,12 @@ class PrepDay extends Model
 {
     use HasFactory;
 
+    public const MONDAY = "Monday";
+    public const TUESDAY = "Tuesday";
+    public const WEDNESDAY = "Wednesday";
+    public const THURSDAY = "Thursday";
+    public const FRIDAY = "Friday";
+
     /**
      * @var bool
      */
@@ -72,26 +78,26 @@ class PrepDay extends Model
                 array_push($timetable[ $day->day ], $classic);
             }
             switch ($day->day) {
-                case "Monday":
+                case self::MONDAY:
                     array_push($timetable[ $day->day ], $request->optiona);
                     array_push($timetable[ $day->day ], $request->cmfl);
                     break;
-                case "Tuesday":
+                case self::TUESDAY:
                     array_push($timetable[ $day->day ], "English");
                     break;
-                case "Wednesday":
+                case self::WEDNESDAY:
                     array_push($timetable[ $day->day ], $request->optionb);
                     if (Str::contains($request->maths_set, "Y")) {
                         array_push($timetable[ $day->day ], "Maths");
                     }
                     break;
-                case "Thursday":
+                case self::THURSDAY:
                     array_push($timetable[ $day->day ], "Maths");
                     if ($request->latin === true) {
                         array_push($timetable[ $day->day ], "Latin");
                     }
                     break;
-                case "Friday":
+                case self::FRIDAY:
                     array_push($timetable[ $day->day ], $request->optionc);
                     if (Str::contains($request->maths_set, "X")) {
                         array_push($timetable[ $day->day ], "Maths");
@@ -126,24 +132,24 @@ class PrepDay extends Model
             }
 
             switch ($day->day) {
-                case "Monday":
+                case self::MONDAY:
                     array_push($timetable[ $day->day ], $request->optionb);
                     array_push($timetable[ $day->day ], 'English');
                     array_push($timetable[ $day->day ], $request->cmfl);
                     break;
-                case "Tuesday":
+                case self::TUESDAY:
                     array_push($timetable[ $day->day ], $request->optiona);
                     array_push($timetable[ $day->day ], $request->optionc);
                     break;
-                case "Wednesday":
+                case self::WEDNESDAY:
                     array_push($timetable[ $day->day ], $request->optionc);
                     array_push($timetable[ $day->day ], 'Maths');
                     break;
-                case "Thursday":
+                case self::THURSDAY:
                     array_push($timetable[ $day->day ], "English");
                     array_push($timetable[ $day->day ], $request->optiond);
                     break;
-                case "Friday":
+                case self::FRIDAY:
                     array_push($timetable[ $day->day ], $request->optionb);
                     array_push($timetable[ $day->day ], $request->optiond);
                     array_push($timetable[ $day->day ], $request->cmfl);
@@ -178,25 +184,25 @@ class PrepDay extends Model
             }
 
             switch ($day->day) {
-                case "Monday":
+                case self::MONDAY:
                     array_push($timetable[ $day->day ], $request->cmfl);
                     array_push($timetable[ $day->day ], 'Maths');
                     break;
-                case "Tuesday":
+                case self::TUESDAY:
                     array_push($timetable[ $day->day ], 'English');
                     array_push($timetable[ $day->day ], $request->optiona);
                     array_push($timetable[ $day->day ], $request->optionc);
                     break;
-                case "Wednesday":
+                case self::WEDNESDAY:
                     array_push($timetable[ $day->day ], $request->optionb);
                     array_push($timetable[ $day->day ], $request->cmfl);
                     array_push($timetable[ $day->day ], $request->optiond);
                     break;
-                case "Thursday":
+                case self::THURSDAY:
                     array_push($timetable[ $day->day ], "English");
                     array_push($timetable[ $day->day ], $request->optiond);
                     break;
-                case "Friday":
+                case self::FRIDAY:
                     array_push($timetable[ $day->day ], $request->optiona);
                     array_push($timetable[ $day->day ], $request->optionb);
                     array_push($timetable[ $day->day ], $request->optionc);
