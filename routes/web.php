@@ -1,6 +1,5 @@
 <?php
 
-use App\Http\Controllers\Isams\SubjectsController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,24 +12,7 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::get('/', function () {
-
-    return view('start');
-})->name("start");
-
-Route::get('setup', function (\App\Http\Requests\SetupRequest $request) {
-    $yearGroup = $request->yearGroup;
-    $days = \App\Models\PrepDay::all();
-    $sets = $request->sets;
-
-    $timetable = [];
-    return view('setup', compact('days', 'request', 'timetable', 'sets', 'yearGroup'));
-})->name('setup');
-
-Route::post('generate/{yearGroup}', function (int $yearGroup, \App\Http\Requests\TimetableRequest $request) {
-    $days = \App\Models\PrepDay::all();
-    $yearGroup = $request->yearGroup;
-    $timetable = \App\Models\PrepDay::getTimetable($yearGroup, $request);
-    //dd($timetable);
-    return view('timetable', compact('days', 'request', 'timetable', 'yearGroup'));
-})->name('timetable');
+use App\Http\Controllers\PrepTimetableController;
+Route::get('/', [PrepTimetableController::class, 'home'])->name("start");
+Route::get('setup', [PrepTimetableController::class, 'setup'])->name('setup');
+Route::post('generate/{yearGroup}', [PrepTimetableController::class, 'generate'])->name('timetable');
