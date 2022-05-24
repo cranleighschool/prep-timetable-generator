@@ -66,7 +66,7 @@
                                     @if ($yearGroup===9)
                                         <label class="form-label" for="science_set">Science Set</label>
                                         <input required="required" type="number" class="form-control"
-                                               value="{{ old('science_set') ?? $request->science_set }}"
+                                               value="{{ old('science_set') ?? $setResults['Science'] }}"
                                                placeholder="Science Set"
                                                name="science_set" id="science_set"/>
                                     @else
@@ -75,7 +75,7 @@
                                                    for="{{ strtolower($scienceSubject) }}_set">{{ $scienceSubject }}
                                                 Set</label>
                                             <input required="required" type="number" class="form-control"
-                                                   value="{{ old(strtolower($scienceSubject).'_set') ?? $request->{$scienceSubject.'_set'} }}"
+                                                   value="{{ old(strtolower($scienceSubject).'_set') ?? $setResults[$scienceSubject] }}"
                                                    placeholder="{{ $scienceSubject }} Set"
                                                    name="{{ strtolower($scienceSubject) }}_set"
                                                    id="{{ strtolower($scienceSubject) }}_set"/>
@@ -85,20 +85,20 @@
                                         <label class="form-label" for="humanities">Humanities Set (Geog, Hist,
                                             RS)</label>
                                         <input required="required" type="number" class="form-control"
-                                               value="{{ old('humanities_set') ?? $request->humanities_set }}"
+                                               value="{{ old('humanities_set') ?? $setResults['Humanities'] }}"
                                                placeholder="Humanities Set"
                                                name="humanities_set" id="humanities_set"/>
 
                                         @if (!in_array('Latin', $sets->toArray()))
                                             <label class="form-label" for="classciv_set">Class Civ Set</label>
                                             <input required="required" type="number" class="form-control"
-                                                   value="{{ old('classciv_set') ?? $request->classciv_set }}"
+                                                   value="{{ old('classciv_set') ?? $setResults['Classical Civilisation'] }}"
                                                    placeholder="Class Civ Set"
                                                    name="classciv_set" id="classciv_set"/>
                                         @endif
                                         <label class="form-label" for="maths_set">Maths Set</label>
                                         <input required="required" class="form-control" type="text"
-                                               value="{{ old('maths_set') ?? $request->maths_set }}"
+                                               value="{{ old('maths_set') ?? $setResults['Maths'] }}"
                                                placeholder="Maths Set"
                                                name="maths_set" id="maths_set"/>
                                     @endif
@@ -106,31 +106,31 @@
                                 <div class="col-md">
                                     <label class="form-label" for="optiona">Option A</label>
                                     <input class="form-control" type="text"
-                                           value="{{ old('optiona') ?? $request->optiona }}"
+                                           value="{{ old('optiona') ?? $setResults['Option A'] }}"
                                            placeholder="Option A" name="optiona"/>
 
                                     <label class="form-label" for="optionb">Option B</label>
                                     <input class="form-control" type="text"
-                                           value="{{ old('optionb') ?? $request->optionb }}"
+                                           value="{{ old('optionb') ?? $setResults['Option B'] }}"
                                            placeholder="Option B"
                                            name="optionb"/>
 
                                     <label class="form-label" for="optionc">Option C</label>
                                     <input class="form-control" type="text"
-                                           value="{{ old('optionc') ?? $request->optionc }}"
+                                           value="{{ old('optionc') ?? $setResults['Option C'] }}"
                                            placeholder="Option C"
                                            name="optionc"/>
                                     @if ($yearGroup !== 9)
                                         <label class="form-label" for="optionc">Option D</label>
                                         <input class="form-control" type="text"
-                                               value="{{ old('optiond') ?? $request->optiond }}"
+                                               value="{{ old('optiond') ?? ($setResults['Option D'] ?? '') }}"
                                                placeholder="Option D"
                                                name="optiond"/>
                                     @endif
                                 </div>
                                 <div class="col-md">
                                     <label class="form-label" for="cmlf">Modern Foreign Language</label>
-                                    <input class="form-control" type="text" value="{{ old('cmfl') ?? $request->cmfl }}"
+                                    <input class="form-control" type="text" value="{{ old('cmfl') ?? $setResults['CMFL'] }}"
                                            placeholder="CMFL"
                                            name="cmfl"/>
 

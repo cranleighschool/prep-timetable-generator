@@ -10,7 +10,7 @@ class ScienceSet extends Model
 {
     use HasFactory;
 
-    public static function label(string $code)
+    public static function label(string $code, bool $raw=false)
     {
         $label = '';
         $e = explode("-", $code);
@@ -41,8 +41,9 @@ class ScienceSet extends Model
         if (preg_match('^\A(9|10|11)-(FR|SP)[0-9]{1}\Z^', $code, $matches)) {
             $label = "Language";
         }
-
-
+        if (preg_match('^\A(9|10|11)-(EN)[0-9]{1}\Z^', $code, $matches)) {
+            $label = "English";
+        }
         if (preg_match('^\A(9)-(CC)[0-9]{1}\Z^', $code, $matches)) {
             $label = "Class Civ Set: ".substr($matches[ 0 ], -1);
         }
@@ -53,6 +54,9 @@ class ScienceSet extends Model
             $label = "Maths Set: ".trim(end($matches));
         }
 
+        if ($raw) {
+            return $label;
+        }
         return '<span class="badge bg-success">'.$label.'</span>';
     }
 }
