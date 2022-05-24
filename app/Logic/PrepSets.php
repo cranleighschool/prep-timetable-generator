@@ -2,11 +2,21 @@
 
 namespace App\Logic;
 
+use App\Http\Controllers\Isams\SubjectsController;
+use App\Models\School;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Str;
+use spkm\isams\Controllers\PupilTimetableController;
+use spkm\isams\Wrappers\Pupil;
 
 trait PrepSets
 {
+    /**
+     * @var \spkm\isams\Wrappers\Pupil
+     */
+    public Pupil $pupil;
+
     /**
      * @param  string  $code
      * @param  string  $subject
@@ -56,6 +66,8 @@ trait PrepSets
             'Philosophy',
             'Greek',
             'Supervised Private Study',
+            'German',
+            'Spanish'
         ])) {
             return (int) substr($code, -1, 1);
         }
@@ -112,4 +124,47 @@ trait PrepSets
         return $matchSets;
     }
 
+    /**
+     * @param  string  $username
+     *
+     * @return mixed
+     * @throws \Illuminate\Validation\ValidationException
+     */
+    public function getPupilAndSets()
+    {
+        $sets = Cache::remember("sets_".$this->pupil->schoolId, now()->addHours(2), function () {
+            $timetable = new PupilTimetableController(School::find(1));
+            return collect($timetable->show($this->pupil->schoolId)[ 'sets' ])->pluck('code',
+                'subjectId')->unique()->toArray();
+        });
+        return $sets;
+    }
+
+    /**
+     * @param $username
+     *
+     * @return void
+     */
+    public function setPupil($username)
+    {
+        $this->pupil = School::getPupil($username);
+    }
+
+    /**
+     * @param  array  $sets
+     *
+     * @return \Illuminate\Support\Collection
+     */
+    public static function getSets(array $sets): Collection
+    {
+        return Cache::rememberForever("sets".serialize($sets), function () use ($sets) {
+            $subjectController = new SubjectsController(new School());
+            $sets = collect($sets)->map(function ($item, $key) use ($subjectController) {
+                $subject = $subjectController->show($key);
+                $subject[ 'set' ] = $item;
+                return $subject;
+            })->pluck("name", "set");
+            return $sets;
+        });
+    }
 }

@@ -34,7 +34,7 @@ class PrepDay extends Model
      *
      * @return array
      */
-    public static function getTimetable(int $yearGroup, Request $request): array
+    public static function getTimetable(int $yearGroup, Request|\stdClass $request): array
     {
         $timetable = [];
 
@@ -61,7 +61,7 @@ class PrepDay extends Model
      *
      * @return array
      */
-    public static function year9Timetable(array $timetable, Request $request): array
+    public static function year9Timetable(array $timetable, Request|\stdClass $request): array
     {
         foreach (self::all() as $day) {
             $timetable[ $day->day ] = [];
@@ -114,7 +114,7 @@ class PrepDay extends Model
      *
      * @return array
      */
-    public static function year10Timetable(array $timetable, Request $request): array
+    public static function year10Timetable(array $timetable, Request|\stdClass $request): array
     {
         foreach (self::all() as $day) {
             $timetable[ $day->day ] = [];
@@ -166,7 +166,7 @@ class PrepDay extends Model
      *
      * @return array
      */
-    public static function year11Timetable(array $timetable, Request $request): array
+    public static function year11Timetable(array $timetable, Request|\stdClass $request): array
     {
         foreach (self::all() as $day) {
             $timetable[ $day->day ] = [];

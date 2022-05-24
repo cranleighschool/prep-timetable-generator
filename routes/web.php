@@ -16,3 +16,4 @@ use App\Http\Controllers\PrepTimetableController;
 Route::get('/', [PrepTimetableController::class, 'home'])->name("start");
 Route::get('setup', [PrepTimetableController::class, 'setup'])->name('setup');
 Route::post('generate/{yearGroup}', [PrepTimetableController::class, 'generate'])->name('timetable');
+Route::get('house/{house}', [PrepTimetableController::class, 'byHouse'])->name('byHouse');

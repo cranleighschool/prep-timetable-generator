@@ -8,22 +8,11 @@
         Timetable
     </title>
     <style>
-
         ul.two-columns {
             columns: 2;
             -webkit-columns: 2;
             -moz-columns: 2;
         }
-
-        /*main {*/
-        /*    margin-top:30px;*/
-        /*}*/
-        /*.progress {*/
-        /*    margin-bottom: 50px;*/
-        /*}*/
-        /*.card {*/
-        /*    margin-bottom: 50px;*/
-        /*}*/
     </style>
 </head>
 <body>

@@ -6,6 +6,7 @@ use App\Http\Requests\SetupRequest;
 use App\Logic\PrepSets;
 use App\Models\PrepDay;
 use App\Http\Requests\TimetableRequest;
+use Illuminate\Support\Facades\Http;
 
 /**
  *
@@ -13,6 +14,20 @@ use App\Http\Requests\TimetableRequest;
 class PrepTimetableController extends Controller
 {
     use PrepSets;
+
+    /**
+     * @param  string  $house
+     *
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
+     * @throws \Exception
+     */
+    public function byHouse(string $house) {
+        $api = new ApiController();
+        $data = $api->getHouseData($house);
+
+        return view('house', compact('data'));
+    }
+
     /**
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
      */
@@ -20,6 +35,8 @@ class PrepTimetableController extends Controller
     {
         return view('start');
     }
+
+
 
     /**
      * @param  \App\Http\Requests\SetupRequest  $request
