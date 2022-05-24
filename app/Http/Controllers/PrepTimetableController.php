@@ -7,6 +7,8 @@ use App\Logic\PrepSets;
 use App\Models\PrepDay;
 use App\Http\Requests\TimetableRequest;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\Rule;
 
 /**
  *
@@ -21,8 +23,21 @@ class PrepTimetableController extends Controller
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
      * @throws \Exception
      */
-    public function byHouse(string $house) {
+    public function byHouse(string $house)
+    {
         $api = new ApiController();
+        $house = ucfirst($house);
+
+        $validator = Validator::make(['house' => $house], [
+            'house' => [
+                'required',
+                Rule::in(['Loveday', 'East', 'Cubitt', 'North', 'West', 'South', 'Rhodes', 'Martlet']),
+            ],
+        ]);
+        if ($validator->fails()) {
+            throw new \Exception("Invalid House");
+        }
+
         $data = $api->getHouseData($house);
 
         return view('house', compact('data'));
@@ -35,7 +50,6 @@ class PrepTimetableController extends Controller
     {
         return view('start');
     }
-
 
 
     /**

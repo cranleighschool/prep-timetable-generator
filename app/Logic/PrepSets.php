@@ -2,6 +2,7 @@
 
 namespace App\Logic;
 
+use App\Exceptions\ZeroSetsFound;
 use App\Http\Controllers\Isams\SubjectsController;
 use App\Models\School;
 use Illuminate\Support\Collection;
@@ -109,16 +110,25 @@ trait PrepSets
         $sets = $sets->map([$this, 'mapSets']);
         $unsets = [];
 
-        if ($yearGroup === 9) {
-            if (($sets[ 'Biology' ] == $sets[ 'Physics' ]) && ($sets[ 'Physics' ]) == $sets[ 'Chemistry' ]) {
-                $sets[ 'Science' ] = $sets[ 'Biology' ];
-            }
-            $sets[ 'Humanities' ] = $sets[ 'Religious Studies' ];
-
-            $unsets = ['Biology', 'Chemistry', 'Physics', 'Geography', 'History', 'Religious Studies'];
+        if ($sets->isEmpty()) {
+            throw new ZeroSetsFound($this->pupil->fullName." has no sets assigned");
         }
 
-        $matchSets = $this->matchSets($sets, $unsets);
+        try {
+            if ($yearGroup === 9) {
+                if (($sets[ 'Biology' ] == $sets[ 'Physics' ]) && ($sets[ 'Physics' ]) == $sets[ 'Chemistry' ]) {
+                    $sets[ 'Science' ] = $sets[ 'Biology' ];
+                }
+                $sets[ 'Humanities' ] = $sets[ 'Religious Studies' ] ?? $sets['Geography'];
+
+                $unsets = ['Biology', 'Chemistry', 'Physics', 'Geography', 'History', 'Religious Studies'];
+            }
+
+            $matchSets = $this->matchSets($sets, $unsets);
+
+        } catch (\ErrorException $error) {
+            throw new \ErrorException($error->getMessage()." on pupil: ".$this->pupil->fullName);
+        }
 
         ksort($matchSets);
         return $matchSets;
