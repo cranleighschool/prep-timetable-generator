@@ -19,10 +19,10 @@ class TimetableRequest extends FormRequest
     protected function prepareForValidation()
     {
         $this->merge([
-            'maths_set' => strtoupper($this->get('maths_set'))
+            'maths_set' => strtoupper($this->get('maths_set')),
         ]);
-        if ($this->get('latin')==='YES') {
-            $this->merge(["latin" => true]);
+        if ($this->get('latin') === 'YES') {
+            $this->merge(['latin' => true]);
         } else {
             $this->merge(['latin' => false]);
         }
@@ -44,9 +44,10 @@ class TimetableRequest extends FormRequest
             'physics_set' => 'min:1|max:8|integer',
             'classciv_set' => 'min:1|max:6|integer',
 
-            'maths_set' => 'regex:/^[a-zA-Z]{1}[0-9]{1}$/'
+            'maths_set' => 'regex:/^[a-zA-Z]{1}[0-9]{1}$/',
         ];
     }
+
     public function messages()
     {
         return [

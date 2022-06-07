@@ -1,7 +1,7 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ApiController;
+use Illuminate\Support\Facades\Route;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,4 +16,3 @@ use App\Http\Controllers\ApiController;
 
 Route::get('house/{house}', [ApiController::class, 'getHouseData']);
 Route::get('{username}', [ApiController::class, 'getPupilTimetable']);
-

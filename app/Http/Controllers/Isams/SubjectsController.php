@@ -24,6 +24,7 @@ class SubjectsController extends Endpoint
     {
         $decode = json_decode($this->pageRequest($this->endpoint.'/'.$subjectId, 1));
         $items = collect($decode);
+
         return $items;
     }
 
@@ -31,5 +32,4 @@ class SubjectsController extends Endpoint
     {
         $this->endpoint = $this->getDomain().'/api/teaching/subjects';
     }
-
 }

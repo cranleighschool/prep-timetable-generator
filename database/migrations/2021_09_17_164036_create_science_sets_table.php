@@ -14,15 +14,15 @@ class CreateScienceSetsTable extends Migration
     public function up()
     {
         Schema::create('science_sets', function (Blueprint $table) {
-            $table->tinyInteger("set");
-            $table->string("subject");
-            $table->unsignedBigInteger("day_id");
+            $table->tinyInteger('set');
+            $table->string('subject');
+            $table->unsignedBigInteger('day_id');
             $table->tinyInteger('nc_year')->default(9);
 
-            $table->foreign("day_id")
-                  ->references("id")
-                  ->on("prep_days")
-                  ->onDelete("restrict");
+            $table->foreign('day_id')
+                  ->references('id')
+                  ->on('prep_days')
+                  ->onDelete('restrict');
             $table->unique(['set', 'subject', 'day_id', 'nc_year']);
         });
     }

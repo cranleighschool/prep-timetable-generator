@@ -24,5 +24,4 @@ class TeachingSetsController extends Endpoint
     {
         $this->endpoint = $this->getDomain().'/api/teaching/sets';
     }
-
 }

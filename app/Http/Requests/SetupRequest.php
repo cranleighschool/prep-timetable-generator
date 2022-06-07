@@ -5,7 +5,6 @@ namespace App\Http\Requests;
 use App\Logic\PrepSets;
 use Illuminate\Foundation\Http\FormRequest;
 
-
 class SetupRequest extends FormRequest
 {
     use PrepSets;

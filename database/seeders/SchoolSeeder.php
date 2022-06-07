@@ -17,8 +17,8 @@ class SchoolSeeder extends Seeder
         DB::table('schools')->insert([
             [
                 'short_code' => 'CS',
-                'long_name' => 'Cranleigh School'
-            ]
+                'long_name' => 'Cranleigh School',
+            ],
         ]);
     }
 }

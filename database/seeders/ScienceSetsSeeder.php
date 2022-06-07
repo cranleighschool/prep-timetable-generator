@@ -56,7 +56,7 @@ class ScienceSetsSeeder extends Seeder
             $this->getData(8, 'Chemistry', PrepDay::TUESDAY),
             $this->getData(8, 'Physics', PrepDay::FRIDAY),
         ]);
-        $this->addSubject("Class Civ", 9, [
+        $this->addSubject('Class Civ', 9, [
             1 => PrepDay::THURSDAY,
             2 => PrepDay::THURSDAY,
             3 => PrepDay::WEDNESDAY,
@@ -64,7 +64,7 @@ class ScienceSetsSeeder extends Seeder
             5 => PrepDay::WEDNESDAY,
             6 => PrepDay::TUESDAY,
         ]);
-        $this->addSubject("Geography", 9, [
+        $this->addSubject('Geography', 9, [
             1 => PrepDay::MONDAY,
             2 => PrepDay::MONDAY,
             3 => PrepDay::TUESDAY,
@@ -74,7 +74,7 @@ class ScienceSetsSeeder extends Seeder
             7 => PrepDay::THURSDAY,
             8 => PrepDay::THURSDAY,
         ]);
-        $this->addSubject("History", 9, [
+        $this->addSubject('History', 9, [
             1 => PrepDay::WEDNESDAY,
             2 => PrepDay::TUESDAY,
             3 => PrepDay::MONDAY,
@@ -84,7 +84,7 @@ class ScienceSetsSeeder extends Seeder
             7 => PrepDay::MONDAY,
             8 => PrepDay::WEDNESDAY,
         ]);
-        $this->addSubject("RS", 9, [
+        $this->addSubject('RS', 9, [
             1 => PrepDay::TUESDAY,
             2 => PrepDay::WEDNESDAY,
             3 => PrepDay::WEDNESDAY,
@@ -98,12 +98,13 @@ class ScienceSetsSeeder extends Seeder
 
     private function getData(int $set, string $subject, string $day, int $yearGroup = 9)
     {
-        $day_id = PrepDay::where("day", $day)->first()->id;
+        $day_id = PrepDay::where('day', $day)->first()->id;
+
         return [
-            "set" => $set,
-            "subject" => $subject,
-            "day_id" => $day_id,
-            "nc_year" => $yearGroup,
+            'set' => $set,
+            'subject' => $subject,
+            'day_id' => $day_id,
+            'nc_year' => $yearGroup,
         ];
     }
 
@@ -118,9 +119,9 @@ class ScienceSetsSeeder extends Seeder
 
     private function lowerFifth()
     {
-        $this->addSubject("Biology", 10, [
+        $this->addSubject('Biology', 10, [
             8 => PrepDay::WEDNESDAY,
-            9 => PrepDay::WEDNESDAY
+            9 => PrepDay::WEDNESDAY,
         ]);
 
         $this->addSubject('Biology', 10, [
@@ -133,7 +134,7 @@ class ScienceSetsSeeder extends Seeder
             7 => PrepDay::THURSDAY,
         ]);
 
-        $this->addSubject("Chemistry", 10, [
+        $this->addSubject('Chemistry', 10, [
             4 => PrepDay::TUESDAY,
             5 => PrepDay::TUESDAY,
             6 => PrepDay::TUESDAY,
@@ -149,17 +150,16 @@ class ScienceSetsSeeder extends Seeder
             6 => PrepDay::THURSDAY,
             7 => PrepDay::THURSDAY,
             8 => PrepDay::THURSDAY,
-            9 => PrepDay::THURSDAY
+            9 => PrepDay::THURSDAY,
         ]);
 
-        $this->addSubject("Chemistry", 10, [
+        $this->addSubject('Chemistry', 10, [
             1 => PrepDay::FRIDAY,
             2 => PrepDay::FRIDAY,
             3 => PrepDay::FRIDAY,
         ]);
 
-
-        $this->addSubject("Physics", 10, [
+        $this->addSubject('Physics', 10, [
             1 => PrepDay::TUESDAY,
             2 => PrepDay::TUESDAY,
             3 => PrepDay::TUESDAY,
@@ -167,7 +167,6 @@ class ScienceSetsSeeder extends Seeder
             8 => PrepDay::TUESDAY,
             9 => PrepDay::TUESDAY,
         ]);
-
 
         $this->addSubject('Physics', 10, [
             1 => PrepDay::THURSDAY,

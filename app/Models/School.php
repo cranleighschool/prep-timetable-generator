@@ -19,23 +19,24 @@ class School extends Model implements Institution
      */
     public static function allPupils(): Collection
     {
-        return Cache::rememberForever("allPupils", function () {
+        return Cache::rememberForever('allPupils', function () {
             $isams = new CurrentPupilController(new self());
+
             return $isams->index()->whereIn('yearGroup', [9, 10, 11]);
         });
     }
 
     /**
      * @param  string  $username
-     *
      * @return \spkm\isams\Wrappers\Pupil
      */
     public static function getPupil(string $username): Pupil
     {
         $allPupils = self::allPupils();
-        return Cache::rememberForever("pupil_".$username, function () use ($allPupils, $username) {
+
+        return Cache::rememberForever('pupil_'.$username, function () use ($allPupils, $username) {
             return $allPupils->whereIn('schoolEmailAddress',
-                [strtoupper($username)."@cranleigh.org", strtolower($username)."@cranleigh.org"])->first();
+                [strtoupper($username).'@cranleigh.org', strtolower($username).'@cranleigh.org'])->first();
         });
     }
 
