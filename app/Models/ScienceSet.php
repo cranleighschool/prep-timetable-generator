@@ -10,7 +10,13 @@ class ScienceSet extends Model
 {
     use HasFactory;
 
-    public static function label(string $code, bool $raw=false)
+    /**
+     * @param  string  $code
+     * @param  bool  $raw
+     *
+     * @return string
+     */
+    public static function label(string $code, bool $raw=false): string
     {
         $label = '';
         $e = explode("-", $code);

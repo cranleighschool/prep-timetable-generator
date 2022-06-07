@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Exceptions\ZeroSetsFound;
+use App\Logic\GenerateTimetable;
 use App\Logic\PrepSets;
 use App\Models\PrepDay;
 use App\Models\School;
@@ -13,11 +14,16 @@ class ApiController
 {
     use PrepSets;
 
-    public function getHouseData(string $house)
+    /**
+     * @param  string  $house
+     *
+     * @return \Illuminate\Support\Collection
+     * @throws \Illuminate\Validation\ValidationException
+     */
+    public function getHouseData(string $house): Collection
     {
-//        dd($house);
         $allPupils = School::allPupils()->groupBy(['boardingHouse', 'yearGroup']);
-        //dd($allPupils);
+
         $result = [];
         foreach ($allPupils[ $house ] as $yearGroup => $pupils) {
 
@@ -62,7 +68,7 @@ class ApiController
         }
 
         return collect([
-            'timetable' => PrepDay::getTimetable($yearGroup, $request),
+            'timetable' => (new GenerateTimetable($yearGroup, $request, PrepDay::all()))->getTimetable(),
             'username' => $username,
             'yearGroup' => $yearGroup,
             'subjects' => $sets->sort(),
@@ -76,7 +82,7 @@ class ApiController
      *
      * @return object
      */
-    private function sanitizeVariables($yearGroup, $setResults)
+    private function sanitizeVariables($yearGroup, $setResults): object
     {
         try {
             $output = [

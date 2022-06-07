@@ -3,10 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\SetupRequest;
+use App\Logic\GenerateTimetable;
 use App\Logic\PrepSets;
 use App\Models\PrepDay;
 use App\Http\Requests\TimetableRequest;
-use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
 
@@ -31,7 +31,7 @@ class PrepTimetableController extends Controller
         $validator = Validator::make(['house' => $house], [
             'house' => [
                 'required',
-                Rule::in(['Loveday', 'East', 'Cubitt', 'North', 'West', 'South', 'Rhodes', 'Martlet']),
+                Rule::in(config('timetable.houses')),
             ],
         ]);
         if ($validator->fails()) {
@@ -80,7 +80,7 @@ class PrepTimetableController extends Controller
     {
         $days = PrepDay::all();
         $yearGroup = $request->yearGroup;
-        $timetable = PrepDay::getTimetable($yearGroup, $request);
+        $timetable = (new GenerateTimetable($yearGroup, $request, $days))->getTimetable();
 
         return view('timetable', compact('days', 'request', 'timetable', 'yearGroup'));
     }
