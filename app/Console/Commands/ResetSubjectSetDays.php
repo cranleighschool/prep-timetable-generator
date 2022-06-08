@@ -38,12 +38,10 @@ class ResetSubjectSetDays extends Command
     public function handle()
     {
         DB::table($this->table)->truncate();
-        $this->info("Truncated Table");
-        $this->call("db:seed", ['class' => SetsSeeder::class]);
-        $this->info("Done");
+        $this->info('Truncated Table');
+        $this->call('db:seed', ['class' => SetsSeeder::class]);
+        $this->info('Done');
 
         return 0;
     }
-
-
 }

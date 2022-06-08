@@ -13,7 +13,8 @@ class SubjectsSet extends Model
     /**
      * @var string
      */
-    protected $table = "set_subject_days";
+    protected $table = 'set_subject_days';
+
     /**
      * @param  string  $code
      * @param  bool  $raw
