@@ -13,7 +13,7 @@ return [
     |
     */
 
-    'name' => env('APP_NAME', 'Laravel'),
+    'name' => env('APP_NAME', \App\Models\School::first()->long_name.' Prep Timetable Generator'),
 
     /*
     |--------------------------------------------------------------------------

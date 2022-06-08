@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Logic\GenerateTimetable;
 use App\Models\PrepDay;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
@@ -20,83 +21,94 @@ class ScienceSetsSeeder extends Seeder
         $this->upperFifth();
     }
 
-    private function fourthForm()
+    /**
+     * @return void
+     */
+    private function fourthForm(): void
     {
         DB::table('science_sets')->insert([
 
-            $this->getData(1, 'Biology', PrepDay::THURSDAY),
-            $this->getData(1, 'Chemistry', PrepDay::TUESDAY),
-            $this->getData(1, 'Physics', PrepDay::FRIDAY),
+            $this->getData(1, 'Biology', GenerateTimetable::THURSDAY),
+            $this->getData(1, 'Chemistry', GenerateTimetable::TUESDAY),
+            $this->getData(1, 'Physics', GenerateTimetable::FRIDAY),
 
-            $this->getData(2, 'Biology', PrepDay::FRIDAY),
-            $this->getData(2, 'Chemistry', PrepDay::TUESDAY),
-            $this->getData(2, 'Physics', PrepDay::THURSDAY),
+            $this->getData(2, 'Biology', GenerateTimetable::FRIDAY),
+            $this->getData(2, 'Chemistry', GenerateTimetable::TUESDAY),
+            $this->getData(2, 'Physics', GenerateTimetable::THURSDAY),
 
-            $this->getData(3, 'Biology', PrepDay::FRIDAY),
-            $this->getData(3, 'Chemistry', PrepDay::TUESDAY),
-            $this->getData(3, 'Physics', PrepDay::THURSDAY),
+            $this->getData(3, 'Biology', GenerateTimetable::FRIDAY),
+            $this->getData(3, 'Chemistry', GenerateTimetable::TUESDAY),
+            $this->getData(3, 'Physics', GenerateTimetable::THURSDAY),
 
-            $this->getData(4, 'Biology', PrepDay::FRIDAY),
-            $this->getData(4, 'Chemistry', PrepDay::TUESDAY),
-            $this->getData(4, 'Physics', PrepDay::THURSDAY),
+            $this->getData(4, 'Biology', GenerateTimetable::FRIDAY),
+            $this->getData(4, 'Chemistry', GenerateTimetable::TUESDAY),
+            $this->getData(4, 'Physics', GenerateTimetable::THURSDAY),
 
-            $this->getData(5, 'Biology', PrepDay::THURSDAY),
-            $this->getData(5, 'Chemistry', PrepDay::FRIDAY),
-            $this->getData(5, 'Physics', PrepDay::TUESDAY),
+            $this->getData(5, 'Biology', GenerateTimetable::THURSDAY),
+            $this->getData(5, 'Chemistry', GenerateTimetable::FRIDAY),
+            $this->getData(5, 'Physics', GenerateTimetable::TUESDAY),
 
-            $this->getData(6, 'Biology', PrepDay::FRIDAY),
-            $this->getData(6, 'Chemistry', PrepDay::TUESDAY),
-            $this->getData(6, 'Physics', PrepDay::THURSDAY),
+            $this->getData(6, 'Biology', GenerateTimetable::FRIDAY),
+            $this->getData(6, 'Chemistry', GenerateTimetable::TUESDAY),
+            $this->getData(6, 'Physics', GenerateTimetable::THURSDAY),
 
-            $this->getData(7, 'Biology', PrepDay::THURSDAY),
-            $this->getData(7, 'Chemistry', PrepDay::TUESDAY),
-            $this->getData(7, 'Physics', PrepDay::FRIDAY),
+            $this->getData(7, 'Biology', GenerateTimetable::THURSDAY),
+            $this->getData(7, 'Chemistry', GenerateTimetable::TUESDAY),
+            $this->getData(7, 'Physics', GenerateTimetable::FRIDAY),
 
-            $this->getData(8, 'Biology', PrepDay::THURSDAY),
-            $this->getData(8, 'Chemistry', PrepDay::TUESDAY),
-            $this->getData(8, 'Physics', PrepDay::FRIDAY),
+            $this->getData(8, 'Biology', GenerateTimetable::THURSDAY),
+            $this->getData(8, 'Chemistry', GenerateTimetable::TUESDAY),
+            $this->getData(8, 'Physics', GenerateTimetable::FRIDAY),
         ]);
         $this->addSubject('Class Civ', 9, [
-            1 => PrepDay::THURSDAY,
-            2 => PrepDay::THURSDAY,
-            3 => PrepDay::WEDNESDAY,
-            4 => PrepDay::WEDNESDAY,
-            5 => PrepDay::WEDNESDAY,
-            6 => PrepDay::TUESDAY,
+            1 => GenerateTimetable::THURSDAY,
+            2 => GenerateTimetable::THURSDAY,
+            3 => GenerateTimetable::WEDNESDAY,
+            4 => GenerateTimetable::WEDNESDAY,
+            5 => GenerateTimetable::WEDNESDAY,
+            6 => GenerateTimetable::TUESDAY,
         ]);
         $this->addSubject('Geography', 9, [
-            1 => PrepDay::MONDAY,
-            2 => PrepDay::MONDAY,
-            3 => PrepDay::TUESDAY,
-            4 => PrepDay::WEDNESDAY,
-            5 => PrepDay::MONDAY,
-            6 => PrepDay::MONDAY,
-            7 => PrepDay::THURSDAY,
-            8 => PrepDay::THURSDAY,
+            1 => GenerateTimetable::MONDAY,
+            2 => GenerateTimetable::MONDAY,
+            3 => GenerateTimetable::TUESDAY,
+            4 => GenerateTimetable::WEDNESDAY,
+            5 => GenerateTimetable::MONDAY,
+            6 => GenerateTimetable::MONDAY,
+            7 => GenerateTimetable::THURSDAY,
+            8 => GenerateTimetable::THURSDAY,
         ]);
         $this->addSubject('History', 9, [
-            1 => PrepDay::WEDNESDAY,
-            2 => PrepDay::TUESDAY,
-            3 => PrepDay::MONDAY,
-            4 => PrepDay::MONDAY,
-            5 => PrepDay::TUESDAY,
-            6 => PrepDay::THURSDAY,
-            7 => PrepDay::MONDAY,
-            8 => PrepDay::WEDNESDAY,
+            1 => GenerateTimetable::WEDNESDAY,
+            2 => GenerateTimetable::TUESDAY,
+            3 => GenerateTimetable::MONDAY,
+            4 => GenerateTimetable::MONDAY,
+            5 => GenerateTimetable::TUESDAY,
+            6 => GenerateTimetable::THURSDAY,
+            7 => GenerateTimetable::MONDAY,
+            8 => GenerateTimetable::WEDNESDAY,
         ]);
         $this->addSubject('RS', 9, [
-            1 => PrepDay::TUESDAY,
-            2 => PrepDay::WEDNESDAY,
-            3 => PrepDay::WEDNESDAY,
-            4 => PrepDay::TUESDAY,
-            5 => PrepDay::THURSDAY,
-            6 => PrepDay::TUESDAY,
-            7 => PrepDay::WEDNESDAY,
-            8 => PrepDay::MONDAY,
+            1 => GenerateTimetable::TUESDAY,
+            2 => GenerateTimetable::WEDNESDAY,
+            3 => GenerateTimetable::WEDNESDAY,
+            4 => GenerateTimetable::TUESDAY,
+            5 => GenerateTimetable::THURSDAY,
+            6 => GenerateTimetable::TUESDAY,
+            7 => GenerateTimetable::WEDNESDAY,
+            8 => GenerateTimetable::MONDAY,
         ]);
     }
 
-    private function getData(int $set, string $subject, string $day, int $yearGroup = 9)
+    /**
+     * @param  int  $set
+     * @param  string  $subject
+     * @param  string  $day
+     * @param  int  $yearGroup
+     *
+     * @return array
+     */
+    private function getData(int $set, string $subject, string $day, int $yearGroup = 9): array
     {
         $day_id = PrepDay::where('day', $day)->first()->id;
 
@@ -108,7 +120,14 @@ class ScienceSetsSeeder extends Seeder
         ];
     }
 
-    private function addSubject(string $subject, int $yearGroup, array $array)
+    /**
+     * @param  string  $subject
+     * @param  int  $yearGroup
+     * @param  array  $array
+     *
+     * @return void
+     */
+    private function addSubject(string $subject, int $yearGroup, array $array): void
     {
         foreach ($array as $set => $day) {
             DB::table('science_sets')->insert([
@@ -117,138 +136,144 @@ class ScienceSetsSeeder extends Seeder
         }
     }
 
-    private function lowerFifth()
+    /**
+     * @return void
+     */
+    private function lowerFifth(): void
     {
         $this->addSubject('Biology', 10, [
-            8 => PrepDay::WEDNESDAY,
-            9 => PrepDay::WEDNESDAY,
+            8 => GenerateTimetable::WEDNESDAY,
+            9 => GenerateTimetable::WEDNESDAY,
         ]);
 
         $this->addSubject('Biology', 10, [
-            1 => PrepDay::THURSDAY,
-            2 => PrepDay::THURSDAY,
-            3 => PrepDay::THURSDAY,
-            4 => PrepDay::THURSDAY,
-            5 => PrepDay::THURSDAY,
-            6 => PrepDay::THURSDAY,
-            7 => PrepDay::THURSDAY,
+            1 => GenerateTimetable::THURSDAY,
+            2 => GenerateTimetable::THURSDAY,
+            3 => GenerateTimetable::THURSDAY,
+            4 => GenerateTimetable::THURSDAY,
+            5 => GenerateTimetable::THURSDAY,
+            6 => GenerateTimetable::THURSDAY,
+            7 => GenerateTimetable::THURSDAY,
         ]);
 
         $this->addSubject('Chemistry', 10, [
-            4 => PrepDay::TUESDAY,
-            5 => PrepDay::TUESDAY,
-            6 => PrepDay::TUESDAY,
-            7 => PrepDay::TUESDAY,
+            4 => GenerateTimetable::TUESDAY,
+            5 => GenerateTimetable::TUESDAY,
+            6 => GenerateTimetable::TUESDAY,
+            7 => GenerateTimetable::TUESDAY,
         ]);
         $this->addSubject('Chemistry', 10, [
-            1 => PrepDay::WEDNESDAY,
-            2 => PrepDay::WEDNESDAY,
-            3 => PrepDay::WEDNESDAY,
+            1 => GenerateTimetable::WEDNESDAY,
+            2 => GenerateTimetable::WEDNESDAY,
+            3 => GenerateTimetable::WEDNESDAY,
 
-            4 => PrepDay::THURSDAY,
-            5 => PrepDay::THURSDAY,
-            6 => PrepDay::THURSDAY,
-            7 => PrepDay::THURSDAY,
-            8 => PrepDay::THURSDAY,
-            9 => PrepDay::THURSDAY,
+            4 => GenerateTimetable::THURSDAY,
+            5 => GenerateTimetable::THURSDAY,
+            6 => GenerateTimetable::THURSDAY,
+            7 => GenerateTimetable::THURSDAY,
+            8 => GenerateTimetable::THURSDAY,
+            9 => GenerateTimetable::THURSDAY,
         ]);
 
         $this->addSubject('Chemistry', 10, [
-            1 => PrepDay::FRIDAY,
-            2 => PrepDay::FRIDAY,
-            3 => PrepDay::FRIDAY,
+            1 => GenerateTimetable::FRIDAY,
+            2 => GenerateTimetable::FRIDAY,
+            3 => GenerateTimetable::FRIDAY,
         ]);
 
         $this->addSubject('Physics', 10, [
-            1 => PrepDay::TUESDAY,
-            2 => PrepDay::TUESDAY,
-            3 => PrepDay::TUESDAY,
+            1 => GenerateTimetable::TUESDAY,
+            2 => GenerateTimetable::TUESDAY,
+            3 => GenerateTimetable::TUESDAY,
 
-            8 => PrepDay::TUESDAY,
-            9 => PrepDay::TUESDAY,
+            8 => GenerateTimetable::TUESDAY,
+            9 => GenerateTimetable::TUESDAY,
         ]);
 
         $this->addSubject('Physics', 10, [
-            1 => PrepDay::THURSDAY,
-            2 => PrepDay::THURSDAY,
-            3 => PrepDay::THURSDAY,
+            1 => GenerateTimetable::THURSDAY,
+            2 => GenerateTimetable::THURSDAY,
+            3 => GenerateTimetable::THURSDAY,
 
-            4 => PrepDay::WEDNESDAY,
-            5 => PrepDay::WEDNESDAY,
-            6 => PrepDay::WEDNESDAY,
-            7 => PrepDay::WEDNESDAY,
+            4 => GenerateTimetable::WEDNESDAY,
+            5 => GenerateTimetable::WEDNESDAY,
+            6 => GenerateTimetable::WEDNESDAY,
+            7 => GenerateTimetable::WEDNESDAY,
         ]);
 
         $this->addSubject('Physics', 10, [
-            4 => PrepDay::FRIDAY,
-            5 => PrepDay::FRIDAY,
-            6 => PrepDay::FRIDAY,
-            7 => PrepDay::FRIDAY,
+            4 => GenerateTimetable::FRIDAY,
+            5 => GenerateTimetable::FRIDAY,
+            6 => GenerateTimetable::FRIDAY,
+            7 => GenerateTimetable::FRIDAY,
         ]);
     }
 
-    private function upperFifth()
+    /**
+     * @return void
+     */
+    private function upperFifth(): void
     {
         // Year 11 Science Sets
         $this->addSubject('Biology', 11, [
-            1 => PrepDay::MONDAY,
-            2 => PrepDay::MONDAY,
-            3 => PrepDay::MONDAY,
-            4 => PrepDay::MONDAY,
-            5 => PrepDay::MONDAY,
-            6 => PrepDay::MONDAY,
-            7 => PrepDay::MONDAY,
-            8 => PrepDay::MONDAY,
+            1 => GenerateTimetable::MONDAY,
+            2 => GenerateTimetable::MONDAY,
+            3 => GenerateTimetable::MONDAY,
+            4 => GenerateTimetable::MONDAY,
+            5 => GenerateTimetable::MONDAY,
+            6 => GenerateTimetable::MONDAY,
+            7 => GenerateTimetable::MONDAY,
+            8 => GenerateTimetable::MONDAY,
         ]);
 
         $this->addSubject('Biology', 11, [
-            1 => PrepDay::WEDNESDAY,
-            2 => PrepDay::WEDNESDAY,
-            3 => PrepDay::WEDNESDAY,
-            4 => PrepDay::THURSDAY,
-            5 => PrepDay::THURSDAY,
-            6 => PrepDay::THURSDAY,
+            1 => GenerateTimetable::WEDNESDAY,
+            2 => GenerateTimetable::WEDNESDAY,
+            3 => GenerateTimetable::WEDNESDAY,
+            4 => GenerateTimetable::THURSDAY,
+            5 => GenerateTimetable::THURSDAY,
+            6 => GenerateTimetable::THURSDAY,
         ]);
 
         $this->addSubject('Chemistry', 11, [
-            1 => PrepDay::WEDNESDAY,
-            2 => PrepDay::WEDNESDAY,
-            3 => PrepDay::WEDNESDAY,
-            4 => PrepDay::WEDNESDAY,
-            5 => PrepDay::WEDNESDAY,
-            6 => PrepDay::WEDNESDAY,
-            7 => PrepDay::MONDAY,
-            8 => PrepDay::MONDAY,
+            1 => GenerateTimetable::WEDNESDAY,
+            2 => GenerateTimetable::WEDNESDAY,
+            3 => GenerateTimetable::WEDNESDAY,
+            4 => GenerateTimetable::WEDNESDAY,
+            5 => GenerateTimetable::WEDNESDAY,
+            6 => GenerateTimetable::WEDNESDAY,
+            7 => GenerateTimetable::MONDAY,
+            8 => GenerateTimetable::MONDAY,
 
         ]);
 
         $this->addSubject('Chemistry', 11, [
-            1 => PrepDay::THURSDAY,
-            2 => PrepDay::THURSDAY,
-            3 => PrepDay::THURSDAY,
-            4 => PrepDay::THURSDAY,
-            5 => PrepDay::THURSDAY,
-            6 => PrepDay::THURSDAY,
+            1 => GenerateTimetable::THURSDAY,
+            2 => GenerateTimetable::THURSDAY,
+            3 => GenerateTimetable::THURSDAY,
+            4 => GenerateTimetable::THURSDAY,
+            5 => GenerateTimetable::THURSDAY,
+            6 => GenerateTimetable::THURSDAY,
         ]);
 
         $this->addSubject('Physics', 11, [
-            1 => PrepDay::MONDAY,
-            2 => PrepDay::MONDAY,
-            3 => PrepDay::MONDAY,
-            4 => PrepDay::MONDAY,
-            5 => PrepDay::MONDAY,
-            6 => PrepDay::MONDAY,
+            1 => GenerateTimetable::MONDAY,
+            2 => GenerateTimetable::MONDAY,
+            3 => GenerateTimetable::MONDAY,
+            4 => GenerateTimetable::MONDAY,
+            5 => GenerateTimetable::MONDAY,
+            6 => GenerateTimetable::MONDAY,
         ]);
 
         $this->addSubject('Physics', 11, [
-            1 => PrepDay::THURSDAY,
-            2 => PrepDay::THURSDAY,
-            3 => PrepDay::THURSDAY,
-            4 => PrepDay::WEDNESDAY,
-            5 => PrepDay::WEDNESDAY,
-            6 => PrepDay::WEDNESDAY,
-            7 => PrepDay::THURSDAY,
-            8 => PrepDay::THURSDAY,
+            1 => GenerateTimetable::THURSDAY,
+            2 => GenerateTimetable::THURSDAY,
+            3 => GenerateTimetable::THURSDAY,
+            4 => GenerateTimetable::WEDNESDAY,
+            5 => GenerateTimetable::WEDNESDAY,
+            6 => GenerateTimetable::WEDNESDAY,
+            7 => GenerateTimetable::THURSDAY,
+            8 => GenerateTimetable::THURSDAY,
         ]);
     }
 }

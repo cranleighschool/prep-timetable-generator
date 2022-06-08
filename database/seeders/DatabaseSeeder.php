@@ -18,7 +18,6 @@ class DatabaseSeeder extends Seeder
             SchoolSeeder::class,
             PrepDaySeeder::class,
             ScienceSetsSeeder::class,
-        ]
-        );
+        ]);
     }
 }

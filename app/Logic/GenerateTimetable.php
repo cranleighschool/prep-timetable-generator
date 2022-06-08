@@ -2,7 +2,6 @@
 
 namespace App\Logic;
 
-use App\Models\PrepDay;
 use Illuminate\Http\Request;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Str;
