@@ -105,7 +105,6 @@ class SetsSeeder extends Seeder
      * @param  string  $subject
      * @param  string  $day
      * @param  int  $yearGroup
-     *
      * @return array
      */
     private function getData(int $set, string $subject, string $day, int $yearGroup = 9): array
@@ -124,7 +123,6 @@ class SetsSeeder extends Seeder
      * @param  string  $subject
      * @param  int  $yearGroup
      * @param  array  $array
-     *
      * @return void
      */
     private function addSubject(string $subject, int $yearGroup, array $array): void
