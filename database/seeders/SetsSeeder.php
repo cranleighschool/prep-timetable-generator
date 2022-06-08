@@ -7,7 +7,7 @@ use App\Models\PrepDay;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
-class ScienceSetsSeeder extends Seeder
+class SetsSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -26,7 +26,7 @@ class ScienceSetsSeeder extends Seeder
      */
     private function fourthForm(): void
     {
-        DB::table('science_sets')->insert([
+        DB::table('set_subject_days')->insert([
 
             $this->getData(1, 'Biology', GenerateTimetable::THURSDAY),
             $this->getData(1, 'Chemistry', GenerateTimetable::TUESDAY),
@@ -130,7 +130,7 @@ class ScienceSetsSeeder extends Seeder
     private function addSubject(string $subject, int $yearGroup, array $array): void
     {
         foreach ($array as $set => $day) {
-            DB::table('science_sets')->insert([
+            DB::table('set_subject_days')->insert([
                 $this->getData($set, $subject, $day, $yearGroup),
             ]);
         }

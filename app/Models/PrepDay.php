@@ -37,7 +37,7 @@ class PrepDay extends Model
      */
     private function sets()
     {
-        return $this->hasMany(ScienceSet::class, 'day_id');
+        return $this->hasMany(SubjectsSet::class, 'day_id');
     }
 
     /**

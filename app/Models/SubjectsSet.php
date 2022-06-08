@@ -6,10 +6,14 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Str;
 
-class ScienceSet extends Model
+class SubjectsSet extends Model
 {
     use HasFactory;
 
+    /**
+     * @var string
+     */
+    protected $table = "set_subject_days";
     /**
      * @param  string  $code
      * @param  bool  $raw

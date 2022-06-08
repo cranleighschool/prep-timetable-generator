@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateScienceSetsTable extends Migration
+class CreateSetSubjectDaysTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreateScienceSetsTable extends Migration
      */
     public function up()
     {
-        Schema::create('science_sets', function (Blueprint $table) {
+        Schema::create('set_subject_days', function (Blueprint $table) {
             $table->tinyInteger('set');
             $table->string('subject');
             $table->unsignedBigInteger('day_id');
@@ -34,6 +34,6 @@ class CreateScienceSetsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('science_sets');
+        Schema::dropIfExists('set_subject_days');
     }
 }
