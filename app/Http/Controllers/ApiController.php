@@ -27,11 +27,7 @@ class ApiController
         $result = [];
         foreach ($allPupils[$house] as $yearGroup => $pupils) {
             foreach (collect($pupils)->sortBy('surname') as $pupil) {
-                try {
-                    $emailAddress = $pupil->schoolEmailAddress;
-                } catch (\Exception $exception) {
-                    throw new \Exception('Email Address address error for '.$pupil->id);
-                }
+                $emailAddress = $pupil->schoolEmailAddress;
 
                 $result[$yearGroup][$pupil->surname.', '.$pupil->forename] = $this->getPupilTimetable(Str::before($emailAddress,
                     '@'))['timetable'];
@@ -45,7 +41,7 @@ class ApiController
 
     /**
      * @param  string  $username
-     * @return void
+     * @return Collection
      *
      * @throws \Illuminate\Validation\ValidationException
      */
@@ -76,11 +72,11 @@ class ApiController
     }
 
     /**
-     * @param $yearGroup
-     * @param $setResults
+     * @param int $yearGroup
+     * @param array $setResults
      * @return object
      */
-    private function sanitizeVariables($yearGroup, $setResults): object
+    private function sanitizeVariables(int $yearGroup, array $setResults): object
     {
         try {
             $output = [

@@ -77,12 +77,13 @@ trait PrepSets
     }
 
     /**
-     * @param $sets
+     * @param Collection $sets
      * @param  array  $unsets
      * @return array
      */
-    private function matchSets($sets, array $unsets = []): array
+    private function matchSets(Collection $sets, array $unsets = []): array
     {
+        $matchSets = [];
         foreach ($sets as $subject => $value) {
             if (in_array($subject, $unsets)) {
                 continue;
@@ -133,12 +134,11 @@ trait PrepSets
     }
 
     /**
-     * @param  string  $username
-     * @return mixed
+     * @return array
      *
      * @throws \Illuminate\Validation\ValidationException
      */
-    public function getPupilAndSets()
+    public function getPupilAndSets(): array
     {
         $sets = Cache::remember('sets_'.$this->pupil->schoolId, now()->addHours(2), function () {
             $timetable = new PupilTimetableController(School::find(1));
@@ -151,10 +151,10 @@ trait PrepSets
     }
 
     /**
-     * @param $username
+     * @param string $username
      * @return void
      */
-    public function setPupil($username)
+    public function setPupil(string $username)
     {
         $this->pupil = School::getPupil($username);
     }

@@ -129,7 +129,6 @@ class GenerateTimetable
     }
 
     /**
-     * @param  \Illuminate\Http\Request|\stdClass  $request
      * @return array
      */
     private function year10Timetable(): array
@@ -180,7 +179,6 @@ class GenerateTimetable
     }
 
     /**
-     * @param  \Illuminate\Http\Request|\stdClass  $request
      * @return array
      */
     private function year11Timetable(): array
