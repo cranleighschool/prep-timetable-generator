@@ -1,6 +1,6 @@
 <?php
 
-use Illuminate\Http\Request;
+use App\Http\Controllers\ApiController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,9 +14,5 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
-});
-Route::get('house/{house}', [\App\Http\Controllers\ApiController::class, 'getHouseData']);
-Route::get('{username}', [\App\Http\Controllers\ApiController::class, 'getPupilTimetable']);
-
+Route::get('house/{house}', [ApiController::class, 'getHouseData']);
+Route::get('{username}', [ApiController::class, 'getPupilTimetable']);

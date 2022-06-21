@@ -21,27 +21,27 @@ trait PrepSets
     /**
      * @param  string  $code
      * @param  string  $subject
-     *
      * @return int|string
+     *
      * @throws \Exception
      */
     public function mapSets(string $code, string $subject)
     {
-        $e = explode("-", $code);
+        $e = explode('-', $code);
 
-        if (Str::endsWith($e[ 0 ], "A")) {
+        if (Str::endsWith($e[0], 'A')) {
             return 'Option A';
         }
 
-        if (Str::endsWith($e[ 0 ], "B")) {
+        if (Str::endsWith($e[0], 'B')) {
             return 'Option B';
         }
 
-        if (Str::endsWith($e[ 0 ], "C")) {
+        if (Str::endsWith($e[0], 'C')) {
             return 'Option C';
         }
 
-        if (Str::endsWith($e[ 0 ], "D")) {
+        if (Str::endsWith($e[0], 'D')) {
             return 'Option D';
         }
 
@@ -68,19 +68,17 @@ trait PrepSets
             'Greek',
             'Supervised Private Study',
             'German',
-            'Spanish'
+            'Spanish',
         ])) {
             return (int) substr($code, -1, 1);
         }
 
-        throw new \Exception("Something went wrong, could not match: ".$subject);
-
+        throw new \Exception('Something went wrong, could not match: '.$subject);
     }
 
     /**
      * @param $sets
      * @param  array  $unsets
-     *
      * @return array
      */
     private function matchSets($sets, array $unsets = []): array
@@ -90,18 +88,18 @@ trait PrepSets
                 continue;
             }
             if (in_array($value, ['Option A', 'Option B', 'Option C', 'Option D', 'CMFL'])) {
-                $matchSets[ $value ] = $subject;
+                $matchSets[$value] = $subject;
             } else {
-                $matchSets[ $subject ] = $value;
+                $matchSets[$subject] = $value;
             }
         }
+
         return $matchSets;
     }
 
     /**
      * @param  int  $yearGroup
      * @param  \Illuminate\Support\Collection  $sets
-     *
      * @return array
      */
     private function calculateSets(int $yearGroup, Collection $sets)
@@ -111,48 +109,49 @@ trait PrepSets
         $unsets = [];
 
         if ($sets->isEmpty()) {
-            throw new ZeroSetsFound($this->pupil->fullName." has no sets assigned");
+            throw new ZeroSetsFound($this->pupil->fullName.' has no sets assigned');
         }
 
         try {
             if ($yearGroup === 9) {
-                if (($sets[ 'Biology' ] == $sets[ 'Physics' ]) && ($sets[ 'Physics' ]) == $sets[ 'Chemistry' ]) {
-                    $sets[ 'Science' ] = $sets[ 'Biology' ];
+                if (($sets['Biology'] == $sets['Physics']) && ($sets['Physics']) == $sets['Chemistry']) {
+                    $sets['Science'] = $sets['Biology'];
                 }
-                $sets[ 'Humanities' ] = $sets[ 'Religious Studies' ] ?? $sets['Geography'];
+                $sets['Humanities'] = $sets['Religious Studies'] ?? $sets['Geography'];
 
                 $unsets = ['Biology', 'Chemistry', 'Physics', 'Geography', 'History', 'Religious Studies'];
             }
 
             $matchSets = $this->matchSets($sets, $unsets);
-
         } catch (\ErrorException $error) {
-            throw new \ErrorException($error->getMessage()." on pupil: ".$this->pupil->fullName);
+            throw new \ErrorException($error->getMessage().' on pupil: '.$this->pupil->fullName);
         }
 
         ksort($matchSets);
+
         return $matchSets;
     }
 
     /**
      * @param  string  $username
-     *
      * @return mixed
+     *
      * @throws \Illuminate\Validation\ValidationException
      */
     public function getPupilAndSets()
     {
-        $sets = Cache::remember("sets_".$this->pupil->schoolId, now()->addHours(2), function () {
+        $sets = Cache::remember('sets_'.$this->pupil->schoolId, now()->addHours(2), function () {
             $timetable = new PupilTimetableController(School::find(1));
-            return collect($timetable->show($this->pupil->schoolId)[ 'sets' ])->pluck('code',
+
+            return collect($timetable->show($this->pupil->schoolId)['sets'])->pluck('code',
                 'subjectId')->unique()->toArray();
         });
+
         return $sets;
     }
 
     /**
      * @param $username
-     *
      * @return void
      */
     public function setPupil($username)
@@ -162,18 +161,19 @@ trait PrepSets
 
     /**
      * @param  array  $sets
-     *
      * @return \Illuminate\Support\Collection
      */
     public static function getSets(array $sets): Collection
     {
-        return Cache::rememberForever("sets".serialize($sets), function () use ($sets) {
+        return Cache::rememberForever('sets'.serialize($sets), function () use ($sets) {
             $subjectController = new SubjectsController(new School());
             $sets = collect($sets)->map(function ($item, $key) use ($subjectController) {
                 $subject = $subjectController->show($key);
-                $subject[ 'set' ] = $item;
+                $subject['set'] = $item;
+
                 return $subject;
-            })->pluck("name", "set");
+            })->pluck('name', 'set');
+
             return $sets;
         });
     }

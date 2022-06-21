@@ -16,10 +16,8 @@ class DatabaseSeeder extends Seeder
         // \App\Models\User::factory(10)->create();
         $this->call([
             SchoolSeeder::class,
-                PrepDaySeeder::class,
-                ScienceSetsSeeder::class,
-            ]
-        );
-
+            PrepDaySeeder::class,
+            SetsSeeder::class,
+        ]);
     }
 }

@@ -16,11 +16,11 @@ class PrepDaySeeder extends Seeder
     public function run()
     {
         $days = [
-            'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'
+            'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday',
         ];
         foreach ($days as $day) {
             PrepDay::firstOrCreate([
-                'day' => $day
+                'day' => $day,
             ]);
         }
     }

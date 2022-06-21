@@ -15,7 +15,7 @@ class CreatePrepDaysTable extends Migration
     {
         Schema::create('prep_days', function (Blueprint $table) {
             $table->id();
-            $table->string("day");
+            $table->string('day');
         });
     }
 

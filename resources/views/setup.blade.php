@@ -37,7 +37,7 @@
                             <ul class="">
                                 @foreach ($sets->sort() as $code => $subject)
                                     <li>{{ $subject }}
-                                        (<code>{{ $code }}</code>) {!! \App\Models\ScienceSet::label($code) !!}
+                                        (<code>{{ $code }}</code>) {!! \App\Models\SubjectsSet::label($code) !!}
                                     </li>
                                 @endforeach
                             </ul>
@@ -53,7 +53,7 @@
                         {{ csrf_field() }}
                         {{ method_field('POST') }}
                         <input type="hidden" name="yearGroup" value="{{ $yearGroup }}"/>
-                        <input type="hidden" name="username" value="{{ $request->username }}" />
+                        <input type="hidden" name="username" value="{{ $request->username }}"/>
 
                         <div class="row p-3">
                             <div class="row">
@@ -130,7 +130,8 @@
                                 </div>
                                 <div class="col-md">
                                     <label class="form-label" for="cmlf">Modern Foreign Language</label>
-                                    <input class="form-control" type="text" value="{{ old('cmfl') ?? $setResults['CMFL'] }}"
+                                    <input class="form-control" type="text"
+                                           value="{{ old('cmfl') ?? $setResults['CMFL'] }}"
                                            placeholder="CMFL"
                                            name="cmfl"/>
 

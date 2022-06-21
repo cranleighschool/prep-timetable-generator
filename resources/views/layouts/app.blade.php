@@ -5,7 +5,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css"
           integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
     <title>
-        Timetable
+        {{ config('app.name') }}
     </title>
     <style>
         ul.two-columns {
@@ -19,7 +19,7 @@
 <div class="container">
     <div class="row p-3">
         <div class="col">
-            <h1>Cranleigh Prep Timetable Generator</h1>
+            <h1>{{ config('app.name') }}</h1>
             <p class="lead">This application uses the logic from <a href="{{ asset('Summer Prep Timetable 2021-22 (Term 3).pdf') }}" target="_blank">Mr Fearn's Prep Timetable sheet</a> to auto-populate your
                 Prep Timetable.</p>
         </div>
