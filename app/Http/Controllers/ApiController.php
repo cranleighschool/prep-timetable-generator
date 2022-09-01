@@ -72,8 +72,8 @@ class ApiController
     }
 
     /**
-     * @param int $yearGroup
-     * @param array $setResults
+     * @param  int  $yearGroup
+     * @param  array  $setResults
      * @return object
      */
     private function sanitizeVariables(int $yearGroup, array $setResults): object

@@ -77,7 +77,7 @@ trait PrepSets
     }
 
     /**
-     * @param Collection $sets
+     * @param  Collection  $sets
      * @param  array  $unsets
      * @return array
      */
@@ -151,7 +151,7 @@ trait PrepSets
     }
 
     /**
-     * @param string $username
+     * @param  string  $username
      * @return void
      */
     public function setPupil(string $username)
