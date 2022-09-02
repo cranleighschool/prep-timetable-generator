@@ -14,7 +14,7 @@ class CreateSetSubjectDaysTable extends Migration
     public function up()
     {
         Schema::create('set_subject_days', function (Blueprint $table) {
-            $table->tinyInteger('set');
+            $table->string('set', 4);
             $table->string('subject');
             $table->unsignedBigInteger('day_id');
             $table->tinyInteger('nc_year')->default(9);

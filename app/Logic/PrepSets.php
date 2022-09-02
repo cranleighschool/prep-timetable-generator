@@ -18,15 +18,127 @@ trait PrepSets
      */
     public Pupil $pupil;
 
-    /**
-     * @param  string  $code
-     * @param  string  $subject
-     * @return int|string
-     *
-     * @throws \Exception
-     */
-    public function mapSets(string $code, string $subject)
+    private function mapYearNineSets(string $code, string $subject) {
+        // OPTIONS
+        if (Str::startsWith($code, "9A") && !Str::contains($code, ["Gg", "Cc", "Hi", "Rs", "La"])) {
+            return 'Option A';
+        }
+        if (Str::startsWith($code, "9B")) {
+            return 'Option B';
+        }
+        if (Str::startsWith($code, '9C')) {
+            return 'Option C';
+        }
+        if (Str::startsWith($code, '9D')) {
+            return 'Option D';
+        }
+
+        // Sciences
+        if (Str::endsWith($code, ['Bi', 'Ch', 'Ph'])) {
+            // Converts: 9.1/Bi to 1
+            return (int) substr($code, 2, 1);
+        }
+
+
+        // Maths
+        if (Str::endsWith($code, 'Ma')) {
+            // Converts, 9Y1/Ma to Y1
+            return substr($code, 1, 2);
+        }
+
+        // English
+        if (Str::endsWith($code, 'En')) {
+            return (int) substr($code, 2, 1);
+        }
+
+        // Humanities
+        if (preg_match('^\A9(a|b|A)/(Hi|Cc|Gg|Rs)[0-9]{1}\Z^', $code, $matches)) {
+            // Is humanity
+            return strtolower(substr($code, 1, 1).substr($code, -1, 1));
+        }
+        if (Str::endsWith($code, 'Fr') || Str::endsWith($code, 'Sp')) {
+            return 'CMFL';
+        }
+
+
+
+        if (in_array($subject, [
+//            'Maths',
+//            'Geography',
+//            'History',
+//            'Biology',
+//            'Physics',
+//            'Chemistry',
+//            'Religious Studies',
+//            'Classical Civilisation',
+//            'English',
+            'Latin',
+//            'Philosophy',
+//            'Greek',
+//            'Supervised Private Study',
+//            'German',
+//            'Spanish',
+//            'Design Engineering',
+//            'Music',
+//            'Theatre Studies',
+            'Digital Literacy'
+        ])) {
+            return (int) substr($code, -1, 1);
+        }
+
+
+        throw new \Exception('Something went wrong, could not match year 9 subject: '.$subject);
+    }
+
+    private function mapYearTenSets(string $code, $subject): string
     {
+        // Sciences
+        if (Str::startsWith($code, "10D6")) {
+            // DAS in 6
+            return substr($code, 2, 3);
+        }
+        if (Str::startsWith($code, "10D9")) {
+            // DAS in 9
+            return substr($code, 2, 3);
+        }
+        if (Str::startsWith($code, "10T")) {
+            // Triple Award
+            return substr($code, 2, 2);
+        }
+
+        // GCSE OPTIONS
+        if (Str::startsWith($code, "10A")) {
+            return 'Option A';
+        }
+        if (Str::startsWith($code, "10B")) {
+            return 'Option B';
+        }
+        if (Str::startsWith($code, '10C')) {
+            return 'Option C';
+        }
+        if (Str::startsWith($code, '10D')) {
+            return 'Option D';
+        }
+
+        // MATHS / ENGLISH
+        if (in_array($subject, ['Maths', 'English'])) {
+            // Converts "103/En" to "3"
+            return (int) substr($code, 2, 1);
+        }
+
+        // CMFL
+        if (preg_match('^\A[0-9]{3}/(Fr|Sp)\Z^', $code, $matches)) {
+            return 'CMFL';
+        }
+
+        throw new \Exception('Something went wrong, could not match year 10 subject: '.$subject);
+
+    }
+
+    private function mapYearElevenSets(string $code, string $subject): string
+    {
+        // 2022-09-02 - should be the same as last years code, nothing change here. (Next year will change)
+
         $e = explode('-', $code);
 
         if (Str::endsWith($e[0], 'A')) {
@@ -45,12 +157,8 @@ trait PrepSets
             return 'Option D';
         }
 
-        if (preg_match('^\A(9|10|11)-(FR|SP)[0-9]{1}\Z^', $code, $matches)) {
+        if (preg_match('^\A11-(FR|SP)[0-9]{1}\Z^', $code, $matches)) {
             return 'CMFL';
-        }
-
-        if (preg_match('^\A(9)-(MA)+(.*)^', $code, $matches)) {
-            return substr($code, -2, 2);
         }
 
         if (in_array($subject, [
@@ -69,8 +177,34 @@ trait PrepSets
             'Supervised Private Study',
             'German',
             'Spanish',
+            'Design Engineering',
+            'Music',
+            'Theatre Studies',
+            'French'
         ])) {
             return (int) substr($code, -1, 1);
+        }
+        throw new \Exception('Something went wrong, could not match year 11 subject: '.$subject);
+
+    }
+    /**
+     * @param  string  $code
+     * @param  string  $subject
+     * @return int|string
+     *
+     * @throws \Exception
+     */
+    public function mapSets(string $code, string $subject): string|int
+    {
+        if (Str::startsWith($code, "11")) {
+            // Year 11 Sets
+            return $this->mapYearElevenSets($code, $subject);
+        }
+        if (Str::startsWith($code, "10")) {
+            return $this->mapYearTenSets($code, $subject);
+        }
+        if (Str::startsWith($code, "9")) {
+            return $this->mapYearNineSets($code, $subject);
         }
 
         throw new \Exception('Something went wrong, could not match: '.$subject);
@@ -95,6 +229,7 @@ trait PrepSets
             }
         }
 
+
         return $matchSets;
     }
 
@@ -105,8 +240,10 @@ trait PrepSets
      */
     private function calculateSets(int $yearGroup, Collection $sets)
     {
+        //dump($sets);
         $sets = $sets->flip();
         $sets = $sets->map([$this, 'mapSets']);
+        //dd($sets);
         $unsets = [];
 
         if ($sets->isEmpty()) {
@@ -120,7 +257,7 @@ trait PrepSets
                 }
                 $sets['Humanities'] = $sets['Religious Studies'] ?? $sets['Geography'];
 
-                $unsets = ['Biology', 'Chemistry', 'Physics', 'Geography', 'History', 'Religious Studies'];
+                $unsets = ['Biology', 'Chemistry', 'Physics', 'Geography', 'History', 'Religious Studies', 'Digital Literacy'];
             }
 
             $matchSets = $this->matchSets($sets, $unsets);
@@ -129,7 +266,7 @@ trait PrepSets
         }
 
         ksort($matchSets);
-
+//dd($matchSets);
         return $matchSets;
     }
 

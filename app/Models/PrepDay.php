@@ -48,6 +48,10 @@ class PrepDay extends Model
         return $this->sets()->whereIn('subject', ['Chemistry']);
     }
 
+    public function english()
+    {
+        return $this->sets()->whereIn('subject', ['English']);
+    }
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */

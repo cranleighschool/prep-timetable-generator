@@ -45,7 +45,7 @@ class SubjectsSet extends Model
         if (preg_match('^\A(10|11)-(CH)[0-9]{1}\Z^', $code, $matches)) {
             $label = 'Chemistry Set: '.substr($matches[0], -1);
         }
-        if (preg_match('^\A(10|11)-(BI)[0-9]{1}\Z^', $code, $matches)) {
+        if (preg_match('^\A(10|11)-(Bi|BI)[0-9]{1}\Z^', $code, $matches)) {
             $label = 'Biology Set: '.substr($matches[0], -1);
         }
         if (preg_match('^\A(9|10|11)-(FR|SP)[0-9]{1}\Z^', $code, $matches)) {
@@ -60,7 +60,7 @@ class SubjectsSet extends Model
         if (preg_match('^\A(9)-(GG|HI|RS)[0-9]{1}\Z^', $code, $matches)) {
             $label = 'Humanities Set: '.substr($matches[0], -1);
         }
-        if (preg_match('^\A(9)-(MA)+(.*)^', $code, $matches)) {
+        if (preg_match('^\A(9|11)-(MA)+(.*)^', $code, $matches)) {
             $label = 'Maths Set: '.trim(end($matches));
         }
 

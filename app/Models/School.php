@@ -35,8 +35,10 @@ class School extends Model implements Institution
         $allPupils = self::allPupils();
 
         return Cache::rememberForever('pupil_'.$username, function () use ($allPupils, $username) {
-            return $allPupils->whereIn('schoolEmailAddress',
-                [strtoupper($username).'@cranleigh.org', strtolower($username).'@cranleigh.org'])->first();
+            $pupil = $allPupils->whereIn('schoolEmailAddress',
+                [strtoupper($username).'@cranleigh.org', strtolower($username).'@cranleigh.org'])->firstOrFail();
+
+            return $pupil;
         });
     }
 
