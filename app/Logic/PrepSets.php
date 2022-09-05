@@ -18,7 +18,8 @@ trait PrepSets
      */
     public Pupil $pupil;
 
-    private function mapYearNineSets(string $code, string $subject) {
+    private function mapYearNineSets(string $code, string $subject)
+    {
         // Latin
         if (in_array($code, ['9A/La3', '9A/La4'])) {
             return 'Latin';
@@ -118,7 +119,7 @@ trait PrepSets
             return 'CMFL';
         }
         if (in_array($subject, [
-'Greek',
+            'Greek',
             'Philosophy',
 
         ])) {

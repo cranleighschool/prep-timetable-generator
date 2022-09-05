@@ -119,7 +119,7 @@ class GenerateTimetable
 
                     break;
                 case self::FRIDAY:
-                    if (!is_null($request->latin)) {
+                    if (! is_null($request->latin)) {
                         self::addToTimetable($day->day, 'Latin');
                     }
                     if (Str::endsWith($request->humanities_set, ['a1', 'a2', 'a3', 'a4'])) {
