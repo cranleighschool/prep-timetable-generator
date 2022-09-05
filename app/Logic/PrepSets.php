@@ -25,10 +25,10 @@ trait PrepSets
         }
 
         // OPTIONS
-        if (Str::startsWith($code, "9A") && !Str::contains($code, ["Gg", "Cc", "Hi", "Rs", "La"])) {
+        if (Str::startsWith($code, '9A') && ! Str::contains($code, ['Gg', 'Cc', 'Hi', 'Rs', 'La'])) {
             return 'Option A';
         }
-        if (Str::startsWith($code, "9B")) {
+        if (Str::startsWith($code, '9B')) {
             return 'Option B';
         }
         if (Str::startsWith($code, '9C')) {
@@ -43,7 +43,6 @@ trait PrepSets
             // Converts: 9.1/Bi to 1
             return (int) substr($code, 2, 1);
         }
-
 
         // Maths
         if (Str::endsWith($code, 'Ma')) {
@@ -67,32 +66,13 @@ trait PrepSets
             return 'CMFL';
         }
 
-
-
         if (in_array($subject, [
-//            'Maths',
-//            'Geography',
-//            'History',
-//            'Biology',
-//            'Physics',
-//            'Chemistry',
-//            'Religious Studies',
-//            'Classical Civilisation',
-//            'English',
             'Latin',
             'Philosophy',
-//            'Greek',
-//            'Supervised Private Study',
-//            'German',
-//            'Spanish',
-//            'Design Engineering',
-//            'Music',
-//            'Theatre Studies',
-            'Digital Literacy'
+            'Digital Literacy',
         ])) {
             return (int) substr($code, -1, 1);
         }
-
 
         throw new \Exception('Something went wrong, could not match year 9 subject: '.$subject);
     }
@@ -100,24 +80,24 @@ trait PrepSets
     private function mapYearTenSets(string $code, $subject): string
     {
         // Sciences
-        if (Str::startsWith($code, "10D6")) {
+        if (Str::startsWith($code, '10D6')) {
             // DAS in 6
             return substr($code, 2, 3);
         }
-        if (Str::startsWith($code, "10D9")) {
+        if (Str::startsWith($code, '10D9')) {
             // DAS in 9
             return substr($code, 2, 3);
         }
-        if (Str::startsWith($code, "10T")) {
+        if (Str::startsWith($code, '10T')) {
             // Triple Award
             return substr($code, 2, 2);
         }
 
         // GCSE OPTIONS
-        if (Str::startsWith($code, "10A")) {
+        if (Str::startsWith($code, '10A')) {
             return 'Option A';
         }
-        if (Str::startsWith($code, "10B")) {
+        if (Str::startsWith($code, '10B')) {
             return 'Option B';
         }
         if (Str::startsWith($code, '10C')) {
@@ -146,7 +126,6 @@ trait PrepSets
         }
 
         throw new \Exception('Something went wrong, could not match year 10 subject: '.$subject);
-
     }
 
     private function mapYearElevenSets(string $code, string $subject): string
@@ -194,13 +173,13 @@ trait PrepSets
             'Design Engineering',
             'Music',
             'Theatre Studies',
-            'French'
+            'French',
         ])) {
             return (int) substr($code, -1, 1);
         }
         throw new \Exception('Something went wrong, could not match year 11 subject: '.$subject);
-
     }
+
     /**
      * @param  string  $code
      * @param  string  $subject
@@ -210,14 +189,14 @@ trait PrepSets
      */
     public function mapSets(string $code, string $subject): string|int
     {
-        if (Str::startsWith($code, "11")) {
+        if (Str::startsWith($code, '11')) {
             // Year 11 Sets
             return $this->mapYearElevenSets($code, $subject);
         }
-        if (Str::startsWith($code, "10")) {
+        if (Str::startsWith($code, '10')) {
             return $this->mapYearTenSets($code, $subject);
         }
-        if (Str::startsWith($code, "9")) {
+        if (Str::startsWith($code, '9')) {
             return $this->mapYearNineSets($code, $subject);
         }
 
@@ -280,7 +259,7 @@ trait PrepSets
         }
 
         ksort($matchSets);
-//dd($matchSets);
+        //dd($matchSets);
         return $matchSets;
     }
 
