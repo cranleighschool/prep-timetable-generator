@@ -39,9 +39,9 @@ class TimetableRequest extends FormRequest
             'username' => 'string|required',
             'science_set' => 'min:1|max:8|integer',
             'humanities_set' => 'min:1|max:8|string',
-            'biology_set' => 'min:1|max:8|integer',
-            'chemistry_set' => 'min:1|max:8|integer',
-            'physics_set' => 'min:1|max:8|integer',
+            'biology_set' => 'min:1|max:8|string',
+            'chemistry_set' => 'min:1|max:8|string',
+            'physics_set' => 'min:1|max:8|string',
             'classciv_set' => 'min:1|max:6|string',
 
             'maths_set' => 'regex:/^[a-zA-Z]{1}[0-9]{1}$/',

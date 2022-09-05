@@ -69,8 +69,8 @@ class SetsSeeder extends Seeder
             $this->getData(8, 'Physics', GenerateTimetable::MONDAY),
         ]);
         $this->addSubject('Class Civ', 9, [
-            'a1' => GenerateTimetable::FRIDAY,
-            'a2' => GenerateTimetable::FRIDAY,
+//            'a1' => GenerateTimetable::FRIDAY,
+//            'a2' => GenerateTimetable::FRIDAY,
             'b1' => GenerateTimetable::FRIDAY,
             'b2' => GenerateTimetable::WEDNESDAY,
             'b3' => GenerateTimetable::WEDNESDAY,

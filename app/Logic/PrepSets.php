@@ -19,6 +19,11 @@ trait PrepSets
     public Pupil $pupil;
 
     private function mapYearNineSets(string $code, string $subject) {
+        // Latin
+        if (in_array($code, ['9A/La3', '9A/La4'])) {
+            return 'Latin';
+        }
+
         // OPTIONS
         if (Str::startsWith($code, "9A") && !Str::contains($code, ["Gg", "Cc", "Hi", "Rs", "La"])) {
             return 'Option A';
@@ -56,6 +61,8 @@ trait PrepSets
             // Is humanity
             return strtolower(substr($code, 1, 1).substr($code, -1, 1));
         }
+
+        // Languages
         if (Str::endsWith($code, 'Fr') || Str::endsWith($code, 'Sp')) {
             return 'CMFL';
         }
@@ -73,7 +80,7 @@ trait PrepSets
 //            'Classical Civilisation',
 //            'English',
             'Latin',
-//            'Philosophy',
+            'Philosophy',
 //            'Greek',
 //            'Supervised Private Study',
 //            'German',
@@ -129,6 +136,13 @@ trait PrepSets
         // CMFL
         if (preg_match('^\A[0-9]{3}/(Fr|Sp)\Z^', $code, $matches)) {
             return 'CMFL';
+        }
+        if (in_array($subject, [
+'Greek',
+            'Philosophy',
+
+        ])) {
+            return (int) substr($code, -1, 1);
         }
 
         throw new \Exception('Something went wrong, could not match year 10 subject: '.$subject);
@@ -229,7 +243,6 @@ trait PrepSets
             }
         }
 
-
         return $matchSets;
     }
 
@@ -255,6 +268,7 @@ trait PrepSets
                 if (($sets['Biology'] == $sets['Physics']) && ($sets['Physics']) == $sets['Chemistry']) {
                     $sets['Science'] = $sets['Biology'];
                 }
+
                 $sets['Humanities'] = $sets['Religious Studies'] ?? $sets['Geography'];
 
                 $unsets = ['Biology', 'Chemistry', 'Physics', 'Geography', 'History', 'Religious Studies', 'Digital Literacy'];
