@@ -2,8 +2,10 @@
 
 namespace App\Http\Requests;
 
+use App\Exceptions\PupilNotFound;
 use App\Logic\PrepSets;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\ValidationException;
 
 class SetupRequest extends FormRequest
 {
@@ -21,14 +23,19 @@ class SetupRequest extends FormRequest
 
     public function prepareForValidation()
     {
-        $this->setPupil($this->get('username'));
-        $sets = $this->getPupilAndSets();
-        $this->merge(['sets' => $sets]);
-        $sets = self::getSets($this->get('sets'));
-        $this->merge([
-            'sets' => $sets,
-            'yearGroup' => (int) $this->pupil->yearGroup,
-        ]);
+        try {
+            $username = $this->get('username');
+            $this->setPupil($username);
+            $sets = $this->getPupilAndSets();
+            $this->merge(['sets' => $sets]);
+            $sets = self::getSets($this->get('sets'));
+            $this->merge([
+                'sets' => $sets,
+                'yearGroup' => (int) $this->pupil->yearGroup,
+            ]);
+        } catch (PupilNotFound $exception) {
+            throw ValidationException::withMessages(['pupil' => 'Pupil not found: '.strtoupper($username).'. This is only for lower school students.']);
+        }
     }
 
     /**
