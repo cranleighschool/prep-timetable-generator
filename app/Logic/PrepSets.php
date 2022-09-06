@@ -83,11 +83,11 @@ trait PrepSets
         // Sciences
         if (Str::startsWith($code, '10D6')) {
             // DAS in 6
-            return substr($code, 2, 3);
+            return substr($code, 2, 2);
         }
         if (Str::startsWith($code, '10D9')) {
             // DAS in 9
-            return substr($code, 2, 3);
+            return substr($code, 2, 2);
         }
         if (Str::startsWith($code, '10T')) {
             // Triple Award
