@@ -42,8 +42,8 @@ class ApiController
 
     /**
      * @param  string  $tutorUsername
-     *
      * @return \Illuminate\Support\Collection
+     *
      * @throws \Illuminate\Validation\ValidationException|\App\Exceptions\TutorNotFoundToHaveAnyTutees
      */
     public function getTutorData(string $tutorUsername): Collection
@@ -52,7 +52,7 @@ class ApiController
         $allPupils = School::allPupils()->where('tutorUsername', '=', $tutorUsername)->groupBy(['tutorUsername', 'yearGroup']);
 
         if ($allPupils->isEmpty()) {
-            throw new TutorNotFoundToHaveAnyTutees("Either Tutor not found or Tutor does not have any tutees in the dataset", 404);
+            throw new TutorNotFoundToHaveAnyTutees('Either Tutor not found or Tutor does not have any tutees in the dataset', 404);
         }
         $result = [];
         foreach ($allPupils[$tutorUsername] as $yearGroup => $pupils) {

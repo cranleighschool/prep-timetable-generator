@@ -43,8 +43,8 @@ class PrepTimetableController extends Controller
 
     /**
      * @param  string  $tutorUsername
-     *
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
+     *
      * @throws \Exception
      */
     public function byTutor(string $tutorUsername)
@@ -67,6 +67,7 @@ class PrepTimetableController extends Controller
         } catch (TutorNotFoundToHaveAnyTutees $exception) {
             abort($exception->getCode(), $exception->getMessage());
         }
+
         return view('house', compact('data'));
     }
 

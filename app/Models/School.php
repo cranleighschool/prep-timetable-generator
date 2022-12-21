@@ -24,7 +24,7 @@ class School extends Model implements Institution
      */
     public static function allPupils(): Collection
     {
-        return Cache::remember('allPupils',now()->addWeek(), function () {
+        return Cache::remember('allPupils', now()->addWeek(), function () {
             $isams = new CurrentPupilController(new self());
 
             return $isams->index()->whereIn('yearGroup', [9, 10, 11])->map(function ($pupil) {
@@ -32,16 +32,19 @@ class School extends Model implements Institution
                     $pupil->tutorUsername = self::getTutorUsername($pupil->tutorEmployeeId);
                 } catch (TypeError $error) {
                     //echo $error->getMessage()." (".sprintf("%s %s %d", $pupil->fullName, $pupil->boardingHouse, $pupil->yearGroup).")";
-                    $pupil->tutorUsername = "UNKNOWN";
+                    $pupil->tutorUsername = 'UNKNOWN';
                 } catch (ClientException $e) {
                     //echo $e->getMessage();
-                    $pupil->tutorUsername = "UNKNOWN";
+                    $pupil->tutorUsername = 'UNKNOWN';
                 }
+
                 return $pupil;
             });
         });
     }
-    public static function getTutorUsername(int $tutorId) {
+
+    public static function getTutorUsername(int $tutorId)
+    {
         $isams = new HumanResourcesEmployeeController(new self());
         $return = $isams->show($tutorId);
 
@@ -50,7 +53,6 @@ class School extends Model implements Institution
 
     /**
      * @param  string  $username
-     *
      * @return \spkm\isams\Wrappers\Pupil
      */
     public static function getPupil(string $username): Pupil
