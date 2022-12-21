@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Exceptions\TutorNotFoundToHaveAnyTutees;
 use App\Exceptions\ZeroSetsFound;
 use App\Logic\GenerateTimetable;
 use App\Logic\PrepSets;
@@ -26,6 +27,35 @@ class ApiController
 
         $result = [];
         foreach ($allPupils[$house] as $yearGroup => $pupils) {
+            foreach (collect($pupils)->sortBy('surname') as $pupil) {
+                $emailAddress = $pupil->schoolEmailAddress;
+
+                $result[$yearGroup][$pupil->surname.', '.$pupil->forename] = $this->getPupilTimetable(Str::before($emailAddress,
+                    '@'))['timetable'];
+            }
+        }
+        ksort($result);
+        $result = collect($result);
+
+        return $result;
+    }
+
+    /**
+     * @param  string  $tutorUsername
+     *
+     * @return \Illuminate\Support\Collection
+     * @throws \Illuminate\Validation\ValidationException|\App\Exceptions\TutorNotFoundToHaveAnyTutees
+     */
+    public function getTutorData(string $tutorUsername): Collection
+    {
+        $tutorUsername = strtoupper($tutorUsername);
+        $allPupils = School::allPupils()->where('tutorUsername', '=', $tutorUsername)->groupBy(['tutorUsername', 'yearGroup']);
+
+        if ($allPupils->isEmpty()) {
+            throw new TutorNotFoundToHaveAnyTutees("Either Tutor not found or Tutor does not have any tutees in the dataset", 404);
+        }
+        $result = [];
+        foreach ($allPupils[$tutorUsername] as $yearGroup => $pupils) {
             foreach (collect($pupils)->sortBy('surname') as $pupil) {
                 $emailAddress = $pupil->schoolEmailAddress;
 

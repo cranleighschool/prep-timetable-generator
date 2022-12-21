@@ -15,4 +15,5 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('house/{house}', [ApiController::class, 'getHouseData']);
+Route::get('tutor/{tutorUsername}', [ApiController::class, 'getTutorData']);
 Route::get('{username}', [ApiController::class, 'getPupilTimetable']);

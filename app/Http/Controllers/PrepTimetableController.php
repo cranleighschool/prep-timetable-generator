@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Exceptions\TutorNotFoundToHaveAnyTutees;
 use App\Http\Requests\SetupRequest;
 use App\Http\Requests\TimetableRequest;
 use App\Logic\GenerateTimetable;
@@ -37,6 +38,35 @@ class PrepTimetableController extends Controller
 
         $data = $api->getHouseData($house);
 
+        return view('house', compact('data'));
+    }
+
+    /**
+     * @param  string  $tutorUsername
+     *
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
+     * @throws \Exception
+     */
+    public function byTutor(string $tutorUsername)
+    {
+        $api = new ApiController();
+        $tutorUsername = strtolower($tutorUsername);
+
+        $validator = Validator::make(['tutorUsername' => $tutorUsername], [
+            'tutorUsername' => [
+                'required',
+                //Rule::in(config('timetable.houses')),
+            ],
+        ]);
+        if ($validator->fails()) {
+            throw new \Exception('Invalid Tutor');
+        }
+
+        try {
+            $data = $api->getTutorData($tutorUsername);
+        } catch (TutorNotFoundToHaveAnyTutees $exception) {
+            abort($exception->getCode(), $exception->getMessage());
+        }
         return view('house', compact('data'));
     }
 
