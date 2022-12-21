@@ -40,9 +40,9 @@ class SetsSeeder extends Seeder
             $this->getData(1, 'Chemistry', GenerateTimetable::THURSDAY),
             $this->getData(1, 'Physics', GenerateTimetable::MONDAY),
 
-            $this->getData(2, 'Biology', GenerateTimetable::TUESDAY),
-            $this->getData(2, 'Chemistry', GenerateTimetable::MONDAY),
-            $this->getData(2, 'Physics', GenerateTimetable::THURSDAY),
+            $this->getData(2, 'Biology', GenerateTimetable::THURSDAY),
+            $this->getData(2, 'Chemistry', GenerateTimetable::TUESDAY),
+            $this->getData(2, 'Physics', GenerateTimetable::MONDAY),
 
             $this->getData(3, 'Biology', GenerateTimetable::TUESDAY),
             $this->getData(3, 'Chemistry', GenerateTimetable::MONDAY),
@@ -65,8 +65,8 @@ class SetsSeeder extends Seeder
             $this->getData(7, 'Physics', GenerateTimetable::THURSDAY),
 
             $this->getData(8, 'Biology', GenerateTimetable::FRIDAY),
-            $this->getData(8, 'Chemistry', GenerateTimetable::THURSDAY),
-            $this->getData(8, 'Physics', GenerateTimetable::MONDAY),
+            $this->getData(8, 'Chemistry', GenerateTimetable::MONDAY),
+            $this->getData(8, 'Physics', GenerateTimetable::THURSDAY),
         ]);
         $this->addSubject('Class Civ', 9, [
             //            'a1' => GenerateTimetable::FRIDAY,
@@ -166,10 +166,10 @@ class SetsSeeder extends Seeder
         $this->setsBySubjectToday('Biology', 10, GenerateTimetable::MONDAY, [
             'T1', 'T2', 'T3',
         ]);
-        $this->setsBySubjectToday('Chemistry', 10, GenerateTimetable::MONDAY, [
+        $this->setsBySubjectToday('Physics', 10, GenerateTimetable::MONDAY, [
             'T4', 'T5', 'D9',
         ]);
-        $this->setsBySubjectToday('Chemistry', 10, GenerateTimetable::TUESDAY, [
+        $this->setsBySubjectToday('Physics', 10, GenerateTimetable::TUESDAY, [
             'T1', 'T2', 'T3',
         ]);
         $this->setsBySubjectToday('Biology', 10, GenerateTimetable::TUESDAY, [
