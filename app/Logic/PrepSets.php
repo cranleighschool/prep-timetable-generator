@@ -245,7 +245,7 @@ trait PrepSets
 
         try {
             if ($yearGroup === 9) {
-                if (($sets['Biology'] == $sets['Physics']) && ($sets['Physics']) == $sets['Chemistry']) {
+                if (($sets['Biology'] == $sets['Physics']) && $sets['Physics'] == $sets['Chemistry']) {
                     $sets['Science'] = $sets['Biology'];
                 }
 
