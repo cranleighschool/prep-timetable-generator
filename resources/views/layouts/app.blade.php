@@ -20,7 +20,7 @@
     <div class="row p-3">
         <div class="col">
             <h1>{{ config('app.name') }}</h1>
-            <p class="lead">This application uses the logic from <a href="{{ asset('Lent Prep Timetable 2022-23.pdf') }}" target="_blank">Mr Hardy's Prep Timetable sheet</a> to auto-populate your
+            <p class="lead">This application uses the logic from <a href="{{ asset('Summer Prep Timetable 2022-23.pdf') }}" target="_blank">Mr Hardy's Prep Timetable sheet</a> to auto-populate your
                 Prep Timetable.</p>
         </div>
     </div>
