@@ -23,10 +23,13 @@ class ApiController
      */
     public function getHouseData(string $house): Collection
     {
-        $allPupils = School::allPupils()->groupBy(['boardingHouse', 'yearGroup']);
+        $allPupils = School::allPupils()->filter(function($item) use ($house) {
+            return $item->boardingHouse == $house;
+        })->groupBy(['yearGroup']);
 
         $result = [];
-        foreach ($allPupils[$house] as $yearGroup => $pupils) {
+
+        foreach ($allPupils as $yearGroup => $pupils) {
             foreach (collect($pupils)->sortBy('surname') as $pupil) {
                 $emailAddress = $pupil->schoolEmailAddress;
 
