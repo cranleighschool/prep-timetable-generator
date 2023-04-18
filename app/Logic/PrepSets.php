@@ -175,7 +175,7 @@ trait PrepSets
             'Music',
             'Theatre Studies',
             'French',
-            'Learning Support'
+            'Learning Support',
         ])) {
             return (int) substr($code, -1, 1);
         }
