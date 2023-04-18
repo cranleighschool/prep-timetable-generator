@@ -24,7 +24,7 @@ class ApiController
      */
     public function getHouseData(string $house): Collection
     {
-        $allPupils = School::allPupils()->filter(function($item) use ($house) {
+        $allPupils = School::allPupils()->filter(function ($item) use ($house) {
             return $item->boardingHouse == $house;
         })->groupBy(['yearGroup']);
 
