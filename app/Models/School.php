@@ -24,7 +24,7 @@ class School extends Model implements Institution
      */
     public static function allPupils(): Collection
     {
-        return Cache::remember('allPupils', now()->addWeek(), function () {
+        return Cache::remember('allPupils', config('cache.time'), function () {
             $isams = new CurrentPupilController(new self());
 
             return $isams->index()->whereIn('yearGroup', [9, 10, 11])->map(function ($pupil) {

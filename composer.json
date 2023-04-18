@@ -11,7 +11,7 @@
         "laravel/framework": "^9.0",
         "laravel/sanctum": "^2.11",
         "laravel/tinker": "^2.5",
-        "spkm/isams": "^3.0"
+        "spkm/isams": "^4.0"
     },
     "require-dev": {
         "fakerphp/faker": "^1.9.1",

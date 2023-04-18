@@ -9,6 +9,7 @@ use App\Logic\PrepSets;
 use App\Models\PrepDay;
 use App\Models\School;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Str;
 
 class ApiController
@@ -33,8 +34,9 @@ class ApiController
             foreach (collect($pupils)->sortBy('surname') as $pupil) {
                 $emailAddress = $pupil->schoolEmailAddress;
 
-                $result[$yearGroup][$pupil->surname.', '.$pupil->forename] = $this->getPupilTimetable(Str::before($emailAddress,
-                    '@'))['timetable'];
+                $result[$yearGroup][$pupil->surname.', '.$pupil->forename] = Cache::remember('getpupiltimetable'.$pupil->schoolEmailAddress, config('cache.time'), function() use ($emailAddress) {
+                    return $this->getPupilTimetable(Str::before($emailAddress, '@'))['timetable'];
+                });
             }
         }
         ksort($result);

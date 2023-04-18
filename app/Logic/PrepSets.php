@@ -175,6 +175,7 @@ trait PrepSets
             'Music',
             'Theatre Studies',
             'French',
+            'Learning Support'
         ])) {
             return (int) substr($code, -1, 1);
         }
@@ -271,7 +272,7 @@ trait PrepSets
      */
     public function getPupilAndSets(): array
     {
-        $sets = Cache::remember('sets_'.$this->pupil->schoolId, now()->addHours(2), function () {
+        $sets = Cache::remember('sets_'.$this->pupil->schoolId, config('cache.time'), function () {
             $timetable = new PupilTimetableController(School::find(1));
 
             return collect($timetable->show($this->pupil->schoolId)['sets'])->pluck('code',
