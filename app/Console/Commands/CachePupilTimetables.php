@@ -36,6 +36,7 @@ class CachePupilTimetables extends Command
      */
     public function handle()
     {
+        $start = now();
 
         $pupils = School::allPupils();
 
@@ -51,6 +52,9 @@ class CachePupilTimetables extends Command
             $this->alert("Completed: ".$pupil->surname.', '.$pupil->forename);
             $bar->advance();
         }
+        $timeToComplete = $start->diffInSeconds(now());
+        $this->newLine(2);
+        $this->comment('Processed in '.$timeToComplete.' seconds');
         return Command::SUCCESS;
     }
 }
