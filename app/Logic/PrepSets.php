@@ -4,6 +4,8 @@ namespace App\Logic;
 
 use App\Exceptions\ZeroSetsFound;
 use App\Http\Controllers\Isams\SubjectsController;
+use App\Logic\SetMappers\Gcses;
+use App\Logic\SetMappers\YearNine;
 use App\Models\School;
 use ErrorException;
 use Exception;
@@ -20,6 +22,7 @@ trait PrepSets
 
     /**
      * @throws Exception
+     * @deprecated Use the YearNine and Gcses classes instead
      */
     private function mapYearNineSets(string $code, string $subject): int|string
     {
@@ -84,127 +87,20 @@ trait PrepSets
     /**
      * @throws Exception
      */
-    private function mapYearTenSets(string $code, $subject): string
-    {
-        // Sciences
-        if (Str::startsWith($code, '10D6')) {
-            // DAS in 6
-            return substr($code, 2, 2);
-        }
-        if (Str::startsWith($code, '10D9')) {
-            // DAS in 9
-            return substr($code, 2, 2);
-        }
-        if (Str::startsWith($code, '10T')) {
-            // Triple Award
-            return substr($code, 2, 2);
-        }
-
-        // GCSE OPTIONS
-        if (Str::startsWith($code, '10A')) {
-            return 'Option A';
-        }
-        if (Str::startsWith($code, '10B')) {
-            return 'Option B';
-        }
-        if (Str::startsWith($code, '10C')) {
-            return 'Option C';
-        }
-        if (Str::startsWith($code, '10D')) {
-            return 'Option D';
-        }
-
-        // MATHS / ENGLISH
-        if (in_array($subject, ['Maths', 'English'])) {
-            // Converts "103/En" to "3"
-            return (int) substr($code, 2, 1);
-        }
-
-        // CMFL
-        if (preg_match('^\A[0-9]{3}/(Fr|Sp)\Z^', $code, $matches)) {
-            return 'CMFL';
-        }
-        if (in_array($subject, [
-            'Greek',
-            'Philosophy',
-
-        ])) {
-            return (int) substr($code, -1, 1);
-        }
-
-        throw new Exception('Something went wrong, could not match year 10 subject: '.$subject);
-    }
-
-    /**
-     * @throws Exception
-     */
-    private function mapYearElevenSets(string $code, string $subject): string
-    {
-        // 2022-09-02 - should be the same as last year's code, nothing change here. (Next year will change)
-
-        $e = explode('-', $code);
-
-        if (Str::endsWith($e[0], 'A')) {
-            return 'Option A';
-        }
-
-        if (Str::endsWith($e[0], 'B')) {
-            return 'Option B';
-        }
-
-        if (Str::endsWith($e[0], 'C')) {
-            return 'Option C';
-        }
-
-        if (Str::endsWith($e[0], 'D')) {
-            return 'Option D';
-        }
-
-        if (preg_match('^\A11-(FR|SP)[0-9]{1}\Z^', $code, $matches)) {
-            return 'CMFL';
-        }
-
-        if (in_array($subject, [
-            'Maths',
-            'Geography',
-            'History',
-            'Biology',
-            'Physics',
-            'Chemistry',
-            'Religious Studies',
-            'Classical Civilisation',
-            'English',
-            'Latin',
-            'Philosophy',
-            'Greek',
-            'Supervised Private Study',
-            'German',
-            'Spanish',
-            'Design Engineering',
-            'Music',
-            'Theatre Studies',
-            'French',
-            'Learning Support',
-        ])) {
-            return (int) substr($code, -1, 1);
-        }
-        throw new Exception('Something went wrong, could not match year 11 subject: '.$subject);
-    }
-
-    /**
-     * @throws Exception
-     */
     public function mapSets(string $code, string $subject): string|int
     {
         if (Str::startsWith($code, '11')) {
             // Year 11 Sets
-            return $this->mapYearElevenSets($code, $subject);
+            return (new Gcses($code, $subject))->handle(11);
         }
         if (Str::startsWith($code, '10')) {
-            return $this->mapYearTenSets($code, $subject);
+            // Year 10 Sets
+            return (new Gcses($code, $subject))->handle(10);
         }
         if (Str::startsWith($code, '9')) {
-            return $this->mapYearNineSets($code, $subject);
+            // Year 9 Sets
+            return (new YearNine($code, $subject))->handle();
+            //return $this->mapYearNineSets($code, $subject);
         }
 
         throw new Exception('Something went wrong, could not match: '.$subject);

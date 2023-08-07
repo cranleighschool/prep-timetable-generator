@@ -12,6 +12,7 @@ use App\Models\PrepDay;
 use ErrorException;
 use Exception;
 use Illuminate\Contracts\Support\Renderable;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
 use Illuminate\Validation\ValidationException;
@@ -22,6 +23,7 @@ class PrepTimetableController extends Controller
 
     /**
      * @throws ValidationException
+     * @throws Exception
      */
     public function byHouse(string $house): Renderable
     {
@@ -45,6 +47,7 @@ class PrepTimetableController extends Controller
 
     /**
      * @throws ValidationException
+     * @throws Exception
      */
     public function byTutor(string $tutorUsername): Renderable
     {
@@ -76,17 +79,19 @@ class PrepTimetableController extends Controller
     }
 
     /**
-     * @throws ZeroSetsFound
      * @throws ErrorException
      */
-    public function setup(SetupRequest $request): Renderable
+    public function setup(SetupRequest $request): Renderable|RedirectResponse
     {
         $yearGroup = $request->yearGroup;
         $days = PrepDay::all();
         $sets = $request->sets;
 
-        $setResults = $this->calculateSets($yearGroup, $sets);
-
+        try {
+            $setResults = $this->calculateSets($yearGroup, $sets);
+        } catch (ZeroSetsFound $exception) {
+            return back()->withErrors("No sets found for {$request->pupil->forename} {$request->pupil->surname}.");
+        }
         $timetable = [];
 
         return view('setup', compact('days', 'request', 'timetable', 'sets', 'yearGroup', 'setResults'));

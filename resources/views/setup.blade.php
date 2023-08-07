@@ -123,11 +123,13 @@
                                            name="optionb"/>
                                     @endif
 
+                                    @if (isset($setResults['Option C']))
                                     <label class="form-label" for="optionc">Option C</label>
                                     <input class="form-control" type="text"
                                            value="{{ old('optionc') ?? $setResults['Option C'] }}"
                                            placeholder="Option C"
                                            name="optionc"/>
+                                    @endif
 
                                         <label class="form-label" for="optionc">Option D</label>
                                         <input class="form-control" type="text"

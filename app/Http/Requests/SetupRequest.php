@@ -35,6 +35,7 @@ class SetupRequest extends FormRequest
             $this->merge([
                 'sets' => $sets,
                 'yearGroup' => (int) $this->pupil->yearGroup,
+                'pupil' => $this->pupil->toArray(),
             ]);
         } catch (PupilNotFound $exception) {
             throw ValidationException::withMessages(['pupil' => 'Pupil not found: '.strtoupper($this->get('username')).'. This is only for lower school students.']);
