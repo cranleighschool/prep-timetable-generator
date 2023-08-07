@@ -22,6 +22,7 @@ trait PrepSets
 
     /**
      * @throws Exception
+     *
      * @deprecated Use the YearNine and Gcses classes instead
      */
     private function mapYearNineSets(string $code, string $subject): int|string

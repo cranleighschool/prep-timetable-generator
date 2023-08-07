@@ -7,8 +7,9 @@ use Illuminate\Support\Str;
 
 class Gcses implements SetMapperInterface
 {
-
-    public function __construct(protected string $code, protected string $subject){}
+    public function __construct(protected string $code, protected string $subject)
+    {
+    }
 
     /**
      * @throws Exception
@@ -52,7 +53,7 @@ class Gcses implements SetMapperInterface
         // MATHS / ENGLISH
         if (in_array($subject, ['Maths', 'English'])) {
             // Converts "103/En" to "3"
-            return (int)substr($code, 2, 1);
+            return (int) substr($code, 2, 1);
         }
 
 //        dd($code);
@@ -65,9 +66,9 @@ class Gcses implements SetMapperInterface
             'Philosophy',
 
         ])) {
-            return (int)substr($code, -1, 1);
+            return (int) substr($code, -1, 1);
         }
 
-        throw new Exception('Something went wrong, could not match year 11 subject: ' . $subject);
+        throw new Exception('Something went wrong, could not match year 11 subject: '.$subject);
     }
 }
