@@ -14,7 +14,7 @@ class YearNine implements SetMapperInterface
     /**
      * @throws Exception
      */
-    public function handle(?int $year = null): int|string
+    public function handle(int $year = null): int|string
     {
         $code = $this->code;
         $subject = $this->subject;
