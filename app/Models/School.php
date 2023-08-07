@@ -53,7 +53,7 @@ class School extends Model implements Institution
 
     /**
      * @param  string  $username
-     * @return \spkm\isams\Wrappers\Pupil
+     * @return Pupil
      */
     public static function getPupil(string $username): Pupil
     {

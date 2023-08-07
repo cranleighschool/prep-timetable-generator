@@ -21,7 +21,7 @@ class SetupRequest extends FormRequest
         return true;
     }
 
-    public function prepareForValidation()
+    public function prepareForValidation(): void
     {
         try {
             $username = $this->get('username');

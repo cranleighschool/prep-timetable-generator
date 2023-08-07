@@ -14,11 +14,11 @@ use spkm\isams\Wrappers\Pupil;
 trait PrepSets
 {
     /**
-     * @var \spkm\isams\Wrappers\Pupil
+     * @var Pupil
      */
     public Pupil $pupil;
 
-    private function mapYearNineSets(string $code, string $subject)
+    private function mapYearNineSets(string $code, string $subject): int|string
     {
         // Latin
         if (in_array($code, ['9A/La3', '9A/La4'])) {
@@ -228,20 +228,20 @@ trait PrepSets
     }
 
     /**
-     * @param  int  $yearGroup
-     * @param  \Illuminate\Support\Collection  $sets
+     * @param int $yearGroup
+     * @param Collection $sets
      * @return array
+     * @throws \ErrorException
+     * @throws ZeroSetsFound
      */
-    private function calculateSets(int $yearGroup, Collection $sets)
+    private function calculateSets(int $yearGroup, Collection $sets): array
     {
-        //dump($sets);
         $sets = $sets->flip();
         $sets = $sets->map([$this, 'mapSets']);
-        //dd($sets);
         $unsets = [];
 
         if ($sets->isEmpty()) {
-            throw new ZeroSetsFound($this->pupil->fullName.' has no sets assigned');
+            throw new ZeroSetsFound('no sets assigned');
         }
 
         try {
@@ -257,11 +257,10 @@ trait PrepSets
 
             $matchSets = $this->matchSets($sets, $unsets);
         } catch (\ErrorException $error) {
-            throw new \ErrorException($error->getMessage().' on pupil: '.$this->pupil->fullName);
+            throw new \ErrorException($error->getMessage().' on pupil');
         }
 
         ksort($matchSets);
-        //dd($matchSets);
         return $matchSets;
     }
 
@@ -273,7 +272,7 @@ trait PrepSets
     public function getPupilAndSets(): array
     {
         $sets = Cache::remember('sets_'.$this->pupil->schoolId, config('cache.time'), function () {
-            $timetable = new PupilTimetableController(School::find(1));
+            $timetable = new PupilTimetableController(School::first());
 
             return collect($timetable->show($this->pupil->schoolId)['sets'])->pluck('code',
                 'subjectId')->unique()->toArray();
@@ -286,14 +285,14 @@ trait PrepSets
      * @param  string  $username
      * @return void
      */
-    public function setPupil(string $username)
+    public function setPupil(string $username): void
     {
         $this->pupil = School::getPupil($username);
     }
 
     /**
      * @param  array  $sets
-     * @return \Illuminate\Support\Collection
+     * @return Collection
      */
     public static function getSets(array $sets): Collection
     {
