@@ -15,11 +15,6 @@ class SubjectsSet extends Model
      */
     protected $table = 'set_subject_days';
 
-    /**
-     * @param  string  $code
-     * @param  bool  $raw
-     * @return string
-     */
     public static function label(string $code, bool $raw = false): string
     {
         $label = '';

@@ -18,10 +18,6 @@ class ApiController
 {
     use PrepSets;
 
-    /**
-     * @param  string  $house
-     * @return Collection
-     */
     public function getHouseData(string $house): Collection
     {
         $allPupils = School::allPupils()->filter(function ($item) use ($house) {
@@ -45,9 +41,6 @@ class ApiController
     }
 
     /**
-     * @param  string  $tutorUsername
-     * @return Collection
-     *
      * @throws ValidationException|TutorNotFoundToHaveAnyTutees
      */
     public function getTutorData(string $tutorUsername): Collection
@@ -73,9 +66,6 @@ class ApiController
     }
 
     /**
-     * @param  string  $username
-     * @return Collection
-     *
      * @throws ValidationException
      */
     public function getPupilTimetable(string $username): Collection
@@ -105,10 +95,6 @@ class ApiController
     }
 
     /**
-     * @param  int  $yearGroup
-     * @param  array  $setResults
-     * @return object
-     *
      * @throws ErrorException
      */
     private function sanitizeVariables(int $yearGroup, array $setResults): object

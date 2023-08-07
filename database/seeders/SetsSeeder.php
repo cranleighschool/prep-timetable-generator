@@ -21,9 +21,6 @@ class SetsSeeder extends Seeder
         $this->upperFifth();
     }
 
-    /**
-     * @return void
-     */
     private function fourthForm(): void
     {
         $this->setsBySubjectToday('English', 9, GenerateTimetable::TUESDAY, [
@@ -108,13 +105,6 @@ class SetsSeeder extends Seeder
         ]);
     }
 
-    /**
-     * @param  string  $set
-     * @param  string  $subject
-     * @param  string  $day
-     * @param  int  $yearGroup
-     * @return array
-     */
     private function getData(string $set, string $subject, string $day, int $yearGroup = 9): array
     {
         $day_id = PrepDay::where('day', $day)->first()->id;
@@ -127,12 +117,6 @@ class SetsSeeder extends Seeder
         ];
     }
 
-    /**
-     * @param  string  $subject
-     * @param  int  $yearGroup
-     * @param  array  $array
-     * @return void
-     */
     private function addSubject(string $subject, int $yearGroup, array $array): void
     {
         foreach ($array as $set => $day) {
@@ -142,13 +126,6 @@ class SetsSeeder extends Seeder
         }
     }
 
-    /**
-     * @param  string  $subject
-     * @param  int  $yearGroup
-     * @param  string  $day
-     * @param  array  $sets
-     * @return void
-     */
     private function setsBySubjectToday(string $subject, int $yearGroup, string $day, array $sets): void
     {
         $array = [];
@@ -158,9 +135,6 @@ class SetsSeeder extends Seeder
         $this->addSubject($subject, $yearGroup, $array);
     }
 
-    /**
-     * @return void
-     */
     private function lowerFifth(): void
     {
         $this->setsBySubjectToday('Biology', 10, GenerateTimetable::MONDAY, [
@@ -204,9 +178,6 @@ class SetsSeeder extends Seeder
         ]);
     }
 
-    /**
-     * @return void
-     */
     private function upperFifth(): void
     {
         // Year 11 Science Sets

@@ -18,28 +18,14 @@ class GenerateTimetable
 
     public const FRIDAY = 'Friday';
 
-    /**
-     * @var array
-     */
     private array $timetable = [];
-    /**
-     * @var int
-     */
+
     private int $yearGroup;
-    /**
-     * @var \Illuminate\Http\Request|\stdClass
-     */
+
     private Request|\stdClass $request;
-    /**
-     * @var \Illuminate\Support\Collection
-     */
+
     private Collection $days;
 
-    /**
-     * @param  int  $yearGroup
-     * @param  \Illuminate\Http\Request|\stdClass  $request
-     * @param  \Illuminate\Support\Collection  $days
-     */
     public function __construct(int $yearGroup, Request|\stdClass $request, Collection $days)
     {
         $this->days = $days;
@@ -47,9 +33,6 @@ class GenerateTimetable
         $this->request = $request;
     }
 
-    /**
-     * @return array
-     */
     public function getTimetable(): array
     {
         $timetable = match ($this->yearGroup) {
@@ -60,25 +43,17 @@ class GenerateTimetable
         };
 
         return collect($timetable)->map(function (array $day) {
-            return collect($day)->reject(function (string|null $subject) {
+            return collect($day)->reject(function (?string $subject) {
                 return is_null($subject);
             })->toArray();
         })->toArray();
     }
 
-    /**
-     * @param  string  $day
-     * @param  string|null  $subject
-     * @return void
-     */
-    private function addToTimetable(string $day, string|null $subject): void
+    private function addToTimetable(string $day, ?string $subject): void
     {
         array_push($this->timetable[$day], $subject);
     }
 
-    /**
-     * @return array
-     */
     private function year9Timetable(): array
     {
         $request = $this->request;
@@ -132,9 +107,6 @@ class GenerateTimetable
         return $this->timetable;
     }
 
-    /**
-     * @return array
-     */
     private function year10Timetable(): array
     {
         $request = $this->request;
@@ -182,9 +154,6 @@ class GenerateTimetable
         return $this->timetable;
     }
 
-    /**
-     * @return array
-     */
     private function year11Timetable(): array
     {
         $request = $this->request;

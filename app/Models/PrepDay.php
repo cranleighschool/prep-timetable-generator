@@ -4,10 +4,6 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Http\Request;
-use Illuminate\Support\Str;
-use Illuminate\Validation\ValidationException;
-use phpDocumentor\Reflection\Types\Self_;
 
 class PrepDay extends Model
 {
@@ -17,6 +13,7 @@ class PrepDay extends Model
      * @var bool
      */
     public $timestamps = false;
+
     /**
      * @var string[]
      */

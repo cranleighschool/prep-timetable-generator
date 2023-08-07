@@ -21,9 +21,6 @@ class PrepTimetableController extends Controller
     use PrepSets;
 
     /**
-     * @param  string  $house
-     * @return Renderable
-     *
      * @throws ValidationException
      */
     public function byHouse(string $house): Renderable
@@ -47,9 +44,6 @@ class PrepTimetableController extends Controller
     }
 
     /**
-     * @param  string  $tutorUsername
-     * @return Renderable
-     *
      * @throws ValidationException
      */
     public function byTutor(string $tutorUsername): Renderable
@@ -76,18 +70,12 @@ class PrepTimetableController extends Controller
         return view('house', compact('data'));
     }
 
-    /**
-     * @return Renderable
-     */
     public function home(): Renderable
     {
         return view('start');
     }
 
     /**
-     * @param  SetupRequest  $request
-     * @return Renderable
-     *
      * @throws ZeroSetsFound
      * @throws ErrorException
      */
@@ -105,10 +93,6 @@ class PrepTimetableController extends Controller
     }
 
     /**
-     * @param  int  $yearGroup
-     * @param  TimetableRequest  $request
-     * @return Renderable
-     *
      * @throws \spkm\isams\Exceptions\ValidationException
      */
     public function generate(int $yearGroup, TimetableRequest $request): Renderable

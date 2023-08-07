@@ -16,9 +16,6 @@ use spkm\isams\Wrappers\Pupil;
 
 trait PrepSets
 {
-    /**
-     * @var Pupil
-     */
     public Pupil $pupil;
 
     /**
@@ -195,10 +192,6 @@ trait PrepSets
     }
 
     /**
-     * @param  string  $code
-     * @param  string  $subject
-     * @return int|string
-     *
      * @throws Exception
      */
     public function mapSets(string $code, string $subject): string|int
@@ -217,11 +210,6 @@ trait PrepSets
         throw new Exception('Something went wrong, could not match: '.$subject);
     }
 
-    /**
-     * @param  Collection  $sets
-     * @param  array  $unsets
-     * @return array
-     */
     private function matchSets(Collection $sets, array $unsets = []): array
     {
         $matchSets = [];
@@ -240,10 +228,6 @@ trait PrepSets
     }
 
     /**
-     * @param  int  $yearGroup
-     * @param  Collection  $sets
-     * @return array
-     *
      * @throws ErrorException
      * @throws ZeroSetsFound
      */
@@ -279,8 +263,6 @@ trait PrepSets
     }
 
     /**
-     * @return array
-     *
      * @throws ValidationException
      */
     public function getPupilAndSets(): array
@@ -295,19 +277,11 @@ trait PrepSets
         return $sets;
     }
 
-    /**
-     * @param  string  $username
-     * @return void
-     */
     public function setPupil(string $username): void
     {
         $this->pupil = School::getPupil($username);
     }
 
-    /**
-     * @param  array  $sets
-     * @return Collection
-     */
     public static function getSets(array $sets): Collection
     {
         return Cache::rememberForever('sets'.serialize($sets), function () use ($sets) {

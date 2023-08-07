@@ -20,9 +20,9 @@ class CreateSetSubjectDaysTable extends Migration
             $table->tinyInteger('nc_year')->default(9);
 
             $table->foreign('day_id')
-                  ->references('id')
-                  ->on('prep_days')
-                  ->onDelete('restrict');
+                ->references('id')
+                ->on('prep_days')
+                ->onDelete('restrict');
             $table->unique(['set', 'subject', 'day_id', 'nc_year']);
         });
     }

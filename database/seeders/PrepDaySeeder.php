@@ -3,7 +3,6 @@
 namespace Database\Seeders;
 
 use App\Models\PrepDay;
-use Carbon\Carbon;
 use Illuminate\Database\Seeder;
 
 class PrepDaySeeder extends Seeder

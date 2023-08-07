@@ -16,9 +16,6 @@ class ResetSubjectSetDays extends Command
      */
     protected $signature = 'timetable:reset';
 
-    /**
-     * @var string
-     */
     protected string $table;
 
     public function __construct()

@@ -19,9 +19,6 @@ class School extends Model implements Institution
 {
     use HasFactory;
 
-    /**
-     * @return \Illuminate\Support\Collection
-     */
     public static function allPupils(): Collection
     {
         return Cache::remember('allPupils', config('cache.time'), function () {
@@ -51,10 +48,6 @@ class School extends Model implements Institution
         return $return->schoolInitials;
     }
 
-    /**
-     * @param  string  $username
-     * @return Pupil
-     */
     public static function getPupil(string $username): Pupil
     {
         $allPupils = self::allPupils();
@@ -71,9 +64,6 @@ class School extends Model implements Institution
         });
     }
 
-    /**
-     * @return string
-     */
     public function getConfigName(): string
     {
         return 'cranleighSchool';
