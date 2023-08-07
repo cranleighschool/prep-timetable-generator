@@ -51,7 +51,7 @@ class CachePupilTimetables extends Command
                     return $this->api->getPupilTimetable(Str::before($emailAddress, '@'))['timetable'];
                 });
 
-            $this->alert("Completed: ".$pupil->surname.', '.$pupil->forename);
+            $this->alert('Completed: '.$pupil->surname.', '.$pupil->forename);
             $this->newLine();
 
             $bar->advance();
