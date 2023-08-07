@@ -5,9 +5,12 @@ namespace App\Logic;
 use App\Exceptions\ZeroSetsFound;
 use App\Http\Controllers\Isams\SubjectsController;
 use App\Models\School;
+use ErrorException;
+use Exception;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Str;
+use Illuminate\Validation\ValidationException;
 use spkm\isams\Controllers\PupilTimetableController;
 use spkm\isams\Wrappers\Pupil;
 
@@ -18,6 +21,9 @@ trait PrepSets
      */
     public Pupil $pupil;
 
+    /**
+     * @throws Exception
+     */
     private function mapYearNineSets(string $code, string $subject): int|string
     {
         // Latin
@@ -75,9 +81,12 @@ trait PrepSets
             return (int) substr($code, -1, 1);
         }
 
-        throw new \Exception('Something went wrong, could not match year 9 subject: '.$subject);
+        throw new Exception('Something went wrong, could not match year 9 subject: '.$subject);
     }
 
+    /**
+     * @throws Exception
+     */
     private function mapYearTenSets(string $code, $subject): string
     {
         // Sciences
@@ -126,12 +135,15 @@ trait PrepSets
             return (int) substr($code, -1, 1);
         }
 
-        throw new \Exception('Something went wrong, could not match year 10 subject: '.$subject);
+        throw new Exception('Something went wrong, could not match year 10 subject: '.$subject);
     }
 
+    /**
+     * @throws Exception
+     */
     private function mapYearElevenSets(string $code, string $subject): string
     {
-        // 2022-09-02 - should be the same as last years code, nothing change here. (Next year will change)
+        // 2022-09-02 - should be the same as last year's code, nothing change here. (Next year will change)
 
         $e = explode('-', $code);
 
@@ -179,7 +191,7 @@ trait PrepSets
         ])) {
             return (int) substr($code, -1, 1);
         }
-        throw new \Exception('Something went wrong, could not match year 11 subject: '.$subject);
+        throw new Exception('Something went wrong, could not match year 11 subject: '.$subject);
     }
 
     /**
@@ -187,7 +199,7 @@ trait PrepSets
      * @param  string  $subject
      * @return int|string
      *
-     * @throws \Exception
+     * @throws Exception
      */
     public function mapSets(string $code, string $subject): string|int
     {
@@ -202,7 +214,7 @@ trait PrepSets
             return $this->mapYearNineSets($code, $subject);
         }
 
-        throw new \Exception('Something went wrong, could not match: '.$subject);
+        throw new Exception('Something went wrong, could not match: '.$subject);
     }
 
     /**
@@ -231,7 +243,7 @@ trait PrepSets
      * @param int $yearGroup
      * @param Collection $sets
      * @return array
-     * @throws \ErrorException
+     * @throws ErrorException
      * @throws ZeroSetsFound
      */
     private function calculateSets(int $yearGroup, Collection $sets): array
@@ -256,8 +268,8 @@ trait PrepSets
             }
 
             $matchSets = $this->matchSets($sets, $unsets);
-        } catch (\ErrorException $error) {
-            throw new \ErrorException($error->getMessage().' on pupil');
+        } catch (ErrorException $error) {
+            throw new ErrorException($error->getMessage().' on pupil');
         }
 
         ksort($matchSets);
@@ -267,7 +279,7 @@ trait PrepSets
     /**
      * @return array
      *
-     * @throws \Illuminate\Validation\ValidationException
+     * @throws ValidationException
      */
     public function getPupilAndSets(): array
     {
@@ -298,14 +310,12 @@ trait PrepSets
     {
         return Cache::rememberForever('sets'.serialize($sets), function () use ($sets) {
             $subjectController = new SubjectsController(new School());
-            $sets = collect($sets)->map(function ($item, $key) use ($subjectController) {
+            return collect($sets)->map(function ($item, $key) use ($subjectController) {
                 $subject = $subjectController->show($key);
                 $subject['set'] = $item;
 
                 return $subject;
             })->pluck('name', 'set');
-
-            return $sets;
         });
     }
 }

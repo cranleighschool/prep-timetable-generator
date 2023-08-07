@@ -3,25 +3,30 @@
 namespace App\Http\Controllers;
 
 use App\Exceptions\TutorNotFoundToHaveAnyTutees;
+use App\Exceptions\ZeroSetsFound;
 use App\Http\Requests\SetupRequest;
 use App\Http\Requests\TimetableRequest;
 use App\Logic\GenerateTimetable;
 use App\Logic\PrepSets;
 use App\Models\PrepDay;
+use ErrorException;
+use Exception;
+use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
+use Illuminate\Validation\ValidationException;
 
 class PrepTimetableController extends Controller
 {
     use PrepSets;
 
     /**
-     * @param  string  $house
-     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
+     * @param string $house
+     * @return Renderable
      *
-     * @throws \Exception
+     * @throws ValidationException
      */
-    public function byHouse(string $house)
+    public function byHouse(string $house): Renderable
     {
         $api = new ApiController();
         $house = ucfirst($house);
@@ -33,7 +38,7 @@ class PrepTimetableController extends Controller
             ],
         ]);
         if ($validator->fails()) {
-            throw new \Exception('Invalid House');
+            throw new Exception('Invalid House');
         }
 
         $data = $api->getHouseData($house);
@@ -42,12 +47,12 @@ class PrepTimetableController extends Controller
     }
 
     /**
-     * @param  string  $tutorUsername
-     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
+     * @param string $tutorUsername
+     * @return Renderable
      *
-     * @throws \Exception
+     * @throws ValidationException
      */
-    public function byTutor(string $tutorUsername)
+    public function byTutor(string $tutorUsername): Renderable
     {
         $api = new ApiController();
         $tutorUsername = strtolower($tutorUsername);
@@ -59,7 +64,7 @@ class PrepTimetableController extends Controller
             ],
         ]);
         if ($validator->fails()) {
-            throw new \Exception('Invalid Tutor');
+            throw new Exception('Invalid Tutor');
         }
 
         try {
@@ -72,18 +77,20 @@ class PrepTimetableController extends Controller
     }
 
     /**
-     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
+     * @return Renderable
      */
-    public function home()
+    public function home(): Renderable
     {
         return view('start');
     }
 
     /**
-     * @param  \App\Http\Requests\SetupRequest  $request
-     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
+     * @param SetupRequest $request
+     * @return Renderable
+     * @throws ZeroSetsFound
+     * @throws ErrorException
      */
-    public function setup(SetupRequest $request)
+    public function setup(SetupRequest $request): Renderable
     {
         $yearGroup = $request->yearGroup;
         $days = PrepDay::all();
@@ -97,11 +104,12 @@ class PrepTimetableController extends Controller
     }
 
     /**
-     * @param  int  $yearGroup
-     * @param  \App\Http\Requests\TimetableRequest  $request
-     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
+     * @param int $yearGroup
+     * @param TimetableRequest $request
+     * @return Renderable
+     * @throws \spkm\isams\Exceptions\ValidationException
      */
-    public function generate(int $yearGroup, TimetableRequest $request)
+    public function generate(int $yearGroup, TimetableRequest $request): Renderable
     {
         $days = PrepDay::all();
         $yearGroup = $request->yearGroup;

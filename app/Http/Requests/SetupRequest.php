@@ -21,6 +21,9 @@ class SetupRequest extends FormRequest
         return true;
     }
 
+    /**
+     * @throws ValidationException
+     */
     public function prepareForValidation(): void
     {
         try {
@@ -34,7 +37,7 @@ class SetupRequest extends FormRequest
                 'yearGroup' => (int) $this->pupil->yearGroup,
             ]);
         } catch (PupilNotFound $exception) {
-            throw ValidationException::withMessages(['pupil' => 'Pupil not found: '.strtoupper($username).'. This is only for lower school students.']);
+            throw ValidationException::withMessages(['pupil' => 'Pupil not found: '.strtoupper($this->get('username')).'. This is only for lower school students.']);
         }
     }
 
@@ -43,7 +46,7 @@ class SetupRequest extends FormRequest
      *
      * @return array
      */
-    public function rules()
+    public function rules(): array
     {
         return [
             'username' => 'required|string',

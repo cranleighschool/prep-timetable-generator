@@ -8,9 +8,11 @@ use App\Logic\GenerateTimetable;
 use App\Logic\PrepSets;
 use App\Models\PrepDay;
 use App\Models\School;
+use ErrorException;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Str;
+use Illuminate\Validation\ValidationException;
 
 class ApiController
 {
@@ -18,9 +20,8 @@ class ApiController
 
     /**
      * @param  string  $house
-     * @return \Illuminate\Support\Collection
+     * @return Collection
      *
-     * @throws \Illuminate\Validation\ValidationException
      */
     public function getHouseData(string $house): Collection
     {
@@ -40,16 +41,14 @@ class ApiController
             }
         }
         ksort($result);
-        $result = collect($result);
-
-        return $result;
+        return collect($result);
     }
 
     /**
      * @param  string  $tutorUsername
-     * @return \Illuminate\Support\Collection
+     * @return Collection
      *
-     * @throws \Illuminate\Validation\ValidationException|\App\Exceptions\TutorNotFoundToHaveAnyTutees
+     * @throws ValidationException|TutorNotFoundToHaveAnyTutees
      */
     public function getTutorData(string $tutorUsername): Collection
     {
@@ -69,16 +68,14 @@ class ApiController
             }
         }
         ksort($result);
-        $result = collect($result);
-
-        return $result;
+        return collect($result);
     }
 
     /**
      * @param  string  $username
      * @return Collection
      *
-     * @throws \Illuminate\Validation\ValidationException
+     * @throws ValidationException
      */
     public function getPupilTimetable(string $username): Collection
     {
@@ -107,9 +104,10 @@ class ApiController
     }
 
     /**
-     * @param  int  $yearGroup
-     * @param  array  $setResults
+     * @param int $yearGroup
+     * @param array $setResults
      * @return object
+     * @throws ErrorException
      */
     private function sanitizeVariables(int $yearGroup, array $setResults): object
     {
@@ -139,8 +137,8 @@ class ApiController
                 'chemistry_set' => $setResults['Chemistry'] ?? null,
                 'physics_set' => $setResults['Physics'] ?? null,
             ], $output);
-        } catch (\ErrorException $errorException) {
-            throw new \ErrorException($errorException->getMessage().' on pupil: '.$this->pupil->fullName);
+        } catch (ErrorException $errorException) {
+            throw new ErrorException($errorException->getMessage().' on pupil: '.$this->pupil->fullName);
         }
     }
 }
