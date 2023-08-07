@@ -243,6 +243,7 @@ trait PrepSets
      * @param  int  $yearGroup
      * @param  Collection  $sets
      * @return array
+     *
      * @throws ErrorException
      * @throws ZeroSetsFound
      */
@@ -311,6 +312,7 @@ trait PrepSets
     {
         return Cache::rememberForever('sets'.serialize($sets), function () use ($sets) {
             $subjectController = new SubjectsController(new School());
+
             return collect($sets)->map(function ($item, $key) use ($subjectController) {
                 $subject = $subjectController->show($key);
                 $subject['set'] = $item;

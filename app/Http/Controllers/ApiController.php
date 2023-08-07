@@ -21,7 +21,6 @@ class ApiController
     /**
      * @param  string  $house
      * @return Collection
-     *
      */
     public function getHouseData(string $house): Collection
     {
@@ -41,6 +40,7 @@ class ApiController
             }
         }
         ksort($result);
+
         return collect($result);
     }
 
@@ -68,6 +68,7 @@ class ApiController
             }
         }
         ksort($result);
+
         return collect($result);
     }
 
@@ -104,9 +105,10 @@ class ApiController
     }
 
     /**
-     * @param int $yearGroup
-     * @param array $setResults
+     * @param  int  $yearGroup
+     * @param  array  $setResults
      * @return object
+     *
      * @throws ErrorException
      */
     private function sanitizeVariables(int $yearGroup, array $setResults): object

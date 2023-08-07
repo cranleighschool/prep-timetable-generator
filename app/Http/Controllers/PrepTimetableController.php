@@ -21,7 +21,7 @@ class PrepTimetableController extends Controller
     use PrepSets;
 
     /**
-     * @param string $house
+     * @param  string  $house
      * @return Renderable
      *
      * @throws ValidationException
@@ -47,7 +47,7 @@ class PrepTimetableController extends Controller
     }
 
     /**
-     * @param string $tutorUsername
+     * @param  string  $tutorUsername
      * @return Renderable
      *
      * @throws ValidationException
@@ -85,8 +85,9 @@ class PrepTimetableController extends Controller
     }
 
     /**
-     * @param SetupRequest $request
+     * @param  SetupRequest  $request
      * @return Renderable
+     *
      * @throws ZeroSetsFound
      * @throws ErrorException
      */
@@ -104,9 +105,10 @@ class PrepTimetableController extends Controller
     }
 
     /**
-     * @param int $yearGroup
-     * @param TimetableRequest $request
+     * @param  int  $yearGroup
+     * @param  TimetableRequest  $request
      * @return Renderable
+     *
      * @throws \spkm\isams\Exceptions\ValidationException
      */
     public function generate(int $yearGroup, TimetableRequest $request): Renderable
