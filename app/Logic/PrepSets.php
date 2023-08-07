@@ -228,9 +228,10 @@ trait PrepSets
     }
 
     /**
-     * @param int $yearGroup
-     * @param Collection $sets
+     * @param  int  $yearGroup
+     * @param  Collection  $sets
      * @return array
+     *
      * @throws \ErrorException
      * @throws ZeroSetsFound
      */
@@ -261,6 +262,7 @@ trait PrepSets
         }
 
         ksort($matchSets);
+
         return $matchSets;
     }
 
