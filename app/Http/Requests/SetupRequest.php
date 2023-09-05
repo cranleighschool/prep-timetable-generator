@@ -38,7 +38,8 @@ class SetupRequest extends FormRequest
                 'pupil' => $this->pupil->toArray(),
             ]);
         } catch (PupilNotFound $exception) {
-            throw ValidationException::withMessages(['pupil' => 'Pupil not found: '.strtoupper($this->get('username')).'. This is only for lower school students.']);
+            throw ValidationException::withMessages([
+                'pupil' => 'Pupil not found: '.strtoupper($this->get('username')).'. Please double check the username, and ensure that they are in the Lower School (Year 9, 10 or 11).']);
         }
     }
 
