@@ -38,8 +38,6 @@ class TimetableRequest extends FormRequest
                 }
             }
         }
-
-
     }
 
     /**
@@ -67,8 +65,8 @@ class TimetableRequest extends FormRequest
         return [
             'classciv_set.min' => 'That looks like an incorrect Classics Set.',
             'classciv_set.max' => 'That looks like an incorrect Classics Set.',
-            '*.min' => 'That looks like an incorrect ' . ucwords(':attribute') . ' number.',
-            '*.max' => 'That looks like an incorrect ' . ucwords(':attribute') . ' number.',
+            '*.min' => 'That looks like an incorrect '.ucwords(':attribute').' number.',
+            '*.max' => 'That looks like an incorrect '.ucwords(':attribute').' number.',
             'maths_set' => 'Looks like an invalid Maths Set.',
         ];
     }
