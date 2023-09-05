@@ -25,8 +25,6 @@ class ApiController
      * This is a description of what this method does!
      *
      * @response JsonResponse
-     *
-     * @return JsonResponse
      */
     public function getHouseData(string $house): JsonResponse
     {
@@ -78,9 +76,6 @@ class ApiController
     }
 
     /**
-     * @param  string  $username
-     * @return JsonResponse
-     *
      * @throws ErrorException
      * @throws ValidationException
      *
