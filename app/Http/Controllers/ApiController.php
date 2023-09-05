@@ -20,13 +20,13 @@ class ApiController
     use PrepSets;
 
     /**
-     * Get House Data
+     * Get House Data.
      *
      * This is a description of what this method does!
      *
-     * @param  string  $house The name of the house (North, Cubitt, West, South, East)
-     *
      * @response JsonResponse
+     *
+     * @return JsonResponse
      */
     public function getHouseData(string $house): JsonResponse
     {
@@ -78,6 +78,9 @@ class ApiController
     }
 
     /**
+     * @param  string  $username
+     * @return JsonResponse
+     *
      * @throws ErrorException
      * @throws ValidationException
      *
