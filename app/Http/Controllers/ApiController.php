@@ -21,13 +21,16 @@ class ApiController
     use PrepSets;
 
     /**
-     * Get House Data
+     * Get House Data.
      *
      * This is a description of what this method does!
-     * @param string $house The name of the house (North, Cubitt, West, South, East)
+     *
+     * @param  string  $house  The name of the house (North, Cubitt, West, South, East)
+     *
      * @response JsonResponse
+     *
      * @return JsonResponse
- */
+     */
     public function getHouseData(string $house): JsonResponse
     {
         $allPupils = School::allPupils()->filter(function ($item) use ($house) {
@@ -51,8 +54,9 @@ class ApiController
     }
 
     /**
+     * @param  string  $tutorUsername  The username of the staff tutor
+     *
      * @throws ValidationException|TutorNotFoundToHaveAnyTutees
-     * @param string $tutorUsername The username of the staff tutor
      */
     public function getTutorData(string $tutorUsername): JsonResponse
     {
@@ -77,10 +81,12 @@ class ApiController
     }
 
     /**
-     * @param string $username
+     * @param  string  $username
      * @return JsonResponse
+     *
      * @throws ErrorException
      * @throws ValidationException
+     *
      * @response PupilTimetableResource
      */
     public function getPupilTimetable(string $username): JsonResponse
@@ -99,6 +105,7 @@ class ApiController
                 }),
             ]);
         }
+
         return response()->json(new PupilTimetableResource([
             'yearGroup' => $yearGroup,
             'fields' => $request,
