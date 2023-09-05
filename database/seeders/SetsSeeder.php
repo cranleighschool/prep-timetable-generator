@@ -152,7 +152,7 @@ class SetsSeeder extends Seeder
             'T4', 'T5',
         ]);
         $this->setsBySubjectToday('Chemistry', 10, GenerateTimetable::TUESDAY, [
-            'T1', 'T2', 'T3'
+            'T1', 'T2', 'T3',
         ]);
 
         $this->setsBySubjectToday('Physics', 10, GenerateTimetable::WEDNESDAY, [
@@ -160,7 +160,7 @@ class SetsSeeder extends Seeder
         ]);
 
         $this->setsBySubjectToday('Biology', 10, GenerateTimetable::THURSDAY, [
-            'T1', 'T2', 'T3', 'D6', 'D92'
+            'T1', 'T2', 'T3', 'D6', 'D92',
         ]);
         $this->setsBySubjectToday('Chemistry', 10, GenerateTimetable::THURSDAY, [
             'T1', 'T2', 'T3', 'T4', 'T5', 'D91',
@@ -173,7 +173,7 @@ class SetsSeeder extends Seeder
     private function upperFifth(): void
     {
         $this->setsBySubjectToday('Biology', 11, GenerateTimetable::MONDAY, [
-            'D6'
+            'D6',
         ]);
         $this->setsBySubjectToday('Biology', 11, GenerateTimetable::WEDNESDAY, [
             'T4', 'T5', 'D9',
@@ -210,7 +210,7 @@ class SetsSeeder extends Seeder
             'T4', 'T5', 'D9',
         ]);
         $this->setsBySubjectToday('Chemistry', 11, GenerateTimetable::FRIDAY, [
-            'D6'
+            'D6',
         ]);
         $this->setsBySubjectToday('Physics', 11, GenerateTimetable::FRIDAY, [
             'T1', 'T2', 'T3',
