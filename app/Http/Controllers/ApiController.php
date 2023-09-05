@@ -54,7 +54,7 @@ class ApiController
     }
 
     /**
-     * @param  string  $tutorUsername The username of the staff tutor
+     * @param  string  $tutorUsername  The username of the staff tutor
      *
      * @throws ValidationException|TutorNotFoundToHaveAnyTutees
      */
