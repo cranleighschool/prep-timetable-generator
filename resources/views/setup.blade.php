@@ -20,9 +20,10 @@
             <div class="card">
                 <div class="card-body">
                     <h5 class="card-title">Welcome {{ $request->pupil->preferredName }}!</h5>
-                    <p class="card-text"> You have {{ count($request->sets) }} subjects. Below in the green labels
-                        you'll see which set you are in for each subject. Use this information to fill in the form
-                        below, then you can generate your prep timetable!</p>
+                    <p class="card-text"> You have {{ count($request->sets) }} subjects. Below
+                        you'll see which set you are in for each subject. Correct anything you feel you need to in the
+                        form,
+                        then you can generate your prep timetable!</p>
                 </div>
             </div>
         </div>
@@ -58,7 +59,7 @@
                         <div class="row p-3">
                             <div class="row">
                                 <div class="col">
-                                    <h2>Fill in the details below</h2>
+                                    <h2>Double check the details below</h2>
                                 </div>
                             </div>
                             <div class="row">
@@ -82,11 +83,11 @@
                                         @endforeach
                                     @endif
                                     @if ($yearGroup===9)
-                                            <label class="form-label" for="english_set">English Set</label>
-                                            <input required="required" type="text" class="form-control"
-                                                   value="{{ old('english_set') ?? $setResults['English'] }}"
-                                                   placeholder="English Set"
-                                                   name="english_set" id="english_set"/>
+                                        <label class="form-label" for="english_set">English Set</label>
+                                        <input required="required" type="text" class="form-control"
+                                               value="{{ old('english_set') ?? $setResults['English'] }}"
+                                               placeholder="English Set"
+                                               name="english_set" id="english_set"/>
 
                                         <label class="form-label" for="humanities">Humanities Set (Geog, Hist,
                                             RS)</label>
@@ -116,52 +117,62 @@
                                            placeholder="Option A" name="optiona"/>
 
                                     @if (isset($setResults['Option B']))
-                                    <label class="form-label" for="optionb">Option B</label>
-                                    <input class="form-control" type="text"
-                                           value="{{ old('optionb') ?? $setResults['Option B'] }}"
-                                           placeholder="Option B"
-                                           name="optionb"/>
+                                        <label class="form-label" for="optionb">Option B</label>
+                                        <input class="form-control" type="text"
+                                               value="{{ old('optionb') ?? $setResults['Option B'] }}"
+                                               placeholder="Option B"
+                                               name="optionb"/>
                                     @endif
 
                                     @if (isset($setResults['Option C']))
-                                    <label class="form-label" for="optionc">Option C</label>
-                                    <input class="form-control" type="text"
-                                           value="{{ old('optionc') ?? $setResults['Option C'] }}"
-                                           placeholder="Option C"
-                                           name="optionc"/>
-                                    @endif
-
-                                        <label class="form-label" for="optionc">Option D</label>
+                                        <label class="form-label" for="optionc">Option C</label>
                                         <input class="form-control" type="text"
-                                               value="{{ old('optiond') ?? ($setResults['Option D'] ?? '') }}"
-                                               placeholder="Option D"
-                                               name="optiond"/>
-
-                                </div>
-                                <div class="col-md">
-                                    <label class="form-label" for="cmlf">Modern Foreign Language</label>
-                                    <input class="form-control" type="text"
-                                           value="{{ old('cmfl') ?? $setResults['CMFL'] ?? null}}"
-                                           placeholder="CMFL"
-                                           name="cmfl"/>
-
-                                    @if ($yearGroup == 9)
-                                        <label class="form-label" for="latin">
-                                            <span class="">Do you do Latin?</span>
-                                            <select class="form-select mt-1 block w-full" placeholder="Thingy"
-                                                    name="latin">
-                                                <option @if(in_array('Latin', $sets->toArray())) selected="selected"
-                                                        @endif value="YES">
-                                                    Yes
-                                                </option>
-                                                <option @if(!in_array('Latin', $sets->toArray())) selected="selected"
-                                                        @endif value="NO">
-                                                    No
-                                                </option>
-                                            </select>
-                                        </label>
+                                               value="{{ old('optionc') ?? $setResults['Option C'] }}"
+                                               placeholder="Option C"
+                                               name="optionc"/>
                                     @endif
+
+                                    <label class="form-label" for="optiond">Option D</label>
+                                    <input class="form-control" type="text"
+                                           value="{{ old('optiond') ?? ($setResults['Option D'] ?? '') }}"
+                                           placeholder="Option D"
+                                           name="optiond"/>
+
+                                    @if (isset($setResults['Option E']))
+                                        <label class="form-label" for="optione">Option E</label>
+                                        <input class="form-control" type="text"
+                                               value="{{ old('optione') ?? ($setResults['Option E'] ?? '') }}"
+                                               placeholder="Option E"
+                                               name="optione"/>
+                                    @endif
+
                                 </div>
+                                @if ($yearGroup !== 10)
+                                    <div class="col-md">
+                                        <label class="form-label" for="cmlf">Modern Foreign Language</label>
+                                        <input class="form-control" type="text"
+                                               value="{{ old('cmfl') ?? $setResults['CMFL'] ?? null}}"
+                                               placeholder="CMFL"
+                                               name="cmfl"/>
+                                        @endif
+                                        @if ($yearGroup == 9)
+                                            <label class="form-label" for="latin">
+                                                <span class="">Do you do Latin?</span>
+                                                <select class="form-select mt-1 block w-full" placeholder="Thingy"
+                                                        name="latin">
+                                                    <option @if(in_array('Latin', $sets->toArray())) selected="selected"
+                                                            @endif value="YES">
+                                                        Yes
+                                                    </option>
+                                                    <option
+                                                        @if(!in_array('Latin', $sets->toArray())) selected="selected"
+                                                        @endif value="NO">
+                                                        No
+                                                    </option>
+                                                </select>
+                                            </label>
+                                        @endif
+                                    </div>
                             </div>
                         </div>
                         <div class="row p-3">

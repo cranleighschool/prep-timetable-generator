@@ -114,7 +114,7 @@ trait PrepSets
             if (in_array($subject, $unsets)) {
                 continue;
             }
-            if (in_array($value, ['Option A', 'Option B', 'Option C', 'Option D', 'CMFL'])) {
+            if (in_array($value, ['Option A', 'Option B', 'Option C', 'Option D', 'Option E', 'CMFL'])) {
                 $matchSets[$value] = $subject;
             } else {
                 $matchSets[$subject] = $value;

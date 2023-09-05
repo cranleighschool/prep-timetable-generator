@@ -5,7 +5,11 @@ namespace App\Logic;
 use Illuminate\Http\Request;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Str;
+use spkm\isams\Exceptions\ValidationException;
 
+/**
+ * @property int $yearGroup
+ */
 class GenerateTimetable
 {
     public const MONDAY = 'Monday';
@@ -33,6 +37,9 @@ class GenerateTimetable
         $this->request = $request;
     }
 
+    /**
+     * @throws ValidationException
+     */
     public function getTimetable(): array
     {
         $timetable = match ($this->yearGroup) {
@@ -51,7 +58,7 @@ class GenerateTimetable
 
     private function addToTimetable(string $day, ?string $subject): void
     {
-        array_push($this->timetable[$day], $subject);
+        $this->timetable[$day][] = $subject;
     }
 
     private function year9Timetable(): array
@@ -76,10 +83,12 @@ class GenerateTimetable
             }
             switch ($day->day) {
                 case self::MONDAY:
-                    self::addToTimetable($day->day, $request->optiona);
-                    if (Str::endsWith($request->humanities_set, ['b1', 'b2', 'b3', 'b4'])) {
-                        self::addToTimetable($day->day, 'Reading');
+                    self::addToTimetable($day->day, 'Maths');
+
+                    if (Str::endsWith($request->humanities_set, ['a1', 'a2', 'a3', 'a4'])) {
+                        self::addToTimetable($day->day, 'English');
                     }
+
                     break;
                 case self::TUESDAY:
                     self::addToTimetable($day->day, $request->cmfl);
@@ -129,24 +138,24 @@ class GenerateTimetable
                 case self::MONDAY:
                     self::addToTimetable($day->day, $request->optiond);
                     self::addToTimetable($day->day, $request->optionc);
-                    self::addToTimetable($day->day, $request->optionb);
                     break;
                 case self::TUESDAY:
+                    self::addToTimetable($day->day, $request->optione);
+                    self::addToTimetable($day->day, $request->optionc);
                     self::addToTimetable($day->day, $request->optiond);
-                    self::addToTimetable($day->day, $request->cmfl);
-                    self::addToTimetable($day->day, 'English');
                     break;
                 case self::WEDNESDAY:
-                    self::addToTimetable($day->day, $request->optiona);
+                    self::addToTimetable($day->day, $request->optionb);
                     self::addToTimetable($day->day, 'English');
                     break;
                 case self::THURSDAY:
-                    self::addToTimetable($day->day, 'Maths');
-                    self::addToTimetable($day->day, $request->optionb);
+                    self::addToTimetable($day->day, $request->optiona);
+                    self::addToTimetable($day->day, $request->optione);
                     break;
                 case self::FRIDAY:
-                    self::addToTimetable($day->day, $request->optionc);
-                    self::addToTimetable($day->day, $request->cmfl);
+                    self::addToTimetable($day->day, $request->optiona);
+                    self::addToTimetable($day->day, 'Maths');
+                    self::addToTimetable($day->day, $request->optionb);
                     break;
             }
         }
@@ -175,27 +184,27 @@ class GenerateTimetable
             switch ($day->day) {
                 case self::MONDAY:
                     self::addToTimetable($day->day, $request->optionc);
-                    self::addToTimetable($day->day, $request->optiond);
+                    self::addToTimetable($day->day, $request->optiona);
                     self::addToTimetable($day->day, 'Maths');
                     break;
                 case self::TUESDAY:
                     self::addToTimetable($day->day, 'English');
-                    self::addToTimetable($day->day, $request->optionb);
-                    self::addToTimetable($day->day, $request->cmfl);
+                    self::addToTimetable($day->day, $request->optiona);
+                    self::addToTimetable($day->day, $request->optiond);
                     break;
                 case self::WEDNESDAY:
                     self::addToTimetable($day->day, $request->optionc);
-                    self::addToTimetable($day->day, $request->optiona);
+                    self::addToTimetable($day->day, 'Maths');
                     break;
                 case self::THURSDAY:
                     self::addToTimetable($day->day, $request->cmfl);
-                    self::addToTimetable($day->day, $request->optiond);
+                    self::addToTimetable($day->day, 'English');
                     self::addToTimetable($day->day, $request->optionb);
                     break;
                 case self::FRIDAY:
-                    self::addToTimetable($day->day, 'English');
-                    self::addToTimetable($day->day, $request->optiona);
-                    self::addToTimetable($day->day, 'Maths');
+                    self::addToTimetable($day->day, $request->optiond);
+                    self::addToTimetable($day->day, $request->cmfl);
+                    self::addToTimetable($day->day, $request->optionb);
                     break;
             }
         }

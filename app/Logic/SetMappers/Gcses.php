@@ -22,14 +22,15 @@ class Gcses implements SetMapperInterface
 
         $code = $this->code;
         $subject = $this->subject;
+        //dump([$code, $subject]);
         // Sciences
         if (Str::startsWith($code, $year.'D6')) {
             // DAS in 6
-            return substr($code, 2, 2);
+            return substr($code, 2, 2); // we only care about then being D6 as all D6 sets are the same
         }
         if (Str::startsWith($code, $year.'D9')) {
             // DAS in 9
-            return substr($code, 2, 2);
+            return substr($code, 2, 3);
         }
         if (Str::startsWith($code, $year.'T')) {
             // Triple Award
@@ -49,7 +50,9 @@ class Gcses implements SetMapperInterface
         if (Str::startsWith($code, $year.'D')) {
             return 'Option D';
         }
-
+        if (Str::startsWith($code, $year.'E')) {
+            return 'Option E';
+        }
         // MATHS / ENGLISH
         if (in_array($subject, ['Maths', 'English'])) {
             // Converts "103/En" to "3"

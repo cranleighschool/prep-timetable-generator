@@ -93,7 +93,7 @@ class PrepTimetableController extends Controller
             return back()->withErrors("No sets found for {$request->pupil->forename} {$request->pupil->surname}.");
         }
         $timetable = [];
-
+        //dd($setResults);
         return view('setup', compact('days', 'request', 'timetable', 'sets', 'yearGroup', 'setResults'));
     }
 

@@ -31,6 +31,9 @@ class SubjectsSet extends Model
         if (Str::endsWith($e[0], 'D')) {
             $label = 'Option D';
         }
+        if (Str::endsWith($e[0], 'E')) {
+            $label = 'Option E';
+        }
         if (preg_match('^\A(9)-(PH|CH|BI)[0-9]{1}\Z^', $code, $matches)) {
             $label = 'Science Set: '.substr($matches[0], -1);
         }

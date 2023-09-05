@@ -138,116 +138,82 @@ class SetsSeeder extends Seeder
     private function lowerFifth(): void
     {
         $this->setsBySubjectToday('Biology', 10, GenerateTimetable::MONDAY, [
-            'T1', 'T2', 'T3',
+            'D91',
         ]);
         $this->setsBySubjectToday('Physics', 10, GenerateTimetable::MONDAY, [
-            'T4', 'T5', 'D9',
-        ]);
-        $this->setsBySubjectToday('Physics', 10, GenerateTimetable::TUESDAY, [
             'T1', 'T2', 'T3',
+        ]);
+
+        $this->setsBySubjectToday('Chemistry', 10, GenerateTimetable::MONDAY, [
+            'T4', 'T5', 'D6', 'D92',
+        ]);
+
+        $this->setsBySubjectToday('Biology', 10, GenerateTimetable::TUESDAY, [
+            'T4', 'T5',
         ]);
         $this->setsBySubjectToday('Chemistry', 10, GenerateTimetable::TUESDAY, [
-            'T4', 'T5', 'D9',
+            'T1', 'T2', 'T3'
         ]);
-        $this->setsBySubjectToday('Chemistry', 10, GenerateTimetable::WEDNESDAY, [
-            'T1', 'T2', 'T3',
-        ]);
+
         $this->setsBySubjectToday('Physics', 10, GenerateTimetable::WEDNESDAY, [
-            'T4', 'T5', 'D9',
+            'T1', 'T2', 'T3', 'T4', 'T5', 'D6', 'D92', 'D91',
         ]);
-        $this->setsBySubjectToday('Biology', 10, GenerateTimetable::WEDNESDAY, [
-            'D6',
-        ]);
-        $this->setsBySubjectToday('Physics', 10, GenerateTimetable::THURSDAY, [
-            'T1', 'T2', 'T3',
+
+        $this->setsBySubjectToday('Biology', 10, GenerateTimetable::THURSDAY, [
+            'T1', 'T2', 'T3', 'D6', 'D92'
         ]);
         $this->setsBySubjectToday('Chemistry', 10, GenerateTimetable::THURSDAY, [
-            'T4', 'T5', 'D9',
+            'T1', 'T2', 'T3', 'T4', 'T5', 'D91',
         ]);
         $this->setsBySubjectToday('Physics', 10, GenerateTimetable::THURSDAY, [
-            'D6',
-        ]);
-        $this->setsBySubjectToday('Chemistry', 10, GenerateTimetable::FRIDAY, [
-            'T1', 'T2', 'T3',
-        ]);
-        $this->setsBySubjectToday('Biology', 10, GenerateTimetable::FRIDAY, [
-            'T4', 'T5', 'D9',
-        ]);
-        $this->setsBySubjectToday('Chemistry', 10, GenerateTimetable::FRIDAY, [
-            'D6',
+            'T4', 'T5',
         ]);
     }
 
     private function upperFifth(): void
     {
-        // Year 11 Science Sets
-        $this->addSubject('Biology', 11, [
-            1 => GenerateTimetable::MONDAY,
-            2 => GenerateTimetable::MONDAY,
-            3 => GenerateTimetable::MONDAY,
-            4 => GenerateTimetable::MONDAY,
-            5 => GenerateTimetable::MONDAY,
-            6 => GenerateTimetable::MONDAY,
-            7 => GenerateTimetable::MONDAY,
+        $this->setsBySubjectToday('Biology', 11, GenerateTimetable::MONDAY, [
+            'D6'
+        ]);
+        $this->setsBySubjectToday('Biology', 11, GenerateTimetable::WEDNESDAY, [
+            'T4', 'T5', 'D9',
+        ]);
+        $this->setsBySubjectToday('Biology', 11, GenerateTimetable::FRIDAY, [
+            'T1', 'T2', 'T3',
         ]);
 
-        $this->addSubject('Biology', 11, [
-            1 => GenerateTimetable::WEDNESDAY,
-            2 => GenerateTimetable::WEDNESDAY,
-            3 => GenerateTimetable::WEDNESDAY,
-            8 => GenerateTimetable::WEDNESDAY,
-            9 => GenerateTimetable::WEDNESDAY,
+        $this->setsBySubjectToday('Chemistry', 11, GenerateTimetable::MONDAY, [
+            'T4', 'T5', 'D9',
         ]);
-        $this->addSubject('Biology', 11, [
-            4 => GenerateTimetable::FRIDAY,
-            5 => GenerateTimetable::FRIDAY,
-            6 => GenerateTimetable::FRIDAY,
-            7 => GenerateTimetable::FRIDAY,
+        $this->setsBySubjectToday('Physics', 11, GenerateTimetable::MONDAY, [
+            'T1', 'T2', 'T3',
         ]);
-
-        $this->addSubject('Chemistry', 11, [
-            1 => GenerateTimetable::MONDAY,
-            2 => GenerateTimetable::MONDAY,
-            3 => GenerateTimetable::MONDAY,
-            4 => GenerateTimetable::WEDNESDAY,
-            5 => GenerateTimetable::WEDNESDAY,
-            6 => GenerateTimetable::WEDNESDAY,
-            7 => GenerateTimetable::WEDNESDAY,
-            8 => GenerateTimetable::WEDNESDAY,
-            9 => GenerateTimetable::WEDNESDAY,
-
+        $this->setsBySubjectToday('Physics', 11, GenerateTimetable::FRIDAY, [
+            'T4', 'T5', 'D9',
         ]);
-
-        $this->addSubject('Chemistry', 11, [
-            1 => GenerateTimetable::FRIDAY,
-            2 => GenerateTimetable::FRIDAY,
-            3 => GenerateTimetable::FRIDAY,
-            4 => GenerateTimetable::THURSDAY,
-            5 => GenerateTimetable::THURSDAY,
-            6 => GenerateTimetable::THURSDAY,
-            7 => GenerateTimetable::THURSDAY,
+        $this->setsBySubjectToday('Chemistry', 11, GenerateTimetable::TUESDAY, [
+            'T1', 'T2', 'T3',
         ]);
-
-        $this->addSubject('Physics', 11, [
-            4 => GenerateTimetable::MONDAY,
-            5 => GenerateTimetable::MONDAY,
-            6 => GenerateTimetable::MONDAY,
-            7 => GenerateTimetable::MONDAY,
-            8 => GenerateTimetable::MONDAY,
-            9 => GenerateTimetable::MONDAY,
-            1 => GenerateTimetable::THURSDAY,
-            2 => GenerateTimetable::THURSDAY,
-            3 => GenerateTimetable::THURSDAY,
+        $this->setsBySubjectToday('Physics', 11, GenerateTimetable::TUESDAY, [
+            'T4', 'T5', 'D9',
         ]);
-
-        $this->addSubject('Physics', 11, [
-            1 => GenerateTimetable::WEDNESDAY,
-            2 => GenerateTimetable::WEDNESDAY,
-            3 => GenerateTimetable::WEDNESDAY,
-            4 => GenerateTimetable::WEDNESDAY,
-            5 => GenerateTimetable::WEDNESDAY,
-            6 => GenerateTimetable::WEDNESDAY,
-            7 => GenerateTimetable::THURSDAY,
+        $this->setsBySubjectToday('Biology', 11, GenerateTimetable::WEDNESDAY, [
+            'T1', 'T2', 'T3',
+        ]);
+        $this->setsBySubjectToday('Chemistry', 11, GenerateTimetable::WEDNESDAY, [
+            'T4', 'T5', 'D9',
+        ]);
+        $this->setsBySubjectToday('Physics', 11, GenerateTimetable::WEDNESDAY, [
+            'D6',
+        ]);
+        $this->setsBySubjectToday('Biology', 11, GenerateTimetable::FRIDAY, [
+            'T4', 'T5', 'D9',
+        ]);
+        $this->setsBySubjectToday('Chemistry', 11, GenerateTimetable::FRIDAY, [
+            'D6'
+        ]);
+        $this->setsBySubjectToday('Physics', 11, GenerateTimetable::FRIDAY, [
+            'T1', 'T2', 'T3',
         ]);
     }
 }
