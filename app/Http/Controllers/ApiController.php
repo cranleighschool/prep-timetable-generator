@@ -4,11 +4,13 @@ namespace App\Http\Controllers;
 
 use App\Exceptions\TutorNotFoundToHaveAnyTutees;
 use App\Exceptions\ZeroSetsFound;
+use App\Http\Resources\PupilTimetableResource;
 use App\Logic\GenerateTimetable;
 use App\Logic\PrepSets;
 use App\Models\PrepDay;
 use App\Models\School;
 use ErrorException;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Str;
@@ -18,7 +20,15 @@ class ApiController
 {
     use PrepSets;
 
-    public function getHouseData(string $house): Collection
+    /**
+     * Get House Data
+     *
+     * This is a description of what this method does!
+     * @param string $house The name of the house (North, Cubitt, West, South, East)
+     * @response JsonResponse
+     * @return JsonResponse
+ */
+    public function getHouseData(string $house): JsonResponse
     {
         $allPupils = School::allPupils()->filter(function ($item) use ($house) {
             return $item->boardingHouse == $house;
@@ -37,13 +47,14 @@ class ApiController
         }
         ksort($result);
 
-        return collect($result);
+        return response()->json($result);
     }
 
     /**
      * @throws ValidationException|TutorNotFoundToHaveAnyTutees
+     * @param string $tutorUsername The username of the staff tutor
      */
-    public function getTutorData(string $tutorUsername): Collection
+    public function getTutorData(string $tutorUsername): JsonResponse
     {
         $tutorUsername = strtoupper($tutorUsername);
         $allPupils = School::allPupils()->where('tutorUsername', '=', $tutorUsername)->groupBy(['tutorUsername', 'yearGroup']);
@@ -62,13 +73,17 @@ class ApiController
         }
         ksort($result);
 
-        return collect($result);
+        return response()->json($result);
     }
 
     /**
+     * @param string $username
+     * @return JsonResponse
+     * @throws ErrorException
      * @throws ValidationException
+     * @response PupilTimetableResource
      */
-    public function getPupilTimetable(string $username): Collection
+    public function getPupilTimetable(string $username): JsonResponse
     {
         $this->setPupil($username);
         $yearGroup = $this->pupil->yearGroup;
@@ -84,14 +99,14 @@ class ApiController
                 }),
             ]);
         }
-
-        return collect([
-            'timetable' => (new GenerateTimetable($yearGroup, $request, PrepDay::all()))->getTimetable(),
-            'username' => $username,
+        return response()->json(new PupilTimetableResource([
             'yearGroup' => $yearGroup,
+            'fields' => $request,
+            //'timetable' => (new GenerateTimetable($yearGroup, $request, PrepDay::all()))->getTimetable(),
+            'username' => $username,
             'subjects' => $sets->sort(),
             'results' => $setResults,
-        ]);
+        ]));
     }
 
     /**
@@ -106,6 +121,7 @@ class ApiController
                 'optionb' => $setResults['Option B'] ?? null,
                 'optionc' => $setResults['Option C'] ?? null,
                 'optiond' => $setResults['Option D'] ?? null,
+                'optione' => $setResults['Option E'] ?? null,
                 'cmfl' => $setResults['CMFL'] ?? null,
                 'english_set' => $setResults['English'],
                 'maths_set' => $setResults['Maths'],
