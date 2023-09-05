@@ -36,10 +36,15 @@ class ApiController
 
         foreach ($allPupils as $yearGroup => $pupils) {
             foreach (collect($pupils)->sortBy('surname') as $pupil) {
+                if (in_array($pupil->yearGroup, [9])) {
+                    // Ignore year 9 for now
+                    continue;
+                }
+
                 $emailAddress = $pupil->schoolEmailAddress;
 
                 $result[$yearGroup][$pupil->surname.', '.$pupil->forename] = Cache::remember('getpupiltimetable'.$pupil->schoolEmailAddress, config('cache.time'), function () use ($emailAddress) {
-                    return $this->getPupilTimetable(Str::before($emailAddress, '@'))['timetable'];
+                    return $this->getPupilTimetable(Str::before($emailAddress, '@'))->getData()->timetable;
                 });
             }
         }
@@ -64,10 +69,13 @@ class ApiController
         $result = [];
         foreach ($allPupils[$tutorUsername] as $yearGroup => $pupils) {
             foreach (collect($pupils)->sortBy('surname') as $pupil) {
+                if (in_array($pupil->yearGroup, [9])) {
+                    // Ignore year 9 for now
+                    continue;
+                }
                 $emailAddress = $pupil->schoolEmailAddress;
-
                 $result[$yearGroup][$pupil->surname.', '.$pupil->forename] = $this->getPupilTimetable(Str::before($emailAddress,
-                    '@'))['timetable'];
+                    '@'))->getData()->timetable;
             }
         }
         ksort($result);
@@ -101,7 +109,7 @@ class ApiController
         return response()->json(new PupilTimetableResource([
             'yearGroup' => $yearGroup,
             'fields' => $request,
-            //'timetable' => (new GenerateTimetable($yearGroup, $request, PrepDay::all()))->getTimetable(),
+            // 'timetable' => (new GenerateTimetable($yearGroup, $request, PrepDay::all()))->getTimetable(),
             'username' => $username,
             'subjects' => $sets->sort(),
             'results' => $setResults,

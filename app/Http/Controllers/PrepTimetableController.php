@@ -40,7 +40,7 @@ class PrepTimetableController extends Controller
             throw new Exception('Invalid House');
         }
 
-        $data = $api->getHouseData($house);
+        $data = $api->getHouseData($house)->getData(true);
 
         return view('house', compact('data'));
     }
@@ -65,7 +65,7 @@ class PrepTimetableController extends Controller
         }
 
         try {
-            $data = $api->getTutorData($tutorUsername);
+            $data = $api->getTutorData($tutorUsername)->getData(true);
         } catch (TutorNotFoundToHaveAnyTutees $exception) {
             abort($exception->getCode(), $exception->getMessage());
         }

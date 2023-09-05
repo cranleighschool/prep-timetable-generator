@@ -10,10 +10,13 @@
             @endforeach
             </thead>
             <tbody>
+
             @foreach($pupils as $pupil => $days)
                 <tr>
                     <th>{{ $pupil }}</th>
+
                     @foreach ($days as $day)
+
                         <td>{!! implode('<br />', $day) !!}</td>
                     @endforeach
                 </tr>
