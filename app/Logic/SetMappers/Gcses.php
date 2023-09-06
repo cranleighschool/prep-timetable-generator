@@ -59,15 +59,23 @@ class Gcses implements SetMapperInterface
             return (int) substr($code, 2, 1);
         }
 
-        //        dd($code);
-        // CMFL
-        if (preg_match('^\A'.$year.'\.?[0-9]/(Fr|Sp)\Z^', $code, $matches)) {
-            return 'CMFL';
+        // CMFL -- remove if statement block in M24
+        if ($year === 11) {
+            if (preg_match('^\A' . $year . '\.?[0-9]/(Fr|Sp)\Z^', $code, $matches)) {
+                return 'CMFL';
+            }
+        }
+        if ($year === 10) {
+            if ($subject === 'French') {
+                return 'Option C';
+            }
+            if ($subject === 'Spanish') {
+                return 'Option B';
+            }
         }
         if (in_array($subject, [
             'Greek',
             'Philosophy',
-
         ])) {
             return (int) substr($code, -1, 1);
         }
