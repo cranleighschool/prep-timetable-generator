@@ -61,7 +61,7 @@ class Gcses implements SetMapperInterface
 
         // CMFL -- remove if statement block in M24
         if ($year === 11) {
-            if (preg_match('^\A' . $year . '\.?[0-9]/(Fr|Sp)\Z^', $code, $matches)) {
+            if (preg_match('^\A'.$year.'\.?[0-9]/(Fr|Sp)\Z^', $code, $matches)) {
                 return 'CMFL';
             }
         }
