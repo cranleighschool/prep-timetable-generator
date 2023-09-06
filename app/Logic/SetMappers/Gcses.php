@@ -76,7 +76,7 @@ class Gcses implements SetMapperInterface
         if (in_array($subject, [
             'Greek',
             'Philosophy',
-            'Supervised Private Study'
+            'Supervised Private Study',
         ])) {
             return (int) substr($code, -1, 1);
         }
