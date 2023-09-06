@@ -33,74 +33,74 @@ class SetsSeeder extends Seeder
 
         DB::table('set_subject_days')->insert([
 
-            $this->getData(1, 'Biology', GenerateTimetable::TUESDAY),
-            $this->getData(1, 'Chemistry', GenerateTimetable::THURSDAY),
-            $this->getData(1, 'Physics', GenerateTimetable::MONDAY),
+            $this->getData(1, 'Biology', GenerateTimetable::FRIDAY),
+            $this->getData(1, 'Chemistry', GenerateTimetable::TUESDAY),
+            $this->getData(1, 'Physics', GenerateTimetable::THURSDAY),
 
-            $this->getData(2, 'Biology', GenerateTimetable::THURSDAY),
+            $this->getData(2, 'Biology', GenerateTimetable::FRIDAY),
             $this->getData(2, 'Chemistry', GenerateTimetable::TUESDAY),
-            $this->getData(2, 'Physics', GenerateTimetable::MONDAY),
+            $this->getData(2, 'Physics', GenerateTimetable::THURSDAY),
 
             $this->getData(3, 'Biology', GenerateTimetable::TUESDAY),
-            $this->getData(3, 'Chemistry', GenerateTimetable::MONDAY),
-            $this->getData(3, 'Physics', GenerateTimetable::THURSDAY),
+            $this->getData(3, 'Chemistry', GenerateTimetable::THURSDAY),
+            $this->getData(3, 'Physics', GenerateTimetable::FRIDAY),
 
-            $this->getData(4, 'Biology', GenerateTimetable::MONDAY),
-            $this->getData(4, 'Chemistry', GenerateTimetable::THURSDAY),
+            $this->getData(4, 'Biology', GenerateTimetable::THURSDAY),
+            $this->getData(4, 'Chemistry', GenerateTimetable::FRIDAY),
             $this->getData(4, 'Physics', GenerateTimetable::TUESDAY),
 
             $this->getData(5, 'Biology', GenerateTimetable::THURSDAY),
-            $this->getData(5, 'Chemistry', GenerateTimetable::MONDAY),
-            $this->getData(5, 'Physics', GenerateTimetable::FRIDAY),
+            $this->getData(5, 'Chemistry', GenerateTimetable::FRIDAY),
+            $this->getData(5, 'Physics', GenerateTimetable::MONDAY),
 
-            $this->getData(6, 'Biology', GenerateTimetable::THURSDAY),
-            $this->getData(6, 'Chemistry', GenerateTimetable::MONDAY),
-            $this->getData(6, 'Physics', GenerateTimetable::FRIDAY),
+            $this->getData(6, 'Biology', GenerateTimetable::FRIDAY),
+            $this->getData(6, 'Chemistry', GenerateTimetable::THURSDAY),
+            $this->getData(6, 'Physics', GenerateTimetable::MONDAY),
 
-            $this->getData(7, 'Biology', GenerateTimetable::MONDAY),
-            $this->getData(7, 'Chemistry', GenerateTimetable::FRIDAY),
-            $this->getData(7, 'Physics', GenerateTimetable::THURSDAY),
+            $this->getData(7, 'Biology', GenerateTimetable::FRIDAY),
+            $this->getData(7, 'Chemistry', GenerateTimetable::THURSDAY),
+            $this->getData(7, 'Physics', GenerateTimetable::MONDAY),
 
-            $this->getData(8, 'Biology', GenerateTimetable::FRIDAY),
-            $this->getData(8, 'Chemistry', GenerateTimetable::MONDAY),
-            $this->getData(8, 'Physics', GenerateTimetable::THURSDAY),
+            $this->getData(8, 'Biology', GenerateTimetable::MONDAY),
+            $this->getData(8, 'Chemistry', GenerateTimetable::THURSDAY),
+            $this->getData(8, 'Physics', GenerateTimetable::FRIDAY),
         ]);
         $this->addSubject('Class Civ', 9, [
-            //            'a1' => GenerateTimetable::FRIDAY,
-            //            'a2' => GenerateTimetable::FRIDAY,
-            'b1' => GenerateTimetable::FRIDAY,
+            'a3' => GenerateTimetable::THURSDAY,
+            'a4' => GenerateTimetable::THURSDAY,
+            'b1' => GenerateTimetable::TUESDAY,
             'b2' => GenerateTimetable::WEDNESDAY,
             'b3' => GenerateTimetable::WEDNESDAY,
-            'b4' => GenerateTimetable::THURSDAY,
+            'b4' => GenerateTimetable::FRIDAY,
         ]);
         $this->addSubject('Geography', 9, [
-            'a1' => GenerateTimetable::WEDNESDAY,
+            'a1' => GenerateTimetable::FRIDAY,
             'a2' => GenerateTimetable::MONDAY,
-            'a3' => GenerateTimetable::MONDAY,
-            'a4' => GenerateTimetable::THURSDAY,
-            'b1' => GenerateTimetable::THURSDAY,
-            'b2' => GenerateTimetable::FRIDAY,
-            'b3' => GenerateTimetable::FRIDAY,
-            'b4' => GenerateTimetable::FRIDAY,
-        ]);
-        $this->addSubject('History', 9, [
-            'a1' => GenerateTimetable::THURSDAY,
-            'a2' => GenerateTimetable::WEDNESDAY,
-            'a3' => GenerateTimetable::THURSDAY,
-            'a4' => GenerateTimetable::WEDNESDAY,
-            'b1' => GenerateTimetable::WEDNESDAY,
-            'b2' => GenerateTimetable::THURSDAY,
-            'b3' => GenerateTimetable::THURSDAY,
-            'b4' => GenerateTimetable::FRIDAY,
-        ]);
-        $this->addSubject('RS', 9, [
-            'a1' => GenerateTimetable::MONDAY,
-            'a2' => GenerateTimetable::THURSDAY,
             'a3' => GenerateTimetable::WEDNESDAY,
             'a4' => GenerateTimetable::MONDAY,
-            'b1' => GenerateTimetable::FRIDAY,
+            'b1' => GenerateTimetable::MONDAY,
             'b2' => GenerateTimetable::FRIDAY,
-            'b3' => GenerateTimetable::FRIDAY,
+            'b3' => GenerateTimetable::TUESDAY,
+            'b4' => GenerateTimetable::TUESDAY,
+        ]);
+        $this->addSubject('History', 9, [
+            'a1' => GenerateTimetable::MONDAY,
+            'a2' => GenerateTimetable::WEDNESDAY,
+            'a3' => GenerateTimetable::FRIDAY,
+            'a4' => GenerateTimetable::FRIDAY,
+            'b1' => GenerateTimetable::WEDNESDAY,
+            'b2' => GenerateTimetable::TUESDAY,
+            'b3' => GenerateTimetable::MONDAY,
+            'b4' => GenerateTimetable::MONDAY,
+        ]);
+        $this->addSubject('RS', 9, [
+            'a1' => GenerateTimetable::WEDNESDAY,
+            'a2' => GenerateTimetable::FRIDAY,
+            'a3' => GenerateTimetable::MONDAY,
+            'a4' => GenerateTimetable::WEDNESDAY,
+            'b1' => GenerateTimetable::WEDNESDAY,
+            'b2' => GenerateTimetable::FRIDAY,
+            'b3' => GenerateTimetable::MONDAY,
             'b4' => GenerateTimetable::WEDNESDAY,
         ]);
     }
