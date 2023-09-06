@@ -111,11 +111,12 @@
                                     @endif
                                 </div>
                                 <div class="col-md">
+                                    @if (isset($setResults['Option A']))
                                     <label class="form-label" for="optiona">Option A</label>
                                     <input class="form-control" type="text"
                                            value="{{ old('optiona') ?? $setResults['Option A'] }}"
                                            placeholder="Option A" name="optiona"/>
-
+                                    @endif
                                     @if (isset($setResults['Option B']))
                                         <label class="form-label" for="optionb">Option B</label>
                                         <input class="form-control" type="text"
@@ -131,12 +132,13 @@
                                                placeholder="Option C"
                                                name="optionc"/>
                                     @endif
-
+                                        @if (isset($setResults['Option D']))
                                     <label class="form-label" for="optiond">Option D</label>
                                     <input class="form-control" type="text"
                                            value="{{ old('optiond') ?? ($setResults['Option D'] ?? '') }}"
                                            placeholder="Option D"
                                            name="optiond"/>
+                                        @endif
 
                                     @if (isset($setResults['Option E']))
                                         <label class="form-label" for="optione">Option E</label>
