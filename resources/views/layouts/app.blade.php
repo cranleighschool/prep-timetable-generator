@@ -13,14 +13,22 @@
             -webkit-columns: 2;
             -moz-columns: 2;
         }
+        @media print {
+            div {
+                break-inside: avoid;
+            }
+            .container {
+                width: 100% !important;
+            }
+        }
     </style>
 </head>
 <body>
 <div class="container">
     <div class="row p-3">
         <div class="col">
-            <h1>{{ config('app.name') }}</h1>
-            <p class="lead">This application uses the logic from <a href="{{ asset('Prep TT Michaelmas 23.pdf') }}" target="_blank">Mr Barker's Prep Timetable sheet</a> to auto-populate your
+            <h1 class="d-print-none">{{ config('app.name') }}</h1>
+            <p class="lead d-print-none">This application uses the logic from <a href="{{ asset('Prep TT Michaelmas 23.pdf') }}" target="_blank">Mr Barker's Prep Timetable sheet</a> to auto-populate your
                 Prep Timetable.</p>
         </div>
     </div>
@@ -30,7 +38,7 @@
         @endforeach
         @yield('content')
         @if (!request()->routeIs('start'))
-            <div class="row p-3">
+            <div class="row p-3 d-print-none">
                 <div class="col">
                     <a href="javascript:history.back()" class="btn btn-lg btn-primary">Go Back</a>
                     <a href="{{ url('/') }}" class="btn btn-lg btn-secondary">Start Over</a>

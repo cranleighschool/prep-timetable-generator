@@ -1,6 +1,6 @@
 @extends('layouts.app')
 @section('content')
-    <div class="row p-3">
+    <div class="row p-3 d-print-none">
         <div class="col">
             <div class="progress" style="height:30px;">
                 <div class="progress-bar progress-bar-striped bg-success" role="progressbar" style="width: 33.3%;"
@@ -16,13 +16,19 @@
         </div>
     </div>
 
-
+    <div class="d-block d-sm-block d-md-none d-lg-none">
+        <div class="row">
+            <div class="col">
+                <div class="alert alert-warning">The table below might look a bit strange - that's because you're viewing this on quite a small screen. Try your iPad in landscape mode?</div>
+            </div>
+        </div>
+    </div>
     <div class="row p-3">
         <div class="col">
             <div class="card" id="timetable-card">
                 <div class="card-body">
                     <h2 class="card-title">Your Prep Timetable (<code>{{ $request->username }}</code>)</h2>
-                    <div class="table-responsive">
+                    <div class="w-auto">
                         <table class="table">
                             <thead>
                             @foreach ($timetable as $day => $values)
@@ -58,7 +64,7 @@
             </div>
         </div>
     </div>
-    <div class="row p-3">
+    <div class="row p-3 d-print-none">
         <div style="display: none;" id="hidden-photo"></div>
         <div class="col">
             {{--            <button type="button" class="btn btn-lg btn-success" id="copy-to-clipboard"--}}
