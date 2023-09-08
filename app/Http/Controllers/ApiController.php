@@ -36,10 +36,6 @@ class ApiController
 
         foreach ($allPupils as $yearGroup => $pupils) {
             foreach (collect($pupils)->sortBy('surname') as $pupil) {
-                if (in_array($pupil->yearGroup, [9])) {
-                    // Ignore year 9 for now
-                    continue;
-                }
 
                 $emailAddress = $pupil->schoolEmailAddress;
 
@@ -69,10 +65,6 @@ class ApiController
         $result = [];
         foreach ($allPupils[$tutorUsername] as $yearGroup => $pupils) {
             foreach (collect($pupils)->sortBy('surname') as $pupil) {
-                if (in_array($pupil->yearGroup, [9])) {
-                    // Ignore year 9 for now
-                    continue;
-                }
                 $emailAddress = $pupil->schoolEmailAddress;
                 $result[$yearGroup][$pupil->surname.', '.$pupil->forename] = $this->getPupilTimetable(Str::before($emailAddress,
                     '@'))->getData()->timetable;
