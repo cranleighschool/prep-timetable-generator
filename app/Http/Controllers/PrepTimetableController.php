@@ -107,6 +107,7 @@ class PrepTimetableController extends Controller
         $timetable = (new GenerateTimetable($yearGroup, $request, $days))->getTimetable();
 
         $requestSets = collect(json_decode($request->requestSets));
+
         return view('timetable', compact('days', 'request', 'timetable', 'yearGroup', 'requestSets'));
     }
 }
