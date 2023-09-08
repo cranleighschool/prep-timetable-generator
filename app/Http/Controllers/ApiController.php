@@ -36,7 +36,6 @@ class ApiController
 
         foreach ($allPupils as $yearGroup => $pupils) {
             foreach (collect($pupils)->sortBy('surname') as $pupil) {
-
                 $emailAddress = $pupil->schoolEmailAddress;
 
                 $result[$yearGroup][$pupil->surname.', '.$pupil->forename] = Cache::remember('getpupiltimetable'.$pupil->schoolEmailAddress, config('cache.time'), function () use ($emailAddress) {
