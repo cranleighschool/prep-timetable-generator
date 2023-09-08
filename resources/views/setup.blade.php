@@ -55,6 +55,7 @@
                         {{ method_field('POST') }}
                         <input type="hidden" name="yearGroup" value="{{ $yearGroup }}"/>
                         <input type="hidden" name="username" value="{{ $request->username }}"/>
+                        <input type="hidden" name="requestSets" value="{{ $sets->toJson() }}"/>
 
                         <div class="row p-3">
                             <div class="row">
