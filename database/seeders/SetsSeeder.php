@@ -98,9 +98,9 @@ class SetsSeeder extends Seeder
             'a2' => GenerateTimetable::FRIDAY,
             'a3' => GenerateTimetable::MONDAY,
             'a4' => GenerateTimetable::WEDNESDAY,
-            'b1' => GenerateTimetable::WEDNESDAY,
-            'b2' => GenerateTimetable::FRIDAY,
-            'b3' => GenerateTimetable::MONDAY,
+            'b1' => GenerateTimetable::FRIDAY,
+            'b2' => GenerateTimetable::MONDAY,
+            'b3' => GenerateTimetable::FRIDAY,
             'b4' => GenerateTimetable::WEDNESDAY,
         ]);
     }

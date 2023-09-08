@@ -77,6 +77,7 @@ class Gcses implements SetMapperInterface
             'Greek',
             'Philosophy',
             'Supervised Private Study',
+            'Supervised Private Study',
         ])) {
             return (int) substr($code, -1, 1);
         }

@@ -20,15 +20,16 @@ class YearNine implements SetMapperInterface
         $subject = $this->subject;
 
         // Latin
-        if (in_array($code, ['9A/La3', '9A/La4'])) {
+        if (in_array($code, ['9A/La1', '9A/La2'])) {
             return 'Latin';
         }
 
+
         // OPTIONS
-        if (Str::startsWith($code, '9A') && ! Str::contains($code, ['Gg', 'Cc', 'Hi', 'Rs', 'La'])) {
+        if (Str::startsWith($code, '9A') && !Str::contains($code, ['Gg', 'Cc', 'Hi', 'Rs', 'La', 'En'])) {
             return 'Option A';
         }
-        if (Str::startsWith($code, '9B')) {
+        if (Str::startsWith($code, '9B') && !Str::contains($code, ['Gg', 'Cc', 'Hi', 'Rs', 'La', 'En'])) {
             return 'Option B';
         }
         if (Str::startsWith($code, '9C')) {
@@ -39,28 +40,27 @@ class YearNine implements SetMapperInterface
         }
 
         // Sciences
-        if (Str::endsWith($code, ['Bi', 'Ch', 'Ph'])) {
+        if (Str::contains($code, ['Bi', 'Ch', 'Ph'])) {
             // Converts: 9.1/Bi to 1
-            return (int) substr($code, 2, 1);
+            return (int)substr($code, 2, 1);
         }
 
         // Maths
         if (Str::endsWith($code, 'Ma')) {
             // Converts, 9Y1/Ma to Y1
-            return substr($code, 1, 2);
+            return (int)substr($code, 2, 1);
         }
 
-        // English
-        if (Str::endsWith($code, 'En')) {
-            return (int) substr($code, 2, 1);
-        }
+////         English
+//        if (Str::contains($code, 'En')) {
+//            return substr($code, 1, 1).substr($code, -1, 1);
+//        }
 
         // Humanities
-        if (preg_match('^\A9(a|b|A)/(Hi|Cc|Gg|Rs)[0-9]{1}\Z^', $code, $matches)) {
+        if (preg_match('^\A9(a|b|A|B)/(Hi|Cc|Gg|Rs|En)[0-9]{1}\Z^', $code, $matches)) {
             // Is humanity
-            return strtolower(substr($code, 1, 1).substr($code, -1, 1));
+            return strtolower(substr($code, 1, 1) . substr($code, -1, 1));
         }
-
         // Languages
         if (Str::endsWith($code, 'Fr') || Str::endsWith($code, 'Sp')) {
             return 'CMFL';
@@ -71,9 +71,9 @@ class YearNine implements SetMapperInterface
             'Philosophy',
             'Digital Literacy',
         ])) {
-            return (int) substr($code, -1, 1);
+            return (int)substr($code, -1, 1);
         }
 
-        throw new Exception('Something went wrong, could not match year 9 subject: '.$subject);
+        throw new Exception('Something went wrong, could not match year 9 subject: ' . $subject);
     }
 }

@@ -100,7 +100,6 @@ class GenerateTimetable
                     break;
                 case self::THURSDAY:
                     self::addToTimetable($day->day, $request->optiona);
-                    self::addToTimetable($day->day, 'Maths');
                     if (Str::endsWith($request->humanities_set, ['b1', 'b2', 'b3', 'b4'])) {
                         self::addToTimetable($day->day, 'English');
                     }

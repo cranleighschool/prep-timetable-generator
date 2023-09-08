@@ -56,7 +56,8 @@ class TimetableRequest extends FormRequest
             'physics_set' => 'min:1|max:8|string',
             'classciv_set' => 'min:1|max:6|string',
 
-            'maths_set' => 'regex:/^[a-zA-Z]{1}[0-9]{1}$/',
+            //'maths_set' => 'regex:/^[a-zA-Z]{1}[0-9]{1}$/',
+            'maths_set' => 'min:1|max:8|integer',
         ];
     }
 
