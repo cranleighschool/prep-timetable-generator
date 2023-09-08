@@ -33,7 +33,7 @@ trait PrepSets
         }
 
         // OPTIONS
-        if (Str::startsWith($code, '9A') && !Str::contains($code, ['Gg', 'Cc', 'Hi', 'Rs', 'La'])) {
+        if (Str::startsWith($code, '9A') && ! Str::contains($code, ['Gg', 'Cc', 'Hi', 'Rs', 'La'])) {
             return 'Option A';
         }
         if (Str::startsWith($code, '9B')) {
@@ -48,9 +48,8 @@ trait PrepSets
 
         // Sciences
         if (Str::contains($code, ['Bi', 'Ch', 'Ph'])) {
-
             // Converts: 9.1/Bi to 1
-            return (int)substr($code, 2, 1);
+            return (int) substr($code, 2, 1);
         }
 
         // Maths
@@ -61,13 +60,13 @@ trait PrepSets
 
         // English
         if (Str::endsWith($code, 'En')) {
-            return (int)substr($code, 2, 1);
+            return (int) substr($code, 2, 1);
         }
 
         // Humanities
         if (preg_match('^\A9(a|b|A)/(Hi|Cc|Gg|Rs)[0-9]{1}\Z^', $code, $matches)) {
             // Is humanity
-            return strtolower(substr($code, 1, 1) . substr($code, -1, 1));
+            return strtolower(substr($code, 1, 1).substr($code, -1, 1));
         }
 
         // Languages
@@ -80,10 +79,10 @@ trait PrepSets
             'Philosophy',
             'Digital Literacy',
         ])) {
-            return (int)substr($code, -1, 1);
+            return (int) substr($code, -1, 1);
         }
 
-        throw new Exception('Something went wrong, could not match year 9 subject: ' . $subject);
+        throw new Exception('Something went wrong, could not match year 9 subject: '.$subject);
     }
 
     /**
@@ -104,7 +103,7 @@ trait PrepSets
             return (new YearNine($code, $subject))->handle();
         }
 
-        throw new Exception('Something went wrong, could not match: ' . $subject . ' (' . $code . ')');
+        throw new Exception('Something went wrong, could not match: '.$subject.' ('.$code.')');
     }
 
     private function matchSets(Collection $sets, array $unsets = []): array
@@ -151,7 +150,7 @@ trait PrepSets
 
             $matchSets = $this->matchSets($sets, $unsets);
         } catch (ErrorException $error) {
-            throw new ErrorException($error->getMessage() . ' on pupil');
+            throw new ErrorException($error->getMessage().' on pupil');
         }
 
         ksort($matchSets);
@@ -164,7 +163,7 @@ trait PrepSets
      */
     public function getPupilAndSets(): array
     {
-        $sets = Cache::remember('sets_' . $this->pupil->schoolId, config('cache.time'), function () {
+        $sets = Cache::remember('sets_'.$this->pupil->schoolId, config('cache.time'), function () {
             $timetable = new PupilTimetableController(School::first());
 
             return collect($timetable->show($this->pupil->schoolId)['sets'])->pluck('code',
@@ -181,7 +180,7 @@ trait PrepSets
 
     public static function getSets(array $sets): Collection
     {
-        return Cache::rememberForever('sets' . serialize($sets), function () use ($sets) {
+        return Cache::rememberForever('sets'.serialize($sets), function () use ($sets) {
             $subjectController = new SubjectsController(new School());
 
             return collect($sets)->map(function ($item, $key) use ($subjectController) {
