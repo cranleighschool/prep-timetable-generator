@@ -28,7 +28,7 @@
     <div class="row p-3">
         <div class="col">
             <h1 class="d-print-none">{{ config('app.name') }}</h1>
-            <p class="lead d-print-none">This application uses the logic from <a href="{{ asset('Prep TT Michaelmas 23.pdf') }}" target="_blank">Mr Barker's Prep Timetable sheet</a> to auto-populate your
+            <p class="lead d-print-none">This application uses the logic from <a href="{{ asset('Prep TT Lent 24.pdf') }}" target="_blank">Mr Barker's Prep Timetable sheet</a> to auto-populate your
                 Prep Timetable.</p>
         </div>
     </div>
