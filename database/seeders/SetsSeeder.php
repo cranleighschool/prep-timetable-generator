@@ -137,8 +137,8 @@ class SetsSeeder extends Seeder
 
     private function lowerFifth(): void
     {
-        $this->setsBySubjectToday("Biology", 10,GenerateTimetable::MONDAY, [
-           'D91'
+        $this->setsBySubjectToday('Biology', 10, GenerateTimetable::MONDAY, [
+            'D91',
         ]);
 
         $this->setsBySubjectToday('Physics', 10, GenerateTimetable::MONDAY, [
@@ -163,17 +163,17 @@ class SetsSeeder extends Seeder
             'D6',
         ]);
         $this->setsBySubjectToday('Biology', 10, GenerateTimetable::WEDNESDAY, [
-            'T1', 'T2', 'T3', 'D92'
+            'T1', 'T2', 'T3', 'D92',
         ]);
         $this->setsBySubjectToday('Chemistry', 10, GenerateTimetable::WEDNESDAY, [
             'T1', 'T2', 'T3', 'D91',
-            ]);
+        ]);
 
         $this->setsBySubjectToday('Biology', 10, GenerateTimetable::THURSDAY, [
-            'T1', 'T2', 'T3', 'D6', 'D92'
+            'T1', 'T2', 'T3', 'D6', 'D92',
         ]);
         $this->setsBySubjectToday('Chemistry', 10, GenerateTimetable::THURSDAY, [
-           'T1', 'T2', 'T3', 'T4', 'T5', 'D91', 'D92'
+            'T1', 'T2', 'T3', 'T4', 'T5', 'D91', 'D92',
         ]);
         $this->setsBySubjectToday('Physics', 10, GenerateTimetable::THURSDAY, [
             'T4', 'T5', 'D91', 'D92',
