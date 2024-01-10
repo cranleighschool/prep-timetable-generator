@@ -166,7 +166,7 @@ class SetsSeeder extends Seeder
             'T1', 'T2', 'T3', 'D92',
         ]);
         $this->setsBySubjectToday('Chemistry', 10, GenerateTimetable::WEDNESDAY, [
-            'T1', 'T2', 'T3', 'D91',
+            'T4', 'T5', 'D91',
         ]);
 
         $this->setsBySubjectToday('Biology', 10, GenerateTimetable::THURSDAY, [
