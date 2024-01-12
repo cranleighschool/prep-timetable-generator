@@ -138,7 +138,7 @@ class SetsSeeder extends Seeder
     private function lowerFifth(): void
     {
         $this->setsBySubjectToday('Biology', 10, GenerateTimetable::MONDAY, [
-            'D91', 'T4', 'T5'
+            'D91', 'T4', 'T5',
         ]);
 
         $this->setsBySubjectToday('Physics', 10, GenerateTimetable::MONDAY, [
