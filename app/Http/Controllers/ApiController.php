@@ -96,7 +96,7 @@ class ApiController
         } catch (ZeroSetsFound $exception) {
             return response()->json(new PupilTimetableResource([
                 'yearGroup' => $yearGroup,
-                'fields' => new \stdClass(),//$this->sanitizeVariables($yearGroup, []),
+                'fields' => new \stdClass(), //$this->sanitizeVariables($yearGroup, []),
                 'username' => $username,
                 'subjects' => $sets->sort(),
                 'results' => [],
