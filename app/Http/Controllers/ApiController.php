@@ -11,6 +11,7 @@ use App\Models\PrepDay;
 use App\Models\School;
 use ErrorException;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Str;
 use Illuminate\Validation\ValidationException;
@@ -80,7 +81,7 @@ class ApiController
      *
      * @response PupilTimetableResource
      */
-    public function getPupilTimetable(string $username): JsonResponse
+    public function getPupilTimetable(string $username): JsonResponse|Collection
     {
         $this->setPupil($username);
         $yearGroup = $this->pupil->yearGroup;
