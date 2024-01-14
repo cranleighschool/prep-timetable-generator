@@ -93,11 +93,13 @@ class ApiController
             $setResults = $this->calculateSets($yearGroup, $sets);
             $request = $this->sanitizeVariables($yearGroup, $setResults);
         } catch (ZeroSetsFound $exception) {
-            return collect([
-                'timetable' => PrepDay::all()->map(function ($day) {
-                    return ['No Subject Sets Assigned'];
-                }),
-            ]);
+            return response()->json(new PupilTimetableResource([
+                'yearGroup' => $yearGroup,
+                'fields' => $this->sanitizeVariables($yearGroup, $this->calculateSets($yearGroup, $sets)),
+                'username' => $username,
+                'subjects' => $sets->sort(),
+                'results' => $setResults,
+            ]));
         }
 
         return response()->json(new PupilTimetableResource([
