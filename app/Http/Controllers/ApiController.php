@@ -42,6 +42,7 @@ class ApiController
 
                 $result[$yearGroup][$pupil->surname.', '.$pupil->forename] = Cache::remember('getpupiltimetable'.$pupil->schoolEmailAddress, config('cache.time'), function () use ($emailAddress) {
                     Log::error('Cache miss for '.$emailAddress);
+
                     return $this->getPupilTimetable(Str::before($emailAddress, '@'))->getData()->timetable;
                 });
             }
