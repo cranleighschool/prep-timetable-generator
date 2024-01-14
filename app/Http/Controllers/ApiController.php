@@ -99,7 +99,7 @@ class ApiController
                 'fields' => new \stdClass(),//$this->sanitizeVariables($yearGroup, []),
                 'username' => $username,
                 'subjects' => $sets->sort(),
-                'results' => $setResults,
+                'results' => [],
             ]));
         }
 
