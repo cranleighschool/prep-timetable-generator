@@ -41,11 +41,11 @@ class ApiController
                 $emailAddress = $pupil->schoolEmailAddress;
 
                 try {
-                    $result[$yearGroup][$pupil->surname . ', ' . $pupil->forename] = Cache::remember('getpupiltimetable' . $pupil->schoolEmailAddress, config('cache.time'), function () use ($emailAddress) {
+                    $result[$yearGroup][$pupil->surname.', '.$pupil->forename] = Cache::remember('getpupiltimetable'.$pupil->schoolEmailAddress, config('cache.time'), function () use ($emailAddress) {
                         return $this->getPupilTimetable(Str::before($emailAddress, '@'))->getData()->timetable;
                     });
                 } catch (ZeroSetsFound $exception) {
-                    $result['errors'][] = $exception->getMessage() . ' so they are missed out from the sheet below';
+                    $result['errors'][] = $exception->getMessage().' so they are missed out from the sheet below';
                     Log::error($exception->getMessage());
                 }
             }
