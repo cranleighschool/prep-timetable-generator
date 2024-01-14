@@ -1,6 +1,14 @@
 @extends('layouts.app')
 @section('content')
+    @if (isset($data['errors']))
+        @foreach ($data['errors'] as $error)
+            <div class="alert alert-danger">{{ $error }}</div>
+        @endforeach
+    @endif
     @foreach($data as $yearGroup => $pupils)
+        @if (is_String($yearGroup))
+            @continue
+            @endif
         <h2>Year {{ $yearGroup }} Pupils</h2>
         <table class="table table-striped table-bordered">
             <thead>

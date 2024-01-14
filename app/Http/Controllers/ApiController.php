@@ -40,11 +40,14 @@ class ApiController
             foreach (collect($pupils)->sortBy('surname') as $pupil) {
                 $emailAddress = $pupil->schoolEmailAddress;
 
-                $result[$yearGroup][$pupil->surname.', '.$pupil->forename] = Cache::remember('getpupiltimetable'.$pupil->schoolEmailAddress, config('cache.time'), function () use ($emailAddress) {
-                    Log::error('Cache miss for '.$emailAddress);
-
-                    return $this->getPupilTimetable(Str::before($emailAddress, '@'))->getData()->timetable;
-                });
+                try {
+                    $result[$yearGroup][$pupil->surname . ', ' . $pupil->forename] = Cache::remember('getpupiltimetable' . $pupil->schoolEmailAddress, config('cache.time'), function () use ($emailAddress) {
+                        return $this->getPupilTimetable(Str::before($emailAddress, '@'))->getData()->timetable;
+                    });
+                } catch (ZeroSetsFound $exception) {
+                    $result['errors'][] = $exception->getMessage() . ' so they are missed out from the sheet below';
+                    Log::error($exception->getMessage());
+                }
             }
         }
         ksort($result);
@@ -84,7 +87,7 @@ class ApiController
      *
      * @response PupilTimetableResource
      */
-    public function getPupilTimetable(string $username): JsonResponse|Collection
+    public function getPupilTimetable(string $username): JsonResponse
     {
         $this->setPupil($username);
         $yearGroup = $this->pupil->yearGroup;
@@ -94,13 +97,7 @@ class ApiController
             $setResults = $this->calculateSets($yearGroup, $sets);
             $request = $this->sanitizeVariables($yearGroup, $setResults);
         } catch (ZeroSetsFound $exception) {
-            return response()->json(new PupilTimetableResource([
-                'yearGroup' => $yearGroup,
-                'fields' => new \stdClass(), //$this->sanitizeVariables($yearGroup, []),
-                'username' => $username,
-                'subjects' => $sets->sort(),
-                'results' => [],
-            ]));
+            throw new ZeroSetsFound($exception->getMessage().' for '.$username);
         }
 
         return response()->json(new PupilTimetableResource([
