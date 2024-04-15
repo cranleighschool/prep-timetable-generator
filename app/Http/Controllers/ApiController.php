@@ -54,7 +54,7 @@ class ApiController
     }
 
     /**
-     * @param  string  $tutorUsername  The username of the staff tutor
+     * @param string $tutorUsername The username of the staff tutor
      *
      * @throws TutorNotFoundToHaveAnyTutees
      * @throws ValidationException
@@ -65,7 +65,7 @@ class ApiController
         $tutorUsername = strtoupper($tutorUsername);
         $allPupils = School::allPupils()->where('tutorUsername', '=', $tutorUsername)->groupBy(['tutorUsername', 'yearGroup']);
 
-        if ($allPupils->isEmpty() || ! $allPupils[$tutorUsername] instanceof Collection) {
+        if ($allPupils->isEmpty() || !$allPupils[$tutorUsername] instanceof Collection) {
             throw new TutorNotFoundToHaveAnyTutees('Either Tutor not found or Tutor does not have any tutees in the dataset', 404);
         }
         $result = [];
@@ -73,8 +73,10 @@ class ApiController
             // @phpstan-ignore-next-line
             foreach (collect($pupils)->sortBy('surname') as $pupil) {
                 $emailAddress = $pupil->schoolEmailAddress;
-                $result[$yearGroup][$pupil->surname.', '.$pupil->forename] = $this->getPupilTimetable(Str::before($emailAddress,
-                    '@'))->getData()->timetable;
+                $result[$yearGroup][$pupil->surname.', '.$pupil->forename] = $this->getPupilTimetable(Str::before(
+                    $emailAddress,
+                    '@'
+                ))->getData()->timetable;
             }
         }
         ksort($result);
@@ -104,11 +106,11 @@ class ApiController
 
         return response()->json(new PupilTimetableResource([
             'yearGroup' => $yearGroup,
-            'fields' => $request,
+            'fields'    => $request,
             // 'timetable' => (new GenerateTimetable($yearGroup, $request, PrepDay::all()))->getTimetable(),
             'username' => $username,
             'subjects' => $sets->sort(),
-            'results' => $setResults,
+            'results'  => $setResults,
         ]));
     }
 
@@ -119,30 +121,30 @@ class ApiController
     {
         try {
             $output = [
-                'yearGroup' => $yearGroup,
-                'optiona' => $setResults['Option A'] ?? null,
-                'optionb' => $setResults['Option B'] ?? null,
-                'optionc' => $setResults['Option C'] ?? null,
-                'optiond' => $setResults['Option D'] ?? null,
-                'optione' => $setResults['Option E'] ?? null,
-                'cmfl' => $setResults['CMFL'] ?? null,
+                'yearGroup'   => $yearGroup,
+                'optiona'     => $setResults['Option A'] ?? null,
+                'optionb'     => $setResults['Option B'] ?? null,
+                'optionc'     => $setResults['Option C'] ?? null,
+                'optiond'     => $setResults['Option D'] ?? null,
+                'optione'     => $setResults['Option E'] ?? null,
+                'cmfl'        => $setResults['CMFL'] ?? null,
                 'english_set' => $setResults['English'],
-                'maths_set' => $setResults['Maths'],
+                'maths_set'   => $setResults['Maths'],
             ];
 
             if ($yearGroup === 9) {
                 return (object) array_merge([
-                    'science_set' => $setResults['Science'],
+                    'science_set'    => $setResults['Science'],
                     'humanities_set' => $setResults['Humanities'],
-                    'classciv_set' => $setResults['Classical Civilisation'] ?? null,
-                    'latin' => $setResults['Latin'] ?? null,
+                    'classciv_set'   => $setResults['Classical Civilisation'] ?? null,
+                    'latin'          => $setResults['Latin'] ?? null,
                 ], $output);
             }
 
             return (object) array_merge([
-                'biology_set' => $setResults['Biology'] ?? null,
+                'biology_set'   => $setResults['Biology'] ?? null,
                 'chemistry_set' => $setResults['Chemistry'] ?? null,
-                'physics_set' => $setResults['Physics'] ?? null,
+                'physics_set'   => $setResults['Physics'] ?? null,
             ], $output);
         } catch (ErrorException $errorException) {
             throw new ErrorException($errorException->getMessage().' on pupil: '.$this->pupil->fullName);

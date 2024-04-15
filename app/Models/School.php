@@ -25,7 +25,7 @@ class School extends Model implements Institution
     public static function allPupils(): Collection
     {
         $cacheTime = config('cache.time');
-        if (! is_int($cacheTime)) {
+        if (!is_int($cacheTime)) {
             $cacheTime = 60;
         }
 
@@ -62,8 +62,10 @@ class School extends Model implements Institution
 
         return Cache::rememberForever('pupil_'.$username, function () use ($allPupils, $username) {
             try {
-                $pupil = $allPupils->whereIn('schoolEmailAddress',
-                    [strtoupper($username).'@cranleigh.org', strtolower($username).'@cranleigh.org'])->firstOrFail();
+                $pupil = $allPupils->whereIn(
+                    'schoolEmailAddress',
+                    [strtoupper($username).'@cranleigh.org', strtolower($username).'@cranleigh.org']
+                )->firstOrFail();
 
                 return $pupil;
             } catch (ItemNotFoundException $exception) {

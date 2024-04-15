@@ -36,7 +36,7 @@ class GenerateTimetable
     private Collection $days;
 
     /**
-     * @param  Collection<array-key, PrepDay>  $days
+     * @param Collection<array-key, PrepDay> $days
      */
     public function __construct(int $yearGroup, Request|stdClass $request, Collection $days)
     {
@@ -52,9 +52,9 @@ class GenerateTimetable
     public function getTimetable(): array
     {
         $timetable = match ($this->yearGroup) {
-            9 => $this->year9Timetable(),
-            10 => $this->year10Timetable(),
-            11 => $this->year11Timetable(),
+            9       => $this->year9Timetable(),
+            10      => $this->year10Timetable(),
+            11      => $this->year11Timetable(),
             default => throw new \spkm\isams\Exceptions\ValidationException('Year group not valid')
         };
 
@@ -75,19 +75,25 @@ class GenerateTimetable
         $request = $this->request;
         foreach ($this->days as $day) {
             $this->timetable[$day->day] = [];
-            foreach ($day->sciences->where('set', $request->science_set)->where('nc_year',
-                $request->yearGroup)->pluck('subject')->toArray() as $science) {
+            foreach ($day->sciences->where('set', $request->science_set)->where(
+                'nc_year',
+                $request->yearGroup
+            )->pluck('subject')->toArray() as $science) {
                 self::addToTimetable($day->day, $science);
             }
             foreach ($day->english->where('set', $request->english_set)->where('nc_year', $request->yearGroup)->pluck('subject')->toArray() as $english) {
                 self::addToTimetable($day->day, 'English');
             }
-            foreach ($day->humanities->where('set',
-                $request->humanities_set)->pluck('subject')->toArray() as $humanity) {
+            foreach ($day->humanities->where(
+                'set',
+                $request->humanities_set
+            )->pluck('subject')->toArray() as $humanity) {
                 self::addToTimetable($day->day, $humanity);
             }
-            foreach ($day->classics->where('set',
-                $request->classciv_set)->pluck('subject')->toArray() as $classic) {
+            foreach ($day->classics->where(
+                'set',
+                $request->classciv_set
+            )->pluck('subject')->toArray() as $classic) {
                 self::addToTimetable($day->day, $classic);
             }
             switch ($day->day) {
@@ -132,16 +138,22 @@ class GenerateTimetable
         $request = $this->request;
         foreach ($this->days as $day) {
             $this->timetable[$day->day] = [];
-            foreach ($day->biology->where('set', $request->biology_set)->where('nc_year',
-                $request->yearGroup)->pluck('subject')->toArray() as $science) {
+            foreach ($day->biology->where('set', $request->biology_set)->where(
+                'nc_year',
+                $request->yearGroup
+            )->pluck('subject')->toArray() as $science) {
                 self::addToTimetable($day->day, $science);
             }
-            foreach ($day->physics->where('set', $request->physics_set)->where('nc_year',
-                $request->yearGroup)->pluck('subject')->toArray() as $science) {
+            foreach ($day->physics->where('set', $request->physics_set)->where(
+                'nc_year',
+                $request->yearGroup
+            )->pluck('subject')->toArray() as $science) {
                 self::addToTimetable($day->day, $science);
             }
-            foreach ($day->chemistry->where('set', $request->chemistry_set)->where('nc_year',
-                $request->yearGroup)->pluck('subject')->toArray() as $science) {
+            foreach ($day->chemistry->where('set', $request->chemistry_set)->where(
+                'nc_year',
+                $request->yearGroup
+            )->pluck('subject')->toArray() as $science) {
                 self::addToTimetable($day->day, $science);
             }
 
@@ -179,16 +191,22 @@ class GenerateTimetable
         $request = $this->request;
         foreach ($this->days as $day) {
             $this->timetable[$day->day] = [];
-            foreach ($day->biology->where('set', $request->biology_set)->where('nc_year',
-                $request->yearGroup)->pluck('subject')->toArray() as $science) {
+            foreach ($day->biology->where('set', $request->biology_set)->where(
+                'nc_year',
+                $request->yearGroup
+            )->pluck('subject')->toArray() as $science) {
                 self::addToTimetable($day->day, $science);
             }
-            foreach ($day->physics->where('set', $request->physics_set)->where('nc_year',
-                $request->yearGroup)->pluck('subject')->toArray() as $science) {
+            foreach ($day->physics->where('set', $request->physics_set)->where(
+                'nc_year',
+                $request->yearGroup
+            )->pluck('subject')->toArray() as $science) {
                 self::addToTimetable($day->day, $science);
             }
-            foreach ($day->chemistry->where('set', $request->chemistry_set)->where('nc_year',
-                $request->yearGroup)->pluck('subject')->toArray() as $science) {
+            foreach ($day->chemistry->where('set', $request->chemistry_set)->where(
+                'nc_year',
+                $request->yearGroup
+            )->pluck('subject')->toArray() as $science) {
                 self::addToTimetable($day->day, $science);
             }
 

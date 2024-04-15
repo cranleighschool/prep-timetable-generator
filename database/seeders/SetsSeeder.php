@@ -110,9 +110,9 @@ class SetsSeeder extends Seeder
         $day_id = PrepDay::where('day', $day)->first()->id;
 
         return [
-            'set' => $set,
+            'set'     => $set,
             'subject' => $subject,
-            'day_id' => $day_id,
+            'day_id'  => $day_id,
             'nc_year' => $yearGroup,
         ];
     }
