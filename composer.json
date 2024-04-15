@@ -1,8 +1,8 @@
 {
-    "name": "laravel/laravel",
+    "name": "cranleigh/prep-timetable-generator",
     "type": "project",
-    "description": "The Laravel Framework.",
-    "keywords": ["framework", "laravel"],
+    "description": "Prep Timetable Generator for Cranleigh School.",
+    "keywords": ["prep", "timetable"],
     "license": "MIT",
     "require": {
         "php": "^8.2",
@@ -14,11 +14,11 @@
     },
     "require-dev": {
         "fakerphp/faker": "^1.9.1",
-        "laravel/pint": "^1.10",
+        "laravel/pint": "^1.15",
         "laravel/sail": "^1.18",
         "mockery/mockery": "^1.4.4",
         "nunomaduro/collision": "^7.0",
-        "nunomaduro/larastan": "^2.0",
+        "larastan/larastan": "^2.0",
         "pestphp/pest-plugin-laravel": "^2.0",
         "spatie/laravel-ignition": "^2.0"
     },

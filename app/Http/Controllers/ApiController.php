@@ -5,13 +5,10 @@ namespace App\Http\Controllers;
 use App\Exceptions\TutorNotFoundToHaveAnyTutees;
 use App\Exceptions\ZeroSetsFound;
 use App\Http\Resources\PupilTimetableResource;
-use App\Logic\GenerateTimetable;
 use App\Logic\PrepSets;
-use App\Models\PrepDay;
 use App\Models\School;
 use ErrorException;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
@@ -41,11 +38,11 @@ class ApiController
                 $emailAddress = $pupil->schoolEmailAddress;
 
                 try {
-                    $result[$yearGroup][$pupil->surname . ', ' . $pupil->forename] = Cache::remember('getpupiltimetable' . $pupil->schoolEmailAddress, config('cache.time'), function () use ($emailAddress) {
+                    $result[$yearGroup][$pupil->surname.', '.$pupil->forename] = Cache::remember('getpupiltimetable'.$pupil->schoolEmailAddress, config('cache.time'), function () use ($emailAddress) {
                         return $this->getPupilTimetable(Str::before($emailAddress, '@'))->getData()->timetable;
                     });
                 } catch (ZeroSetsFound $exception) {
-                    $result['errors'][] = $exception->getMessage() . ' so they are missed out from the sheet below';
+                    $result['errors'][] = $exception->getMessage().' so they are missed out from the sheet below';
                     Log::error($exception->getMessage());
                 }
             }

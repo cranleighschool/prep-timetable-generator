@@ -24,7 +24,7 @@ class School extends Model implements Institution
         return Cache::remember('allPupils', config('cache.time'), function () {
             $isams = new CurrentPupilController(new self());
 
-            return $isams->index()->whereIn('yearGroup', [9, 10, 11])->map(function ($pupil) {
+            return $isams->index()->whereIn('yearGroup', [9, 10, 11, 12, 13])->map(function ($pupil) {
                 try {
                     $pupil->tutorUsername = self::getTutorUsername($pupil->tutorEmployeeId);
                 } catch (TypeError $error) {

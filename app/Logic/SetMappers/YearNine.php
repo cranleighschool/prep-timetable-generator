@@ -14,7 +14,7 @@ class YearNine implements SetMapperInterface
     /**
      * @throws Exception
      */
-    public function handle(int $year = null): int|string
+    public function handle(?int $year = null): int|string
     {
         $code = $this->code;
         $subject = $this->subject;
@@ -51,9 +51,9 @@ class YearNine implements SetMapperInterface
         }
 
         ////         English
-//        if (Str::contains($code, 'En')) {
-//            return substr($code, 1, 1).substr($code, -1, 1);
-//        }
+        //        if (Str::contains($code, 'En')) {
+        //            return substr($code, 1, 1).substr($code, -1, 1);
+        //        }
 
         // Humanities
         if (preg_match('^\A9(a|b|A|B)/(Hi|Cc|Gg|Rs|En)[0-9]{1}\Z^', $code, $matches)) {
