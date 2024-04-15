@@ -148,7 +148,7 @@ class GenerateTimetable
             switch ($day->day) {
                 case self::MONDAY:
                     self::addToTimetable($day->day, $request->optiond);
-                    self::addToTimetable($day->day, $request->optionc);
+                    self::addToTimetable($day->day, $request->optiona);
                     break;
                 case self::TUESDAY:
                     self::addToTimetable($day->day, $request->optione);
@@ -166,7 +166,7 @@ class GenerateTimetable
                 case self::FRIDAY:
                     self::addToTimetable($day->day, $request->optiona);
                     self::addToTimetable($day->day, 'Maths');
-                    self::addToTimetable($day->day, $request->optionb);
+                    self::addToTimetable($day->day, $request->optiond);
                     break;
             }
         }
