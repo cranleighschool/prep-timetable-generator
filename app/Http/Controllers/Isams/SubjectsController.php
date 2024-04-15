@@ -11,9 +11,9 @@ use stdClass;
 class SubjectsController extends Endpoint
 {
     /**
-     * @throws GuzzleException
-     *
      * @return Collection<array-key, mixed>
+     *
+     * @throws GuzzleException
      */
     public function index(): Collection
     {
@@ -30,9 +30,9 @@ class SubjectsController extends Endpoint
     }
 
     /**
-     * @throws GuzzleException
-     *
      * @return Collection<array-key, stdClass>
+     *
+     * @throws GuzzleException
      */
     public function show(int $subjectId): Collection
     {

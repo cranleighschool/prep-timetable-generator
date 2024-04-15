@@ -1,6 +1,6 @@
 module.exports = {
-    purge: ['./resources/**/*.blade.php', './resources/**/*.js', './resources/**/*.vue'],
-    darkMode: false, // or 'media' or 'class'
+    content: ['./resources/**/*.blade.php', './resources/**/*.js', './resources/**/*.vue'],
+    darkMode: 'media', // or 'media' or 'class'
     theme: {
         extend: {},
     },
@@ -10,7 +10,6 @@ module.exports = {
     plugins: [
         require('@tailwindcss/typography'),
         require('@tailwindcss/forms'),
-        require('@tailwindcss/line-clamp'),
         require('@tailwindcss/aspect-ratio'),
     ],
 };

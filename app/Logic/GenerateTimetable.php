@@ -36,7 +36,7 @@ class GenerateTimetable
     private Collection $days;
 
     /**
-     * @param Collection<array-key, PrepDay> $days
+     * @param  Collection<array-key, PrepDay>  $days
      */
     public function __construct(int $yearGroup, Request|stdClass $request, Collection $days)
     {
@@ -52,9 +52,9 @@ class GenerateTimetable
     public function getTimetable(): array
     {
         $timetable = match ($this->yearGroup) {
-            9       => $this->year9Timetable(),
-            10      => $this->year10Timetable(),
-            11      => $this->year11Timetable(),
+            9 => $this->year9Timetable(),
+            10 => $this->year10Timetable(),
+            11 => $this->year11Timetable(),
             default => throw new \spkm\isams\Exceptions\ValidationException('Year group not valid')
         };
 

@@ -7,6 +7,9 @@ use Database\Seeders\SetsSeeder;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\DB;
 
+/**
+ * @deprecated Now use the ReinstallCommand artisan install:reseed
+ */
 class ResetSubjectSetDays extends Command
 {
     /**

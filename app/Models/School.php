@@ -25,7 +25,7 @@ class School extends Model implements Institution
     public static function allPupils(): Collection
     {
         $cacheTime = config('cache.time');
-        if (!is_int($cacheTime)) {
+        if (! is_int($cacheTime)) {
             $cacheTime = 60;
         }
 

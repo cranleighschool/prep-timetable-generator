@@ -2,8 +2,10 @@
 
 namespace App\Console\Commands;
 
+use App\Exceptions\ZeroSetsFound;
 use App\Http\Controllers\ApiController;
 use App\Models\School;
+use Carbon\CarbonInterval;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Str;
@@ -31,6 +33,7 @@ class CachePupilTimetables extends Command
 
     /**
      * Execute the console command.
+     * @throws \Exception
      */
     public function handle(): int
     {
@@ -43,25 +46,29 @@ class CachePupilTimetables extends Command
         foreach ($pupils->sortBy('surname') as $pupil) {
             $emailAddress = $pupil->schoolEmailAddress;
 
-            Cache::forget('getpupiltimetable'.$pupil->schoolEmailAddress);
+            Cache::forget('getpupiltimetable' . $pupil->schoolEmailAddress);
             Cache::remember(
-                'getpupiltimetable'.$pupil->schoolEmailAddress,
+                'getpupiltimetable' . $pupil->schoolEmailAddress,
                 config('cache.time'),
                 function () use ($emailAddress) {
-                    return $this->api->getPupilTimetable(Str::before($emailAddress, '@'))->getContent();
+                    try {
+                        return $this->api->getPupilTimetable(Str::before($emailAddress, '@'))->getContent();
+                    } catch (ZeroSetsFound $e) {
+                        $this->newLine();
+                        $this->error($e->getMessage());
+                    }
                 }
             );
 
-            $this->alert('Completed: '.$pupil->surname.', '.$pupil->forename);
-            $this->newLine();
-
             $bar->advance();
-            $this->newLine();
         }
         $timeToComplete = $start->diffInSeconds(now());
         $this->newLine(2);
-        $this->comment('Processed in '.$timeToComplete.' seconds');
+        $this->comment(sprintf('Processed in %s',
+            CarbonInterval::seconds(185)
+                ->cascade()
+                ->forHumans()));
 
-        return Command::SUCCESS;
+        return self::SUCCESS;
     }
 }

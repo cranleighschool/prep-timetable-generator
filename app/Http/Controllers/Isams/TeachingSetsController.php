@@ -10,9 +10,9 @@ use spkm\isams\Endpoint;
 class TeachingSetsController extends Endpoint
 {
     /**
-     * @throws GuzzleException
-     *
      * @return Collection<array-key, mixed>
+     *
+     * @throws GuzzleException
      */
     public function index(): Collection
     {

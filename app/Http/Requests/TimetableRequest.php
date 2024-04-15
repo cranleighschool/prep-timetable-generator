@@ -48,13 +48,13 @@ class TimetableRequest extends FormRequest
     public function rules()
     {
         return [
-            'username'       => 'string|required',
-            'science_set'    => 'min:1|max:8|integer',
+            'username' => 'string|required',
+            'science_set' => 'min:1|max:8|integer',
             'humanities_set' => 'min:1|max:8|string',
-            'biology_set'    => 'min:1|max:8|string',
-            'chemistry_set'  => 'min:1|max:8|string',
-            'physics_set'    => 'min:1|max:8|string',
-            'classciv_set'   => 'min:1|max:6|string',
+            'biology_set' => 'min:1|max:8|string',
+            'chemistry_set' => 'min:1|max:8|string',
+            'physics_set' => 'min:1|max:8|string',
+            'classciv_set' => 'min:1|max:6|string',
 
             //'maths_set' => 'regex:/^[a-zA-Z]{1}[0-9]{1}$/',
             'maths_set' => 'min:1|max:8|integer',
@@ -66,9 +66,9 @@ class TimetableRequest extends FormRequest
         return [
             'classciv_set.min' => 'That looks like an incorrect Classics Set.',
             'classciv_set.max' => 'That looks like an incorrect Classics Set.',
-            '*.min'            => 'That looks like an incorrect '.ucwords(':attribute').' number.',
-            '*.max'            => 'That looks like an incorrect '.ucwords(':attribute').' number.',
-            'maths_set'        => 'Looks like an invalid Maths Set.',
+            '*.min' => 'That looks like an incorrect '.ucwords(':attribute').' number.',
+            '*.max' => 'That looks like an incorrect '.ucwords(':attribute').' number.',
+            'maths_set' => 'Looks like an invalid Maths Set.',
         ];
     }
 }

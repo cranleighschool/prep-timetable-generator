@@ -33,7 +33,7 @@ trait PrepSets
         }
 
         // OPTIONS
-        if (Str::startsWith($code, '9A') && !Str::contains($code, ['Gg', 'Cc', 'Hi', 'Rs', 'La'])) {
+        if (Str::startsWith($code, '9A') && ! Str::contains($code, ['Gg', 'Cc', 'Hi', 'Rs', 'La'])) {
             return 'Option A';
         }
         if (Str::startsWith($code, '9B')) {
@@ -107,7 +107,7 @@ trait PrepSets
     }
 
     /**
-     * @param Collection<string, int|string> $sets
+     * @param  Collection<string, int|string>  $sets
      */
     private function matchSets(Collection $sets, array $unsets = []): array
     {
@@ -127,7 +127,7 @@ trait PrepSets
     }
 
     /**
-     * @param Collection<string, string> $sets
+     * @param  Collection<string, string>  $sets
      *
      * @throws ErrorException
      * @throws ZeroSetsFound

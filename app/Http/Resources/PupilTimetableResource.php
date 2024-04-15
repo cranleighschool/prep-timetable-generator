@@ -13,16 +13,16 @@ class PupilTimetableResource extends JsonResource
     /**
      * Transform the resource into an array.
      *
-     * @throws ValidationException
-     *
      * @return array<string, mixed>
+     *
+     * @throws ValidationException
      */
     public function toArray(Request $request): array
     {
         return [
             /** @var array<string,array<string>> $timetable */
             'timetable' => (new GenerateTimetable($this['yearGroup'], $this['fields'], PrepDay::all()))->getTimetable(),
-            'username'  => $this['username'],
+            'username' => $this['username'],
             /** @var int $yearGroup the Year Group (National Curriculum) for the pupil */
             'yearGroup' => $this['yearGroup'],
             /** @var array<string,string> $subjects */
