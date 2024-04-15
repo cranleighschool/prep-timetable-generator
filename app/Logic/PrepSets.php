@@ -127,8 +127,9 @@ trait PrepSets
     }
 
     /**
-     * @throws ErrorException
      * @param  Collection<string, string>  $sets
+     *
+     * @throws ErrorException
      * @throws ZeroSetsFound
      */
     private function calculateSets(int $yearGroup, Collection $sets): array

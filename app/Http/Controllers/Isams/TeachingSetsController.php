@@ -11,6 +11,7 @@ class TeachingSetsController extends Endpoint
 {
     /**
      * @return Collection<array-key, mixed>
+     *
      * @throws GuzzleException
      */
     public function index(): Collection

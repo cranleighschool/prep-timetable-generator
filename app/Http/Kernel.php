@@ -12,6 +12,7 @@ class Kernel extends HttpKernel
      * These middleware are run during every request to your application.
      *
      * @var array<string>
+     *
      * @phpstan-ignore-next-line
      */
     protected $middleware = [
@@ -28,6 +29,7 @@ class Kernel extends HttpKernel
      * The application's route middleware groups.
      *
      * @var array<string, array<string>>
+     *
      *     @phpstan-ignore-next-line
      */
     protected $middlewareGroups = [
