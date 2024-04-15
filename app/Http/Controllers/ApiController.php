@@ -9,6 +9,7 @@ use App\Logic\PrepSets;
 use App\Models\School;
 use ErrorException;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
@@ -55,18 +56,21 @@ class ApiController
     /**
      * @param  string  $tutorUsername  The username of the staff tutor
      *
-     * @throws ValidationException|TutorNotFoundToHaveAnyTutees
+     * @throws TutorNotFoundToHaveAnyTutees
+     * @throws ValidationException
+     * @throws ZeroSetsFound|ErrorException
      */
     public function getTutorData(string $tutorUsername): JsonResponse
     {
         $tutorUsername = strtoupper($tutorUsername);
         $allPupils = School::allPupils()->where('tutorUsername', '=', $tutorUsername)->groupBy(['tutorUsername', 'yearGroup']);
 
-        if ($allPupils->isEmpty()) {
+        if ($allPupils->isEmpty() || ! $allPupils[$tutorUsername] instanceof Collection) {
             throw new TutorNotFoundToHaveAnyTutees('Either Tutor not found or Tutor does not have any tutees in the dataset', 404);
         }
         $result = [];
         foreach ($allPupils[$tutorUsername] as $yearGroup => $pupils) {
+            // @phpstan-ignore-next-line
             foreach (collect($pupils)->sortBy('surname') as $pupil) {
                 $emailAddress = $pupil->schoolEmailAddress;
                 $result[$yearGroup][$pupil->surname.', '.$pupil->forename] = $this->getPupilTimetable(Str::before($emailAddress,
@@ -81,6 +85,7 @@ class ApiController
     /**
      * @throws ErrorException
      * @throws ValidationException
+     * @throws ZeroSetsFound
      *
      * @response PupilTimetableResource
      */

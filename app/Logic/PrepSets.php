@@ -106,6 +106,9 @@ trait PrepSets
         throw new Exception('Something went wrong, could not match: '.$subject.' ('.$code.')');
     }
 
+    /**
+     * @param  Collection<string, int|string>  $sets
+     */
     private function matchSets(Collection $sets, array $unsets = []): array
     {
         $matchSets = [];
@@ -125,6 +128,7 @@ trait PrepSets
 
     /**
      * @throws ErrorException
+     * @param  Collection<string, string>  $sets
      * @throws ZeroSetsFound
      */
     private function calculateSets(int $yearGroup, Collection $sets): array
@@ -140,9 +144,11 @@ trait PrepSets
         try {
             if ($yearGroup === 9) {
                 if (($sets['Biology'] == $sets['Physics']) && $sets['Physics'] == $sets['Chemistry']) {
+                    // @phpstan-ignore-next-line
                     $sets['Science'] = $sets['Biology'];
                 }
 
+                // @phpstan-ignore-next-line
                 $sets['Humanities'] = $sets['Religious Studies'] ?? $sets['Geography'];
 
                 $unsets = ['Biology', 'Chemistry', 'Physics', 'Geography', 'History', 'Religious Studies', 'Digital Literacy'];
@@ -163,14 +169,13 @@ trait PrepSets
      */
     public function getPupilAndSets(): array
     {
-        $sets = Cache::remember('sets_'.$this->pupil->schoolId, config('cache.time'), function () {
-            $timetable = new PupilTimetableController(School::first());
+        return Cache::remember('sets_'.$this->pupil->schoolId, config('cache.time'), function () {
+            $timetable = new PupilTimetableController(School::firstOrFail());
 
+            // @phpstan-ignore-next-line
             return collect($timetable->show($this->pupil->schoolId)['sets'])->pluck('code',
                 'subjectId')->unique()->toArray();
         });
-
-        return $sets;
     }
 
     public function setPupil(string $username): void
@@ -178,12 +183,15 @@ trait PrepSets
         $this->pupil = School::getPupil($username);
     }
 
+    /**
+     * @return Collection<string, string>
+     */
     public static function getSets(array $sets): Collection
     {
         return Cache::rememberForever('sets'.serialize($sets), function () use ($sets) {
-            $subjectController = new SubjectsController(new School());
 
-            return collect($sets)->map(function ($item, $key) use ($subjectController) {
+            return collect($sets)->map(function ($item, $key) {
+                $subjectController = new SubjectsController(new School());
                 $subject = $subjectController->show($key);
                 $subject['set'] = $item;
 

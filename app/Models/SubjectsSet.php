@@ -59,7 +59,9 @@ class SubjectsSet extends Model
             $label = 'Humanities Set: '.substr($matches[0], -1);
         }
         if (preg_match('^\A(9|11)-(MA)+(.*)^', $code, $matches)) {
-            $label = 'Maths Set: '.trim(end($matches));
+            if ($matches) {
+                $label = 'Maths Set: '.trim(end($matches));
+            }
         }
 
         if ($raw) {

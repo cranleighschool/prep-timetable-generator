@@ -19,9 +19,17 @@ class School extends Model implements Institution
 {
     use HasFactory;
 
+    /**
+     * @return Collection<array-key,Pupil>
+     */
     public static function allPupils(): Collection
     {
-        return Cache::remember('allPupils', config('cache.time'), function () {
+        $cacheTime = config('cache.time');
+        if (! is_int($cacheTime)) {
+            $cacheTime = 60;
+        }
+
+        return Cache::remember('allPupils', $cacheTime, function () {
             $isams = new CurrentPupilController(new self());
 
             return $isams->index()->whereIn('yearGroup', [9, 10, 11, 12, 13])->map(function ($pupil) {
@@ -40,7 +48,7 @@ class School extends Model implements Institution
         });
     }
 
-    public static function getTutorUsername(int $tutorId)
+    public static function getTutorUsername(int $tutorId): string
     {
         $isams = new HumanResourcesEmployeeController(new self());
         $return = $isams->show($tutorId);

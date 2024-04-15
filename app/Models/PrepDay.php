@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class PrepDay extends Model
 {
@@ -14,70 +15,70 @@ class PrepDay extends Model
      */
     public $timestamps = false;
 
-    /**
-     * @var string[]
-     */
     protected $fillable = [
         'day',
     ];
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     * @return HasMany<SubjectsSet>
      */
-    public function biology()
+    public function biology(): HasMany
     {
         return $this->sets()->whereIn('subject', ['Biology']);
     }
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     * @return HasMany<SubjectsSet>
      */
-    private function sets()
+    private function sets(): HasMany
     {
         return $this->hasMany(SubjectsSet::class, 'day_id');
     }
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     * @return HasMany<SubjectsSet>
      */
-    public function chemistry()
+    public function chemistry(): HasMany
     {
         return $this->sets()->whereIn('subject', ['Chemistry']);
     }
 
-    public function english()
+    /**
+     * @return HasMany<SubjectsSet>
+     */
+    public function english(): HasMany
     {
         return $this->sets()->whereIn('subject', ['English']);
     }
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     * @return HasMany<SubjectsSet>
      */
-    public function physics()
+    public function physics(): HasMany
     {
         return $this->sets()->whereIn('subject', ['Physics']);
     }
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     * @return HasMany<SubjectsSet>
      */
-    public function sciences()
+    public function sciences(): HasMany
     {
         return $this->sets()->whereIn('subject', ['Biology', 'Chemistry', 'Physics']);
     }
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     * @return HasMany<SubjectsSet>
      */
-    public function humanities()
+    public function humanities(): HasMany
     {
         return $this->sets()->whereIn('subject', ['Geography', 'RS', 'History']);
     }
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     * @return HasMany<SubjectsSet>
      */
-    public function classics()
+    public function classics(): HasMany
     {
         return $this->sets()->whereIn('subject', ['Class Civ']);
     }

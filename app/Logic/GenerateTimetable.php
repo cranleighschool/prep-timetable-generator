@@ -2,10 +2,12 @@
 
 namespace App\Logic;
 
+use App\Models\PrepDay;
 use Illuminate\Http\Request;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Str;
 use spkm\isams\Exceptions\ValidationException;
+use stdClass;
 
 /**
  * @property int $yearGroup
@@ -26,12 +28,19 @@ class GenerateTimetable
 
     private int $yearGroup;
 
-    private Request|\stdClass $request;
+    private Request|stdClass $request;
 
+    /**
+     * @var Collection<array-key,PrepDay>
+     */
     private Collection $days;
 
-    public function __construct(int $yearGroup, Request|\stdClass $request, Collection $days)
+    /**
+     * @param  Collection<array-key, PrepDay>  $days
+     */
+    public function __construct(int $yearGroup, Request|stdClass $request, Collection $days)
     {
+        $days->ensure(PrepDay::class);
         $this->days = $days;
         $this->yearGroup = $yearGroup;
         $this->request = $request;
