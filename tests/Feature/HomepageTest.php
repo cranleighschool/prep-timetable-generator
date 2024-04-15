@@ -13,5 +13,5 @@ it('asks for school username', function () {
 
 it('handles invalid usernames', function () {
     $response = $this->get('setup?username=invalidusernmame239ewr78fdy8');
-    $response->assertStatus(302); // becuase of the ValidationException
+    $response->assertStatus(302); // because of the ValidationException
 });
