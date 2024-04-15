@@ -44,10 +44,13 @@ class CachePupilTimetables extends Command
             $emailAddress = $pupil->schoolEmailAddress;
 
             Cache::forget('getpupiltimetable'.$pupil->schoolEmailAddress);
-            Cache::remember('getpupiltimetable'.$pupil->schoolEmailAddress, config('cache.time'),
+            Cache::remember(
+                'getpupiltimetable'.$pupil->schoolEmailAddress,
+                config('cache.time'),
                 function () use ($emailAddress) {
                     return $this->api->getPupilTimetable(Str::before($emailAddress, '@'))->getContent();
-                });
+                }
+            );
 
             $this->alert('Completed: '.$pupil->surname.', '.$pupil->forename);
             $this->newLine();

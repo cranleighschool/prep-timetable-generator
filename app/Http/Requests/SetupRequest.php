@@ -31,9 +31,9 @@ class SetupRequest extends FormRequest
             $this->merge(['sets' => $sets]);
             $sets = self::getSets($this->get('sets'));
             $this->merge([
-                'sets' => $sets,
+                'sets'      => $sets,
                 'yearGroup' => (int) $this->pupil->yearGroup,
-                'pupil' => $this->pupil->toArray(),
+                'pupil'     => $this->pupil->toArray(),
             ]);
         } catch (PupilNotFound $exception) {
             throw ValidationException::withMessages([
@@ -47,7 +47,7 @@ class SetupRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'username' => 'required|string',
+            'username'  => 'required|string',
             'yearGroup' => [
                 function ($attribute, $value, $fail) {
                     if ($value > 11) {

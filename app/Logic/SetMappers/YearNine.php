@@ -25,10 +25,10 @@ class YearNine implements SetMapperInterface
         }
 
         // OPTIONS
-        if (Str::startsWith($code, '9A') && ! Str::contains($code, ['Gg', 'Cc', 'Hi', 'Rs', 'La', 'En'])) {
+        if (Str::startsWith($code, '9A') && !Str::contains($code, ['Gg', 'Cc', 'Hi', 'Rs', 'La', 'En'])) {
             return 'Option A';
         }
-        if (Str::startsWith($code, '9B') && ! Str::contains($code, ['Gg', 'Cc', 'Hi', 'Rs', 'La', 'En'])) {
+        if (Str::startsWith($code, '9B') && !Str::contains($code, ['Gg', 'Cc', 'Hi', 'Rs', 'La', 'En'])) {
             return 'Option B';
         }
         if (Str::startsWith($code, '9C')) {
