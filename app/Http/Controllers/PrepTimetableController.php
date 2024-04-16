@@ -57,7 +57,6 @@ class PrepTimetableController extends Controller
         $validator = Validator::make(['tutorUsername' => $tutorUsername], [
             'tutorUsername' => [
                 'required',
-                //Rule::in(config('timetable.houses')),
             ],
         ]);
         if ($validator->fails()) {
