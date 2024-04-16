@@ -7,6 +7,7 @@ use Carbon\CarbonInterval;
 use Exception;
 use Illuminate\Console\Command;
 use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Str;
 
 class CachePupilTimetables extends Command
@@ -38,9 +39,8 @@ class CachePupilTimetables extends Command
         $bar = $this->output->createProgressBar(count($houses));
         $bar->start();
 
-        $api = new ApiController();
         foreach ($houses as $house) {
-            $api->getHouseData($house);
+            Http::get(url('house/'.$house))->throw()->json();
             $bar->advance();
         }
 
