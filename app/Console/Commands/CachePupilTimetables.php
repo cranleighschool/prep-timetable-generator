@@ -40,7 +40,7 @@ class CachePupilTimetables extends Command
         $bar->start();
 
         foreach ($houses as $house) {
-            Http::get(url('house/'.$house))->throw()->json();
+            Http::timeout(120)->get(url('house/'.$house))->throw()->json();
             $bar->advance();
         }
 
