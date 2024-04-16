@@ -6,7 +6,7 @@
         @endforeach
     @endif
     @foreach($data as $yearGroup => $pupils)
-        @if (is_String($yearGroup))
+        @if (is_string($yearGroup))
             @continue
             @endif
         <h2>Year {{ $yearGroup }} Pupils</h2>
@@ -22,9 +22,7 @@
             @foreach($pupils as $pupil => $days)
                 <tr>
                     <th>{{ $pupil }}</th>
-
                     @foreach ($days as $day)
-
                         <td>{!! implode('<br />', $day) !!}</td>
                     @endforeach
                 </tr>
