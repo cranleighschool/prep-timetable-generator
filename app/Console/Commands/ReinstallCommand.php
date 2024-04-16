@@ -26,8 +26,10 @@ class ReinstallCommand extends Command
     public function handle(): int
     {
         $this->call('down', ['--render' => 'layouts.maintenance']);
-        $this->call('migrate:fresh');
-        $this->call('db:seed');
+        $this->call('migrate:fresh', [
+            '--force' => true,
+            '--seed' => true
+        ]);
         $this->call('cache:clear');
         $this->call('timetable:cache');
         $this->call('up');

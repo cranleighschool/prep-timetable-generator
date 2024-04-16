@@ -2,12 +2,11 @@
 
 namespace App\Console\Commands;
 
-use App\Exceptions\ZeroSetsFound;
 use App\Http\Controllers\ApiController;
-use App\Models\School;
 use Carbon\CarbonInterval;
+use Exception;
 use Illuminate\Console\Command;
-use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Str;
 
 class CachePupilTimetables extends Command
@@ -26,42 +25,25 @@ class CachePupilTimetables extends Command
      */
     protected $description = 'Cache Pupil Timetables';
 
-    public function __construct(protected ApiController $api)
-    {
-        parent::__construct();
-    }
-
     /**
      * Execute the console command.
-     * @throws \Exception
+     *
+     * @throws Exception
      */
     public function handle(): int
     {
         $start = now();
 
-        $pupils = School::allPupils();
-
-        $bar = $this->output->createProgressBar($pupils->count());
+        $houses = Arr::map(config('timetable.houses'), fn (string $house) => Str::slug($house));
+        $bar = $this->output->createProgressBar(count($houses));
         $bar->start();
-        foreach ($pupils->sortBy('surname') as $pupil) {
-            $emailAddress = $pupil->schoolEmailAddress;
 
-            Cache::forget('getpupiltimetable' . $pupil->schoolEmailAddress);
-            Cache::remember(
-                'getpupiltimetable' . $pupil->schoolEmailAddress,
-                config('cache.time'),
-                function () use ($emailAddress) {
-                    try {
-                        return $this->api->getPupilTimetable(Str::before($emailAddress, '@'))->getContent();
-                    } catch (ZeroSetsFound $e) {
-                        $this->newLine();
-                        $this->error($e->getMessage());
-                    }
-                }
-            );
-
+        $api = new ApiController();
+        foreach ($houses as $house) {
+            $api->getHouseData($house);
             $bar->advance();
         }
+
         $timeToComplete = $start->diffInSeconds(now());
         $this->newLine(2);
         $this->comment(sprintf('Processed in %s',
