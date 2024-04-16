@@ -47,7 +47,7 @@ class CachePupilTimetables extends Command
         $timeToComplete = $start->diffInSeconds(now());
         $this->newLine(2);
         $this->comment(sprintf('Processed in %s',
-            CarbonInterval::seconds(185)
+            CarbonInterval::seconds($timeToComplete)
                 ->cascade()
                 ->forHumans()));
 
