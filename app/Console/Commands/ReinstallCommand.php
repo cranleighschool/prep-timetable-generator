@@ -31,8 +31,8 @@ class ReinstallCommand extends Command
             '--seed' => true
         ]);
         $this->call('cache:clear');
-        $this->call('timetable:cache');
         $this->call('up');
+        $this->call('timetable:cache');
 
         return self::SUCCESS;
     }
