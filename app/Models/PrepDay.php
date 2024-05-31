@@ -8,8 +8,6 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class PrepDay extends Model
 {
-    use HasFactory;
-
     /**
      * @var bool
      */

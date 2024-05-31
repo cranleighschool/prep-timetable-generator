@@ -8,8 +8,6 @@ use Illuminate\Support\Str;
 
 class SubjectsSet extends Model
 {
-    use HasFactory;
-
     /**
      * @var string
      */
