@@ -1,0 +1,49 @@
+<?php
+
+//test('strict types used everywhere')->expect('App')->toHaveStrictTypes();
+test('globals')
+    ->expect([
+        'dd',
+        'dump',
+        'ddd',
+        'die',
+        'ray',
+        'sleep',
+        'var_dump',
+        'env',
+    ])
+    ->toBeUsedInNothing();
+test('Models to extend base model')
+    ->expect('App\Models')
+    ->toExtend(\Illuminate\Database\Eloquent\Model::class);
+test('Controllers')
+    ->expect('App\Http\Controllers')
+    ->toBeClasses();
+test('Form Requests')
+    ->expect('App\Http\Requests')
+    ->toBeClasses()
+    ->toExtend(\Illuminate\Foundation\Http\FormRequest::class);
+test('Commands')
+    ->expect('App\Console\Commands')
+    ->toBeClasses()
+    ->toExtend(\Illuminate\Console\Command::class)
+    ->toHaveMethod('handle');
+test('PupilTimetableResouce')
+    ->expect('App\Http\Resources\PupilTimetableResource')
+    ->toHaveMethod('toArray')
+    ->toExtend(\Illuminate\Http\Resources\Json\JsonResource::class);
+test('Mappers')
+    ->expect('App\Logic\SetMappers')
+    ->toHaveMethod('handle')->ignoring(
+        \App\Logic\SetMappers\AbstractMapper::class
+    )
+    ->toHaveMethod('__construct')
+    ->toImplement('App\Logic\SetMappers\SetMapperInterface')->ignoring([
+        \App\Logic\SetMappers\SetMapperInterface::class,
+        \App\Logic\SetMappers\AbstractMapper::class,
+    ]);
+test('Exceptions')
+    ->expect('App\Exceptions')
+    ->toBeClasses()
+    ->not->toHaveSuffix('Exception')
+    ->toExtend(\Exception::class)->ignoring(\App\Exceptions\Handler::class);
