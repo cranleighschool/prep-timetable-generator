@@ -5,12 +5,8 @@ namespace App\Logic\SetMappers;
 use Exception;
 use Illuminate\Support\Str;
 
-class Gcses implements SetMapperInterface
+class Gcses extends AbstractMapper implements SetMapperInterface
 {
-    public function __construct(protected string $code, protected string $subject)
-    {
-    }
-
     /**
      * @throws Exception
      */

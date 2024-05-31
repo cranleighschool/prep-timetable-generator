@@ -5,12 +5,8 @@ namespace App\Logic\SetMappers;
 use Exception;
 use Illuminate\Support\Str;
 
-class YearNine implements SetMapperInterface
+class YearNine extends AbstractMapper implements SetMapperInterface
 {
-    public function __construct(protected string $code, protected string $subject)
-    {
-    }
-
     /**
      * @throws Exception
      */
