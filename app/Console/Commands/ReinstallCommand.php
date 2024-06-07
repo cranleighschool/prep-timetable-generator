@@ -28,7 +28,7 @@ class ReinstallCommand extends Command
         $this->call('down', ['--render' => 'layouts.maintenance']);
         $this->call('migrate:fresh', [
             '--force' => true,
-            '--seed' => true
+            '--seed' => true,
         ]);
         $this->call('cache:clear');
         $this->call('up');

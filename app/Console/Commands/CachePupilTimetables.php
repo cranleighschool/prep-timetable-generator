@@ -2,7 +2,6 @@
 
 namespace App\Console\Commands;
 
-use App\Http\Controllers\ApiController;
 use Carbon\CarbonInterval;
 use Exception;
 use Illuminate\Console\Command;
