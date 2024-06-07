@@ -73,7 +73,7 @@ class Gcses extends AbstractMapper implements SetMapperInterface
             'Greek',
             'Philosophy',
             'Supervised Private Study',
-            'Supervised Private Study',
+            'PSHE',
         ])) {
             return (int) substr($code, -1, 1);
         }
