@@ -52,7 +52,7 @@
     <div class="container">
         <div class="row p-3">
             <div class="col float-end">
-                <small class="float-end">Questions / Errors / Comments - Please contact Mr Bradley (<a href="mailto:frb@cranleigh.org">frb@cranleigh.org</a>) or your HM. </small>
+                <small class="float-end">Questions / Errors / Comments - Please contact Mr Bradley (<a href="mailto:servicedesk@cranleigh.org">servicedesk@cranleigh.org</a>) or your HM. </small>
             </div>
         </div>
     </div>
