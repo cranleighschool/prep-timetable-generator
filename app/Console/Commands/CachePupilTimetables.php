@@ -34,7 +34,7 @@ class CachePupilTimetables extends Command
     {
         $start = now();
 
-        $houses = Arr::map(config('timetable.houses'), fn (string $house) => Str::slug($house));
+        $houses = Arr::map((array) config('timetable.houses'), fn (string $house) => Str::slug($house));
         $bar = $this->output->createProgressBar(count($houses));
         $bar->start();
 

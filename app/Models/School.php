@@ -30,27 +30,27 @@ class School extends Model implements Institution
         }
 
         return Cache::remember('allPupils', $cacheTime, function () {
-            $isams = new CurrentPupilController(new self());
+            $isams = new CurrentPupilController(new self);
 
-            return $isams->index()->whereIn('yearGroup', [9, 10, 11])->map(function ($pupil) {
-                try {
-                    $pupil->tutorUsername = self::getTutorUsername($pupil->tutorEmployeeId);
-                } catch (TypeError $error) {
-                    //echo $error->getMessage()." (".sprintf("%s %s %d", $pupil->fullName, $pupil->boardingHouse, $pupil->yearGroup).")";
-                    $pupil->tutorUsername = 'UNKNOWN';
-                } catch (ClientException $e) {
-                    //echo $e->getMessage();
-                    $pupil->tutorUsername = 'UNKNOWN';
-                }
+            return $isams->index()
+                ->whereIn('yearGroup', [9, 10, 11])
+                ->map(function ($pupil) {
+                    try {
+                        $pupil->tutorUsername = self::getTutorUsername($pupil->tutorEmployeeId);
+                    } catch (TypeError $error) {
+                        $pupil->tutorUsername = 'UNKNOWN';
+                    } catch (ClientException $e) {
+                        $pupil->tutorUsername = 'UNKNOWN';
+                    }
 
-                return $pupil;
-            });
+                    return $pupil;
+                });
         });
     }
 
     public static function getTutorUsername(int $tutorId): string
     {
-        $isams = new HumanResourcesEmployeeController(new self());
+        $isams = new HumanResourcesEmployeeController(new self);
         $return = $isams->show($tutorId);
 
         return $return->schoolInitials;

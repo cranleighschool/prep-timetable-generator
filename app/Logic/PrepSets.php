@@ -12,7 +12,6 @@ use Exception;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Str;
-use Illuminate\Validation\ValidationException;
 use spkm\isams\Controllers\PupilTimetableController;
 use spkm\isams\Wrappers\Pupil;
 
@@ -108,6 +107,8 @@ trait PrepSets
 
     /**
      * @param  Collection<string, int|string>  $sets
+     * @param  array<array-key, string>  $unsets
+     * @return array<int|string, int|string>
      */
     private function matchSets(Collection $sets, array $unsets = []): array
     {
@@ -127,7 +128,8 @@ trait PrepSets
     }
 
     /**
-     * @param  Collection<string, string>  $sets
+     * @param  Collection<int|string, mixed>  $sets
+     * @return array<int|string, int|string>
      *
      * @throws ErrorException
      * @throws ZeroSetsFound
@@ -135,6 +137,7 @@ trait PrepSets
     private function calculateSets(int $yearGroup, Collection $sets): array
     {
         $sets = $sets->flip();
+        // @phpstan-ignore-next-line
         $sets = $sets->map([$this, 'mapSets']);
         $unsets = [];
 
@@ -165,13 +168,20 @@ trait PrepSets
         return $matchSets;
     }
 
+    public function getCacheTime(): int
+    {
+        return config('cache.time', 500);
+    }
+
     /**
-     * @throws ValidationException
+     * @return array<string, int|string>
      */
     public function getPupilAndSets(): array
     {
-        return Cache::remember('sets_'.$this->pupil->schoolId, config('cache.time'), function () {
-            $timetable = new PupilTimetableController(School::firstOrFail());
+        $ttl = $this->getCacheTime();
+
+        return Cache::remember('sets_'.$this->pupil->schoolId, $ttl, function () {
+            $timetable = new PupilTimetableController;
 
             // @phpstan-ignore-next-line
             return collect($timetable->show($this->pupil->schoolId)['sets'])->pluck(
@@ -187,14 +197,17 @@ trait PrepSets
     }
 
     /**
-     * @return Collection<string, string>
+     * @param  array<string, int|string>  $sets
+     * @return Collection<int|string, mixed>
      */
     public static function getSets(array $sets): Collection
     {
         return Cache::rememberForever('sets'.serialize($sets), function () use ($sets) {
             return collect($sets)->map(function ($item, $key) {
-                $subjectController = new SubjectsController(new School());
+                $subjectController = new SubjectsController(new School);
+                $key = (int) $key;
                 $subject = $subjectController->show($key);
+                // @phpstan-ignore-next-line
                 $subject['set'] = $item;
 
                 return $subject;

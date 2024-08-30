@@ -12,12 +12,12 @@ class TimetableRequest extends FormRequest
      *
      * @return bool
      */
-    public function authorize()
+    public function authorize(): bool
     {
         return true;
     }
 
-    protected function prepareForValidation()
+    protected function prepareForValidation(): void
     {
         $this->merge([
             'maths_set' => strtoupper($this->get('maths_set')),
@@ -43,9 +43,9 @@ class TimetableRequest extends FormRequest
     /**
      * Get the validation rules that apply to the request.
      *
-     * @return array
+     * @return array<string, mixed>
      */
-    public function rules()
+    public function rules(): array
     {
         return [
             'username' => 'string|required',
@@ -61,7 +61,10 @@ class TimetableRequest extends FormRequest
         ];
     }
 
-    public function messages()
+    /**
+     * @return string[]
+     */
+    public function messages(): array
     {
         return [
             'classciv_set.min' => 'That looks like an incorrect Classics Set.',

@@ -5,15 +5,15 @@ parameters:
 
     paths:
         - app
+        - database
+        - config
+        - routes
 
     # The level 9 is the highest level
     level: 8
 
     ignoreErrors:
-        - '#PHPDoc tag @var#'
         - '#Access to an undefined property spkm\\isams\\Wrappers\\[a-zA-Z0-9::a-zA-Z]#'
 
     excludePaths:
         - ./*/*/FileToBeExcluded.php
-
-    checkMissingIterableValueType: false

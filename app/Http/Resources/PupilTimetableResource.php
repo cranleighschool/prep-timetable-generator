@@ -21,7 +21,6 @@ class PupilTimetableResource extends JsonResource
     {
         return [
             /** @var array<string,array<string>> $timetable */
-            'timetable' => (new GenerateTimetable($this['yearGroup'], $this['fields'], PrepDay::all()))->getTimetable(),
             'username' => $this['username'],
             /** @var int $yearGroup the Year Group (National Curriculum) for the pupil */
             'yearGroup' => $this['yearGroup'],
@@ -29,6 +28,7 @@ class PupilTimetableResource extends JsonResource
             'subjects' => $this['subjects'],
             /** @var array<string,string> $results */
             'results' => $this['results'],
+            'timetable' => (new GenerateTimetable($this['yearGroup'], $this['fields'], PrepDay::all()))->getTimetable(),
         ];
     }
 }

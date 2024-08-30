@@ -19,7 +19,7 @@ return [
     */
     'schools' => [
         'cranleighSchool' => [
-            'client_id' => 'cranleigh',
+            'client_id' => env('CS_REST_API_ID'),
             'domain' => 'https://isams.cranleigh.org',
             'client_secret' => env('CS_REST_API_SECRET'),
         ],

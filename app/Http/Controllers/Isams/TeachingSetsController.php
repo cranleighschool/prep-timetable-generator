@@ -16,6 +16,7 @@ class TeachingSetsController extends Endpoint
      */
     public function index(): Collection
     {
+        // @phpstan-ignore-next-line
         $key = $this->institution->getConfigName().'teachingSets.index';
 
         $decoded = json_decode($this->pageRequest($this->endpoint, 1));

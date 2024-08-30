@@ -65,7 +65,7 @@ class YearNine extends AbstractMapper implements SetMapperInterface
             'Latin',
             'Philosophy',
             'Digital Literacy',
-            'PSHE'
+            'PSHE',
         ])) {
             return (int) substr($code, -1, 1);
         }

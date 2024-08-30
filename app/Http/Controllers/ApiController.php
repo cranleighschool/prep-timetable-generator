@@ -39,7 +39,7 @@ class ApiController
                 $emailAddress = $pupil->schoolEmailAddress;
 
                 try {
-                    $result[$yearGroup][$pupil->surname.', '.$pupil->forename] = Cache::remember('getpupiltimetable'.$pupil->schoolEmailAddress, config('cache.time'), function () use ($emailAddress) {
+                    $result[$yearGroup][$pupil->surname.', '.$pupil->forename] = Cache::remember('getpupiltimetable'.$pupil->schoolEmailAddress, (int) config('cache.time'), function () use ($emailAddress) {
                         return $this->getPupilTimetable(Str::before($emailAddress, '@'))->getData()->timetable;
                     });
                 } catch (ZeroSetsFound $exception) {
@@ -116,6 +116,9 @@ class ApiController
 
     /**
      * @throws ErrorException
+     * @param int  $yearGroup
+     * @param array<int|string, int|string>  $setResults
+     *
      */
     private function sanitizeVariables(int $yearGroup, array $setResults): object
     {
