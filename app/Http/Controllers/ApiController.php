@@ -32,6 +32,8 @@ class ApiController
             return $item->boardingHouse == $house;
         })->groupBy(['yearGroup']);
 
+	$allPupils->forget(9);
+
         $result = [];
 
         foreach ($allPupils as $yearGroup => $pupils) {
