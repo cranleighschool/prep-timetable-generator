@@ -55,6 +55,11 @@ class Gcses extends AbstractMapper implements SetMapperInterface
             return (int) substr($code, 2, 1);
         }
 
+        if ($year === 10) {
+            if ($subject === 'French') {
+                return 'Option B';
+            }
+        }
         // CMFL -- remove if statement block in M24
         //if ($year === 11) {
             if (preg_match('^\A'.$year.'\.?[0-9]/(Fr|Sp)\Z^', $code, $matches)) {
