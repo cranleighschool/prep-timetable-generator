@@ -150,7 +150,7 @@
                                     @endif
 
                                 </div>
-                                @if ($yearGroup !== 10)
+                                @if ($yearGroup !== 11)
                                     <div class="col-md">
                                         <label class="form-label" for="cmlf">Modern Foreign Language</label>
                                         <input class="form-control" type="text"
