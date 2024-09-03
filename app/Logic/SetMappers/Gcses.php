@@ -61,15 +61,15 @@ class Gcses extends AbstractMapper implements SetMapperInterface
                 return 'CMFL';
             }
         //}
-        if ($year === 10) {
-            if ($subject === 'French') {
-                return 'Option B';
-            }
-            if ($subject === 'Spanish') {
-                // Two different things....
-                return 'Option B';
-            }
-        }
+//        if ($year === 10) {
+//            if ($subject === 'French') {
+//                return 'Option B';
+//            }
+//            if ($subject === 'Spanish') {
+//                // Two different things....
+//                return 'Option B';
+//            }
+//        }
         if (in_array($subject, [
             'Greek',
             'Philosophy',
