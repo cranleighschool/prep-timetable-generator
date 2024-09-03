@@ -55,12 +55,24 @@ class Gcses extends AbstractMapper implements SetMapperInterface
             return (int)substr($code, 2, 1);
         }
 
+        if ($year === 11) {
+            if (Str::endsWith($code, 'Fr')) {
+                return 'Option C';
+            }
+            if (Str::endsWith($code, 'Sp')) {
+                return 'Option B';
+            }
+        }
         if ($year === 10) {
             if (Str::endsWith($code, 'Fr')) {
                 return 'Option B';
             }
+
+            // if in Das 61, and spanish - then Spanish is Option E
+            // if they are not in Das 61 and doing spanish then it's option D...
+
             if (Str::endsWith($code, 'Sp')) {
-                return 'Option E';
+                return 'Option D';
             }
         }
         // CMFL -- remove if statement block in M24

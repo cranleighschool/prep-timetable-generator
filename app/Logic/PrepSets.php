@@ -202,7 +202,7 @@ trait PrepSets
      */
     public static function getSets(array $sets): Collection
     {
-        return Cache::rememberForever('sets'.serialize($sets), function () use ($sets) {
+        //return Cache::rememberForever('sets'.serialize($sets), function () use ($sets) {
             return collect($sets)->map(function ($item, $key) {
                 $subjectController = new SubjectsController(new School);
                 $key = (int) $key;
@@ -212,6 +212,6 @@ trait PrepSets
 
                 return $subject;
             })->pluck('name', 'set');
-        });
+        //});
     }
 }
