@@ -72,7 +72,7 @@ class Gcses extends AbstractMapper implements SetMapperInterface
             // if they are not in Das 61 and doing spanish then it's option D...
 
             if (Str::endsWith($code, 'Sp')) {
-                return 'Option DE (Spanish)';
+                return 'CMFL';
             }
         }
         // CMFL -- remove if statement block in M24
