@@ -50,7 +50,7 @@ class Gcses extends AbstractMapper implements SetMapperInterface
             return 'Option E';
         }
         // MATHS / ENGLISH
-        if (in_array($subject, ['Maths', 'English'])) {
+        if (in_array($subject, ['Maths'])) {
             // Converts "103/En" to "3"
             return (int)substr($code, 2, 1);
         }
