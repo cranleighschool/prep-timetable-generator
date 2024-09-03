@@ -118,11 +118,11 @@ class GenerateTimetable
                     self::addToTimetable($day->day, $request->optionc);
                     break;
                 case self::WEDNESDAY:
-                    self::addToTimetable($day->day, $request->optionc);
-                    self::addToTimetable($day->day, 'Reading');
-                    if (Str::endsWith($request->humanities_set, ['a1', 'a2', 'a3', 'a4'])) {
+                    //self::addToTimetable($day->day, $request->optionc);
+                    self::addToTimetable($day->day, 'English');
+                    /*if (Str::endsWith($request->humanities_set, ['a1', 'a2', 'a3', 'a4'])) {
                         self::addToTimetable($day->day, 'English');
-                    }
+                    }*/
                     break;
                 case self::THURSDAY:
                     self::addToTimetable($day->day, $request->optiona);
@@ -130,7 +130,7 @@ class GenerateTimetable
                     self::addToTimetable($day->day, $request->optiond);
                     break;
                 case self::FRIDAY:
-                    self::addToTimetable($day->day, 'Reading');
+                    self::addToTimetable($day->day, 'English Reading');
 
                     break;
             }
