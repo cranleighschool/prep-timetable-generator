@@ -54,6 +54,10 @@ class Gcses extends AbstractMapper implements SetMapperInterface
             // Converts "103/En" to "3"
             return (int) substr($code, 2, 1);
         }
+        if (Str::endsWith($code, 'Fr')) {
+            // Converts "103/Ma" to "3"
+            return 'Option B';
+        }
 
         if ($year === 10) {
             if ($subject === 'French') {
